@@ -1,6 +1,6 @@
 {
 	"$schema": "http://json.schemastore.org/package",
-	"name": "nextjs13masters",
+	"name": "nextjs14masters",
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
