@@ -1,3 +1,5 @@
+import { ProductList } from "@/ui/organisms/ProductList";
+
 const products = [
 	{
 		id: "1",
@@ -28,8 +30,6 @@ const products = [
 		coverImage: { src: "/products/product_4.jpg", alt: "Mug with trees" },
 	},
 ];
-
-import { ProductList } from "@/ui/organisms/ProductList";
 
 export default function Home() {
 	return (
