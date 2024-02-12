@@ -1,5 +1,5 @@
 {
-	"$schema": "https://json.schemastore.org/eslintrc.json",
+	"$schema": "https://json.schemastore.org/eslintrc",
 	"plugins": ["@typescript-eslint", "import"],
 	"parserOptions": {
 		"project": "tsconfig.json"
