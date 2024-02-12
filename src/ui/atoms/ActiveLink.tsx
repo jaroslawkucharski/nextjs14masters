@@ -1,19 +1,18 @@
 "use client";
 
-import { type UrlObject } from "url";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { type ReactNode } from "react";
 
 type ActiveLinkProps = {
-	href: UrlObject;
+	href: string;
 	children: ReactNode;
 };
 
 export const ActiveLink = ({ href, children }: ActiveLinkProps) => {
 	const pathname = usePathname();
-	const isActive = pathname === String(href);
+	const isActive = pathname === href;
 
 	return (
 		<Link
