@@ -1,11 +1,8 @@
 import { formatMoney } from "@/utils";
+import { type ProductItemType } from "@/ui/types";
 
 type ProductListItemDescriptionProps = {
-	product: {
-		category: string;
-		name: string;
-		price: number;
-	};
+	product: ProductItemType;
 };
 
 export const ProductListItemDescription = ({
@@ -17,11 +14,15 @@ export const ProductListItemDescription = ({
 		</h3>
 
 		<p className="text-sm text-gray-500">
-			<span className="sr-only">Kategoria:</span> {category}
+			<span className="sr-only">Category:</span>
+
+			{category}
 		</p>
 
 		<p className="text-md self-end pt-1 font-medium text-gray-900">
-			<span className="sr-only">Cena:</span> {formatMoney(price)}
+			<span className="sr-only">Price:</span>
+
+			{formatMoney(price)}
 		</p>
 	</div>
 );

@@ -4,8 +4,8 @@ import { ProductListItemDescription } from "@/ui/atoms/ProductListItemDescriptio
 import { type ProductItemType } from "@/ui/types";
 
 export const ProductListItem = ({ product }: { product: ProductItemType }) => (
-	<li>
-		<Link href={`/products/${product.id}`}>
+	<li key={product.id}>
+		<Link prefetch href={`/product/${product.id}`}>
 			<article className="bg-white transition-transform hover:scale-105">
 				<ProductListItemCoverImage {...product.coverImage} />
 
