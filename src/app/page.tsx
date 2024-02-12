@@ -1,9 +1,11 @@
 export default async function Home() {
 	return (
 		<>
-			<h2 className="text-2xl">HOME</h2>
+			<h2 className="mb-10 text-center text-2xl md:text-left lg:text-left">
+				HOME
+			</h2>
 
-			<p className="mt-5">
+			<p className="mb-5">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper
 				quis leo feugiat maximus. Pellentesque nec nulla id augue tincidunt
 				bibendum non eu tortor. In iaculis diam eu ipsum aliquet tincidunt.
@@ -16,7 +18,7 @@ export default async function Home() {
 				imperdiet ornare.
 			</p>
 
-			<p className="mt-5">
+			<p className="mb-5">
 				Pellentesque malesuada, augue at congue aliquam, felis sem dictum elit,
 				ac luctus erat justo eu libero. Aliquam rhoncus est nec tempus accumsan.
 				Nullam maximus dictum sodales. Nunc magna dui, sodales sed libero
