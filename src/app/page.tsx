@@ -1,40 +1,36 @@
-import { ProductList } from "@/ui/organisms/ProductList";
-
-const products = [
-	{
-		id: "1",
-		category: "Shoes",
-		name: "Very green shoes",
-		price: 2137,
-		coverImage: { src: "/products/product_1.jpg", alt: "Very green shoes" },
-	},
-	{
-		id: "2",
-		category: "Clothes",
-		name: "Black T-shirt",
-		price: 2137,
-		coverImage: { src: "/products/product_2.jpg", alt: "Black T-shirt" },
-	},
-	{
-		id: "3",
-		category: "Accessories",
-		name: "White cap",
-		price: 2137,
-		coverImage: { src: "/products/product_3.jpg", alt: "White cap" },
-	},
-	{
-		id: "4",
-		category: "Accessories",
-		name: "Mug with trees",
-		price: 2137,
-		coverImage: { src: "/products/product_4.jpg", alt: "Mug with trees" },
-	},
-];
-
-export default function Home() {
+export default async function Home() {
 	return (
-		<section className="mx-auto max-w-md p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
-			<ProductList products={products} />
-		</section>
+		<>
+			<h2 className="text-2xl">HOME</h2>
+
+			<p className="mt-5">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper
+				quis leo feugiat maximus. Pellentesque nec nulla id augue tincidunt
+				bibendum non eu tortor. In iaculis diam eu ipsum aliquet tincidunt.
+				Maecenas neque dui, cursus sit amet pharetra non, mattis eu nunc. In
+				neque tortor, aliquam eu blandit eu, maximus in metus. Sed ex eros,
+				suscipit ut eleifend at, accumsan sed justo. Aliquam interdum risus
+				laoreet pellentesque bibendum. Sed consequat urna nibh, sit amet
+				facilisis erat ullamcorper non. Morbi turpis dolor, sagittis nec
+				efficitur eget, vehicula quis diam. Ut convallis neque vel orci
+				imperdiet ornare.
+			</p>
+
+			<p className="mt-5">
+				Pellentesque malesuada, augue at congue aliquam, felis sem dictum elit,
+				ac luctus erat justo eu libero. Aliquam rhoncus est nec tempus accumsan.
+				Nullam maximus dictum sodales. Nunc magna dui, sodales sed libero
+				ornare, porttitor porta neque. Duis ligula erat, gravida a pretium ut,
+				faucibus nec turpis. Pellentesque suscipit nisi massa, sed facilisis
+				neque pulvinar ac. Aenean placerat libero eleifend nisi volutpat, ac
+				posuere massa finibus. Proin et odio tempus enim condimentum venenatis
+				ut in sapien. Aliquam rhoncus eget ex sed sodales. Sed ornare, felis id
+				efficitur bibendum, urna quam accumsan felis, ut gravida metus purus ac
+				sem. Nam suscipit sapien vel nisi elementum, vel accumsan velit
+				consequat. Mauris fringilla, turpis blandit rutrum iaculis, mi dui
+				consequat massa, ut sollicitudin eros justo quis est. Donec a bibendum
+				lectus.
+			</p>
+		</>
 	);
 }
