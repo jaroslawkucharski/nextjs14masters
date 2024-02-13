@@ -21,7 +21,7 @@ export const ActiveLink = ({
 	exact,
 }: ActiveLinkProps) => {
 	const pathname = usePathname();
-	const isActive = exact ? pathname.startsWith(href) : pathname === href;
+	const isActive = exact ? pathname === href : pathname.startsWith(href);
 
 	return (
 		<Link
