@@ -3,26 +3,18 @@ import { getProducts } from "@/api/products";
 import { ProductsList } from "@/ui/organisms/ProductList";
 
 export const metadata: Metadata = {
-	title: "Products - Next.js Masters",
+	title: "All - Next.js Masters",
 	description: "Products page.",
 };
 
 export async function generateStaticParams() {
-	const products = await getProducts();
+	const products = await getProducts({ take: "20" });
 
 	return products;
 }
 
 export default async function ProductsPage() {
-	const products = await getProducts();
+	const products = await getProducts({ take: "20" });
 
-	return (
-		<>
-			<h2 className="mb-10 text-center text-2xl md:text-left lg:text-left">
-				ALL
-			</h2>
-
-			<ProductsList products={products} />
-		</>
-	);
+	return <ProductsList products={products} />;
 }
