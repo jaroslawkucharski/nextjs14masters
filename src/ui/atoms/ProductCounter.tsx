@@ -18,7 +18,7 @@ export const ProductCounter = ({ children }: { children: ReactNode }) => {
 				<input
 					readOnly
 					value={counter}
-					className="border border-slate-200 px-2 text-center text-xl"
+					className="w-full border border-slate-200 px-2 text-center text-xl"
 				/>
 
 				<button
