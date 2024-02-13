@@ -1,25 +1,29 @@
-import { getProductsById } from "@/api/products";
-import { ProductCounter } from "@/ui/atoms/ProductCounter";
-import { ProductListItemCoverImage } from "@/ui/atoms/ProductListItemCoverImage";
-import { ProductListItemDescription } from "@/ui/atoms/ProductListItemDescription";
+import { type Metadata } from "next";
 
-type ProductPageType = {
-	params: {
-		productId: string;
-		pathname: string[];
-	};
+import { getProducts } from "@/api/products";
+import { ProductsList } from "@/ui/organisms/ProductList";
+
+export const metadata: Metadata = {
+	title: "All - Next.js Masters",
+	description: "Products page.",
 };
 
-export default async function ProductPage({ params }: ProductPageType) {
-	const product = await getProductsById(params.productId);
+export async function generateStaticParams({
+	params,
+}: {
+	params: { page: string };
+}) {
+	const products = await getProducts({ offset: params.page });
 
-	return (
-		<>
-			<ProductListItemCoverImage {...product.coverImage} />
+	return products;
+}
 
-			<ProductListItemDescription product={product} />
+export default async function ProductsPage({
+	params,
+}: {
+	params: { page: string };
+}) {
+	const products = await getProducts({ offset: params.page });
 
-			<ProductCounter>dsdf</ProductCounter>
-		</>
-	);
+	return <ProductsList products={products} />;
 }
