@@ -1,5 +1,5 @@
 import { type Metadata } from "next";
-import { getProducts, getProductsById } from "@/api/products";
+import { getProductsById } from "@/api/products";
 import { ProductCounter } from "@/ui/atoms/ProductCounter";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductDescription } from "@/ui/atoms/ProductDescription";
@@ -16,12 +16,6 @@ export const generateMetadata = async ({
 		description,
 	};
 };
-
-export async function generateStaticParams() {
-	const products = await getProducts();
-
-	return products.map((product) => ({ productId: product.id }));
-}
 
 type ProductPageType = {
 	params: {
