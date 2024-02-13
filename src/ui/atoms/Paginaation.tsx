@@ -17,7 +17,7 @@ export const Pagination = ({ length }: { length: number }) => {
 							</ActiveLink>
 						</li>
 
-						{pageIndex === 0 && <span>|</span>}
+						{pageIndex !== numOfPages - 1 && <span>|</span>}
 					</>
 				),
 			)}
