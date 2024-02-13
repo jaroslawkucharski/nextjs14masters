@@ -31,7 +31,7 @@ export const ActiveLink = ({
 				[activeClassName]: isActive,
 			})}
 			href={href}
-			aria-current={isActive}
+			aria-current={isActive ? isActive : undefined}
 		>
 			{children}
 		</Link>
