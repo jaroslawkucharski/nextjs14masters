@@ -33,7 +33,7 @@ const productResponseItemToProductItemType = (product: ProductResponseItem) => {
 };
 
 export const getProducts = async ({
-	take = "20",
+	take,
 	offset,
 }: ProductResponseRequest = {}) => {
 	const searchParams = new URLSearchParams({

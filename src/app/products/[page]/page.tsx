@@ -13,7 +13,7 @@ export async function generateStaticParams({
 }: {
 	params: { page: string };
 }) {
-	const products = await getProducts({ offset: params.page });
+	const products = await getProducts({ take: "20", offset: params.page });
 
 	return products;
 }
@@ -23,7 +23,7 @@ export default async function ProductsPage({
 }: {
 	params: { page: string };
 }) {
-	const products = await getProducts({ offset: params.page });
+	const products = await getProducts({ take: "20", offset: params.page });
 
 	return <ProductsList products={products} />;
 }

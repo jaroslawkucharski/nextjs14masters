@@ -8,13 +8,13 @@ export const metadata: Metadata = {
 };
 
 export async function generateStaticParams() {
-	const products = await getProducts();
+	const products = await getProducts({ take: "20" });
 
 	return products;
 }
 
 export default async function ProductsPage() {
-	const products = await getProducts();
+	const products = await getProducts({ take: "20" });
 
 	return <ProductsList products={products} />;
 }

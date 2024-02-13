@@ -1,8 +1,10 @@
 import { type Metadata } from "next";
 import { type ReactNode } from "react";
+import { Pagination } from "@/ui/atoms/Paginaation";
+import { getProducts } from "@/api/products";
 
 export const metadata: Metadata = {
-	title: "Products - Next.js Masters",
+	title: "All - Next.js Masters",
 	description: "Products page.",
 };
 
@@ -11,6 +13,8 @@ export default async function ProductsLayout({
 }: {
 	children: ReactNode;
 }) {
+	const products = await getProducts();
+
 	return (
 		<section>
 			<h2 className="mb-10 text-center text-2xl md:text-left lg:text-left">
@@ -18,6 +22,8 @@ export default async function ProductsLayout({
 			</h2>
 
 			{children}
+
+			<Pagination length={products.length} />
 		</section>
 	);
 }

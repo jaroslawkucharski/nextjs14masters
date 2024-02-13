@@ -13,7 +13,7 @@ type ActiveLinkProps = {
 };
 
 export const ActiveLink = ({
-	className,
+	className = "",
 	activeClassName = "",
 	href,
 	children,
@@ -25,7 +25,7 @@ export const ActiveLink = ({
 		<Link
 			className={clsx(`text-gray-500 hover:text-gray-900`, {
 				["font-semibold text-gray-900"]: isActive,
-				className,
+				[className]: className,
 				[activeClassName]: isActive,
 			})}
 			href={href}
