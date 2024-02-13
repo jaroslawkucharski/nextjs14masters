@@ -3,10 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import { type ComponentProps } from "react";
+import { type ReactNode } from "react";
 
-type ActiveLinkProps = ComponentProps<typeof Link> & {
+type ActiveLinkProps = {
+	className?: string;
 	activeClassName?: string;
+	href: string;
+	children: ReactNode;
 	exact?: boolean;
 };
 
@@ -18,12 +21,7 @@ export const ActiveLink = ({
 	exact,
 }: ActiveLinkProps) => {
 	const pathname = usePathname();
-	// const isActive = exact ? pathname === href : pathname.startsWith(href);
-	const matchedPath = (typeof href === "string" ? href : href.pathname) ?? null;
-	const isActive =
-		matchedPath &&
-		pathname &&
-		(exact ? pathname === matchedPath : pathname.startsWith(matchedPath));
+	const isActive = exact ? pathname === href : pathname.startsWith(href);
 
 	return (
 		<Link

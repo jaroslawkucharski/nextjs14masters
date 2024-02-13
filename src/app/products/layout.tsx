@@ -13,14 +13,14 @@ export default async function ProductsLayout({
 }: {
 	children: ReactNode;
 }) {
-	const products = await getProducts({ take: "80" });
+	const products = await getProducts({ take: "100" });
 
 	return (
 		<>
 			<section>
-				{/* <h2 className="mb-10 text-center text-2xl md:text-left lg:text-left">
-				ALL
-			</h2> */}
+				<h2 className="mb-10 text-center text-2xl md:text-left lg:text-left">
+					ALL
+				</h2>
 
 				{children}
 			</section>
