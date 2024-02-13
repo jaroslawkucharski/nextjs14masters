@@ -11,11 +11,7 @@ export const metadata: Metadata = {
 export async function generateStaticParams() {
 	const products = await getProducts({ take: "20" });
 
-	const numOfPages = Math.ceil(products.length / 20);
-
-	return Array.from({ length: numOfPages }, (_, index) => index + 1).map(
-		(page) => ({ params: { page: page } }),
-	);
+	return products;
 }
 
 export default async function ProductsPage({
