@@ -10,6 +10,7 @@ type ActiveLinkProps = {
 	activeClassName?: string;
 	href: string;
 	children: ReactNode;
+	exact?: boolean;
 };
 
 export const ActiveLink = ({
@@ -17,9 +18,10 @@ export const ActiveLink = ({
 	activeClassName = "",
 	href,
 	children,
+	exact,
 }: ActiveLinkProps) => {
 	const pathname = usePathname();
-	const isActive = pathname === href;
+	const isActive = exact ? pathname.startsWith(href) : pathname === href;
 
 	return (
 		<Link
