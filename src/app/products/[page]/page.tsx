@@ -23,7 +23,9 @@ export default async function ProductsPage({
 }: {
 	params: { page: string };
 }) {
-	const products = await getProducts({ take: "20", offset: params.page });
+	const offset =
+		params.page === "1" ? "0" : String(Number(params.page) * 20 - 20);
+	const products = await getProducts({ take: "20", offset: offset });
 
 	return <ProductsList products={products} />;
 }
