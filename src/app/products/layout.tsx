@@ -16,14 +16,16 @@ export default async function ProductsLayout({
 	const products = await getProducts({ take: "80" });
 
 	return (
-		<section>
-			<h2 className="mb-10 text-center text-2xl md:text-left lg:text-left">
+		<>
+			<section>
+				{/* <h2 className="mb-10 text-center text-2xl md:text-left lg:text-left">
 				ALL
-			</h2>
+			</h2> */}
 
-			{children}
+				{children}
+			</section>
 
 			<Pagination length={products.length} />
-		</section>
+		</>
 	);
 }
