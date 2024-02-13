@@ -8,14 +8,14 @@ export const metadata: Metadata = {
 	description: "Products page.",
 };
 
-export async function generateStaticParams({
-	params,
-}: {
-	params: { page: string };
-}) {
-	const products = await getProducts({ take: "20", offset: params.page });
+export async function generateStaticParams() {
+	const products = await getProducts({ take: "20" });
 
-	return products;
+	const numOfPages = Math.ceil(products.length / 20);
+
+	return Array.from({ length: numOfPages }, (_, index) => index + 1).map(
+		(page) => ({ params: { page: page } }),
+	);
 }
 
 export default async function ProductsPage({
@@ -23,7 +23,9 @@ export default async function ProductsPage({
 }: {
 	params: { page: string };
 }) {
-	const products = await getProducts({ take: "20", offset: params.page });
+	const offset =
+		params.page === "1" ? "0" : String(Number(params.page) * 20 - 20);
+	const products = await getProducts({ take: "20", offset: offset });
 
 	return <ProductsList products={products} />;
 }
