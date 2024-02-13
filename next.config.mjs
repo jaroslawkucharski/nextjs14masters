@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-		typedRoutes: false,
+		typedRoutes: true,
+    mdxRs: true
 	},
   images: {
     remotePatterns: [
