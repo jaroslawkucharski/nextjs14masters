@@ -5,17 +5,17 @@ type ProductListItemCoverImageProps = {
 	alt: string;
 };
 
-export const ProductListItemCoverImage = ({
+export const ProductCoverImage = ({
 	src,
 	alt,
 }: ProductListItemCoverImageProps) => (
-	<div className="aspect-square overflow-hidden">
+	<div className=" aspect-auto overflow-hidden">
 		<Image
-			className="h-full w-full object-cover object-center"
+			className="h-full w-full object-cover object-top"
 			src={src}
 			alt={alt}
-			width={320}
-			height={320}
+			width={400}
+			height={400}
 		/>
 	</div>
 );

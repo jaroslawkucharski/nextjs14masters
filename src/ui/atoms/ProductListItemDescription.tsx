@@ -1,27 +1,28 @@
 import { formatMoney } from "@/utils";
+import { type ProductItemType } from "@/ui/types";
 
 type ProductListItemDescriptionProps = {
-	product: {
-		category: string;
-		name: string;
-		price: number;
-	};
+	product: ProductItemType;
 };
 
 export const ProductListItemDescription = ({
 	product: { name, category, price },
 }: ProductListItemDescriptionProps) => (
-	<div className="mt-2 flex justify-between">
-		<div>
-			<h3 className="text-sm font-semibold text-gray-700">{name}</h3>
+	<div className="flex flex-col p-4">
+		<h3 className="truncate text-sm font-semibold text-gray-950">
+			{name.toLocaleUpperCase()}
+		</h3>
 
-			<p className="text-sm text-gray-500">
-				<span className="sr-only">Kategoria:</span> {category}
-			</p>
-		</div>
+		<p className="text-sm text-gray-500">
+			<span className="sr-only">Category:</span>
 
-		<p className="text-sm font-medium text-gray-900">
-			<span className="sr-only">Cena:</span> {formatMoney(price / 100)}
+			{category}
+		</p>
+
+		<p className="text-md self-end pt-1 font-medium text-gray-900">
+			<span className="sr-only">Price:</span>
+
+			{formatMoney(price)}
 		</p>
 	</div>
 );

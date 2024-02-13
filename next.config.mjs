@@ -1,4 +1,19 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  experimental: {
+		typedRoutes: false,
+	},
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'naszsklep-api.vercel.app',
+        port: '',
+        pathname: '/images/**',
+      },
+    ],
+  },
+};
+
 
 export default nextConfig;
