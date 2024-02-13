@@ -6,15 +6,15 @@ import clsx from "clsx";
 import { type ReactNode } from "react";
 
 type ActiveLinkProps = {
-	className: string;
-	activeClassName: string;
-	href: keyof typeof Link;
+	className?: string;
+	activeClassName?: string;
+	href: string;
 	children: ReactNode;
 };
 
 export const ActiveLink = ({
 	className,
-	activeClassName,
+	activeClassName = "",
 	href,
 	children,
 }: ActiveLinkProps) => {
