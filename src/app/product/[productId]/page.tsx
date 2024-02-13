@@ -36,9 +36,7 @@ export default async function ProductPage({ params }: ProductPageType) {
 		<article className="grid w-full cursor-pointer grid-cols-1 gap-14 sm:grid sm:grid-cols-2">
 			<ProductCoverImage {...product.coverImage} />
 
-			<div>
-				<ProductDescription product={product} />
-			</div>
+			<ProductDescription product={product} />
 		</article>
 	);
 }

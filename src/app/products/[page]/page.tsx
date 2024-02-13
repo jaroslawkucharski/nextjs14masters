@@ -8,14 +8,22 @@ export const metadata: Metadata = {
 	description: "Products page.",
 };
 
-export async function generateStaticParams({
-	params,
-}: {
-	params: { page: string };
-}) {
-	const products = await getProducts({ take: "20", offset: params.page });
+// export async function generateStaticParams({
+// 	params,
+// }: {
+// 	params: { page: string };
+// }) {
+// 	const products = await getProducts({ take: "20", offset: params.page });
 
-	return products;
+// 	return products;
+// }
+
+export async function generateStaticParams() {
+	const products = await getProducts({ take: "20" });
+
+	const numOfPages = Math.ceil(products.length / 20);
+	const pages = Array.from({ length: numOfPages }, (_, i) => i + 1);
+	return pages.map((page) => ({ params: { page: `${page}` } }));
 }
 
 export default async function ProductsPage({
