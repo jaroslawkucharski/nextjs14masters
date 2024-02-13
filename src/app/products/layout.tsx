@@ -13,7 +13,7 @@ export default async function ProductsLayout({
 }: {
 	children: ReactNode;
 }) {
-	const products = await getProducts({ take: "100" });
+	const products = await getProducts({ take: "80" });
 
 	return (
 		<section>
