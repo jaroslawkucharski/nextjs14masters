@@ -7,12 +7,6 @@ export const metadata: Metadata = {
 	description: "Products page.",
 };
 
-export async function generateStaticParams() {
-	const products = await getProducts({ take: "20" });
-
-	return products;
-}
-
 export default async function ProductsPage() {
 	const products = await getProducts({ take: "20" });
 
