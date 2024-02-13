@@ -4,6 +4,8 @@ export const Navigation = () => (
 	<nav className="flex h-fit content-center justify-center gap-4 px-4">
 		<ActiveLink href="/">Home</ActiveLink>
 
-		<ActiveLink href="/products">All</ActiveLink>
+		<ActiveLink href="/products" exact>
+			All
+		</ActiveLink>
 	</nav>
 );
