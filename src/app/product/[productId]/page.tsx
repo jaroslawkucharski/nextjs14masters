@@ -1,6 +1,5 @@
 import { type Metadata } from "next";
 import { getProductsById } from "@/api/products";
-import { ProductCounter } from "@/ui/atoms/ProductCounter";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductDescription } from "@/ui/atoms/ProductDescription";
 
@@ -32,10 +31,6 @@ export default async function ProductPage({ params }: ProductPageType) {
 
 			<div>
 				<ProductDescription product={product} />
-
-				<ProductCounter>
-					test: server component in client component
-				</ProductCounter>
 			</div>
 		</article>
 	);
