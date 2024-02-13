@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/ui/organisms/Header";
+import { ActiveLink } from "@/ui/atoms/ActiveLink";
 
 const lato = Lato({
 	subsets: ["latin"],
@@ -21,7 +22,13 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={lato.className}>
-				<Header />
+				<nav className="flex h-fit content-center justify-center gap-4 px-4">
+					<ActiveLink href="/">Home</ActiveLink>
+
+					<ActiveLink href="/products" exact>
+						All
+					</ActiveLink>
+				</nav>
 
 				<section className="mx-auto max-w-md p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
 					{children}
