@@ -6,11 +6,18 @@ import clsx from "clsx";
 import { type ReactNode } from "react";
 
 type ActiveLinkProps = {
-	href: string;
+	className: string;
+	activeClassName: string;
+	href: keyof typeof Link;
 	children: ReactNode;
 };
 
-export const ActiveLink = ({ href, children }: ActiveLinkProps) => {
+export const ActiveLink = ({
+	className,
+	activeClassName,
+	href,
+	children,
+}: ActiveLinkProps) => {
 	const pathname = usePathname();
 	const isActive = pathname === href;
 
@@ -18,6 +25,8 @@ export const ActiveLink = ({ href, children }: ActiveLinkProps) => {
 		<Link
 			className={clsx(`text-gray-500 hover:text-gray-900`, {
 				["font-semibold text-gray-900"]: isActive,
+				className,
+				[activeClassName]: isActive,
 			})}
 			href={href}
 			aria-current={isActive}
