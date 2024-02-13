@@ -23,6 +23,16 @@ export async function generateMetadata({
 	};
 }
 
+export async function generateStaticParams({
+	params,
+}: {
+	params: { productId: string };
+}) {
+	const product = await getProductsById(params.productId);
+
+	return product;
+}
+
 type ProductPageType = {
 	params: {
 		productId: string;
