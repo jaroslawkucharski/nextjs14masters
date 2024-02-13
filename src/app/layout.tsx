@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/ui/organisms/Header";
+
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 
 const lato = Lato({
