@@ -23,11 +23,11 @@ export async function generateMetadata({
 	};
 }
 
-export async function generateStaticParams() {
-	const products = await getProducts();
+// export async function generateStaticParams() {
+// 	const products = await getProducts();
 
-	return products.map((product) => ({ productId: product.id }));
-}
+// 	return products.map((product) => ({ productId: product.id }));
+// }
 
 type ProductPageType = {
 	params: {
