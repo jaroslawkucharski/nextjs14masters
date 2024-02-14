@@ -3,8 +3,6 @@ import { ActiveLink } from "./ActiveLink";
 export const Pagination = ({ length }: { length: number }) => {
 	const numOfPages = Math.ceil(length / 20);
 
-	console.log("numOfPages: ", numOfPages);
-
 	return (
 		<nav>
 			<ul className="mt-20 flex w-full justify-center" aria-label="pagination">
