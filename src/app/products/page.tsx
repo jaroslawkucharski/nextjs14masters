@@ -1,6 +1,7 @@
 import { type Metadata } from "next";
 import { getProducts } from "@/api/products";
 import { ProductsList } from "@/ui/organisms/ProductList";
+import { AMOUNT_OF_PRODUCTS } from "@/constants";
 
 export const metadata: Metadata = {
 	title: "All - Next.js Masters",
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default async function ProductsPage() {
-	const products = await getProducts({ take: "20" });
+	const products = await getProducts({ take: AMOUNT_OF_PRODUCTS });
 
 	return <ProductsList products={products} />;
 }

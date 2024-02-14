@@ -1,7 +1,8 @@
 import { ActiveLink } from "./ActiveLink";
+import { AMOUNT_OF_PRODUCTS } from "@/constants";
 
 export const Pagination = ({ length }: { length: number }) => {
-	const numOfPages = Math.ceil(length / 20);
+	const numOfPages = Math.ceil(length / Number(AMOUNT_OF_PRODUCTS));
 
 	return (
 		<nav>
