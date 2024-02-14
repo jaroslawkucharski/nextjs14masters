@@ -1,8 +1,8 @@
 export default async function Home() {
 	return (
 		<>
-			<h2 className="mb-10 text-center text-2xl md:text-left lg:text-left">
-				HOME
+			<h2 className="mb-10 text-center text-lg md:text-left lg:text-left">
+				Home
 			</h2>
 
 			<p className="mb-5">

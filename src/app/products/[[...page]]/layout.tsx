@@ -17,8 +17,8 @@ export default async function ProductsLayout({ children }: ProductsLayoutType) {
 
 	return (
 		<section>
-			<h2 className="mb-10 text-center text-2xl md:text-left lg:text-left">
-				ALL
+			<h2 className="mb-10 text-center text-lg md:text-left lg:text-left">
+				All
 			</h2>
 
 			{children}

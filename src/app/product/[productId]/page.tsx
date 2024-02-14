@@ -38,7 +38,7 @@ export default async function ProductPage({ params }: ParamsType) {
 	const product = await getProductsById(params.productId);
 
 	return (
-		<article className="grid w-full cursor-pointer grid-cols-1 gap-14 sm:grid sm:grid-cols-2">
+		<article className="grid w-full grid-cols-1 gap-14 sm:grid sm:grid-cols-2">
 			<ProductCoverImage {...product.coverImage} />
 
 			<ProductDescription product={product} />
