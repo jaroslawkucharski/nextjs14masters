@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
+import { type ReactNode } from "react";
 import { Header } from "@/ui/organisms/Header";
+
+type RootLayoutType = {
+	children: ReactNode;
+};
 
 const lato = Lato({
 	subsets: ["latin"],
@@ -13,11 +18,7 @@ export const metadata: Metadata = {
 	description: "Home page.",
 };
 
-export default function RootLayout({
-	children,
-}: Readonly<{
-	children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<RootLayoutType>) {
 	return (
 		<html lang="en">
 			<body className={lato.className}>

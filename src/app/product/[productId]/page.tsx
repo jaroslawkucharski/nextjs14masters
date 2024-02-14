@@ -3,39 +3,38 @@ import { getProductsById } from "@/api/products";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductDescription } from "@/ui/atoms/ProductDescription";
 
-export async function generateMetadata({
-	params,
-}: {
-	params: { productId: string };
-}): Promise<Metadata> {
-	const { name, description, coverImage } = await getProductsById(
-		params.productId,
-	);
-
-	return {
-		title: name,
-		description,
-		openGraph: {
-			title: name,
-			description,
-			images: [coverImage.src],
-		},
-	};
-}
-
-// export async function generateStaticParams() {
-// 	const products = await getProducts();
-
-// 	return products.map((product) => ({ productId: product.id }));
-// }
-
-type ProductPageType = {
+export type ParamsType = {
 	params: {
 		productId: string;
 	};
 };
 
-export default async function ProductPage({ params }: ProductPageType) {
+export async function generateMetadata({
+	params,
+}: ParamsType): Promise<Metadata> {
+	const {
+		name,
+		description,
+		coverImage: { src },
+	} = await getProductsById(params.productId);
+
+	return {
+		title: `${name} - Next.js Masters`,
+		description,
+		openGraph: {
+			title: name,
+			description,
+			images: [
+				{
+					url: src,
+					alt: name,
+				},
+			],
+		},
+	};
+}
+
+export default async function ProductPage({ params }: ParamsType) {
 	const product = await getProductsById(params.productId);
 
 	return (
