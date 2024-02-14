@@ -25,7 +25,7 @@ export const ActiveLink = ({
 
 	return (
 		<Link
-			className={clsx(`text-gray-500 hover:text-gray-900`, {
+			className={clsx(`text-lg text-gray-500 hover:text-gray-900`, {
 				["font-semibold text-gray-900"]: isActive,
 				[className]: className,
 				[activeClassName]: isActive,
