@@ -1,24 +1,18 @@
+import { getProducts } from "@/api/products";
+import { ProductsList } from "@/ui/organisms/ProductList";
+
 export default async function Home() {
+	const products = await getProducts({ take: "4" });
+
 	return (
 		<>
 			<h2 className="mb-10 text-center text-lg md:text-left lg:text-left">
 				Home
 			</h2>
 
-			<p className="mb-5">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ullamcorper
-				quis leo feugiat maximus. Pellentesque nec nulla id augue tincidunt
-				bibendum non eu tortor. In iaculis diam eu ipsum aliquet tincidunt.
-				Maecenas neque dui, cursus sit amet pharetra non, mattis eu nunc. In
-				neque tortor, aliquam eu blandit eu, maximus in metus. Sed ex eros,
-				suscipit ut eleifend at, accumsan sed justo. Aliquam interdum risus
-				laoreet pellentesque bibendum. Sed consequat urna nibh, sit amet
-				facilisis erat ullamcorper non. Morbi turpis dolor, sagittis nec
-				efficitur eget, vehicula quis diam. Ut convallis neque vel orci
-				imperdiet ornare.
-			</p>
+			<ProductsList products={products} />
 
-			<p className="mb-5">
+			<p className="mt-10">
 				Pellentesque malesuada, augue at congue aliquam, felis sem dictum elit,
 				ac luctus erat justo eu libero. Aliquam rhoncus est nec tempus accumsan.
 				Nullam maximus dictum sodales. Nunc magna dui, sodales sed libero
