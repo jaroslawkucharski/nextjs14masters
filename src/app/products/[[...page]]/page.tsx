@@ -4,7 +4,7 @@ import { getProducts } from "@/api/products";
 import { ProductsList } from "@/ui/organisms/ProductList";
 import { AMOUNT_OF_PRODUCTS } from "@/constants";
 
-export type ParamsType = {
+export type ProductsPageType = {
 	params: {
 		page: string;
 	};
@@ -26,7 +26,7 @@ export async function generateStaticParams() {
 	}));
 }
 
-export default async function ProductsPage({ params }: ParamsType) {
+export default async function ProductsPage({ params }: ProductsPageType) {
 	const offset = params.page
 		? String(
 				Number(params.page) * Number(AMOUNT_OF_PRODUCTS) -
