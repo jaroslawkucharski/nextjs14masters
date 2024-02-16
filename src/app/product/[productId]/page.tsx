@@ -3,7 +3,7 @@ import { getProductsById } from "@/api/products";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductDescription } from "@/ui/atoms/ProductDescription";
 
-export type ParamsType = {
+export type ProductPageType = {
 	params: {
 		productId: string;
 	};
@@ -11,7 +11,7 @@ export type ParamsType = {
 
 export async function generateMetadata({
 	params,
-}: ParamsType): Promise<Metadata> {
+}: ProductPageType): Promise<Metadata> {
 	const {
 		name,
 		description,
@@ -34,7 +34,7 @@ export async function generateMetadata({
 	};
 }
 
-export default async function ProductPage({ params }: ParamsType) {
+export default async function ProductPage({ params }: ProductPageType) {
 	const product = await getProductsById(params.productId);
 
 	return (
