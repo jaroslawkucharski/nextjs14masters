@@ -1,19 +1,37 @@
 import { type Route } from "next";
+import { ShoppingCart } from "lucide-react";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 
+const navigationLinks = [
+	{
+		label: "Home",
+		href: "/",
+		exact: true,
+	},
+	{
+		label: "All",
+		href: "/products",
+	},
+];
+
 export const Navigation = () => (
-	<nav className="hidden h-fit flex-1 gap-8 self-center px-4 sm:flex">
-		<ActiveLink href="/" exact>
-			Home
-		</ActiveLink>
+	<nav className="hidden h-fit flex-1 justify-between gap-8 self-center px-4 sm:flex">
+		<ul className="hidden gap-8 px-4 sm:flex">
+			{navigationLinks.map(({ label, href, exact }) => (
+				<li key={label}>
+					<ActiveLink href={href as Route} exact={exact}>
+						{label}
+					</ActiveLink>
+				</li>
+			))}
+		</ul>
 
-		<ActiveLink href={"/products" as Route}>All</ActiveLink>
+		<div className="relative">
+			<ShoppingCart />
 
-		{/* TODO - fake links */}
-		<p className="text-lg text-gray-500">Jewelery</p>
-
-		<p className="text-lg text-gray-500">Outdoors</p>
-
-		<p className="text-lg text-red-600">Sales</p>
+			<span className="absolute bottom-4 left-4 rounded-full bg-red-500 px-1 text-xs text-white">
+				0
+			</span>
+		</div>
 	</nav>
 );
