@@ -1,3 +1,4 @@
+import { type Route } from "next";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 
 export const Navigation = () => (
@@ -6,7 +7,7 @@ export const Navigation = () => (
 			Home
 		</ActiveLink>
 
-		<ActiveLink href="/products">All</ActiveLink>
+		<ActiveLink href={"/products" as Route}>All</ActiveLink>
 
 		{/* TODO - fake links */}
 		<p className="text-lg text-gray-500">Jewelery</p>
