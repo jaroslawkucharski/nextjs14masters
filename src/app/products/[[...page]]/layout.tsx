@@ -23,12 +23,11 @@ export default async function ProductsLayout({
 }: ProductsLayoutType) {
 	const { numOfProducts } = await getProductList({});
 	const numOfPages = Math.ceil(numOfProducts / AMOUNT_OF_PRODUCTS);
-	const numOfPage = params.page === undefined ? 1 : Number(params.page[0]);
 
 	if (
 		Number(params.page) < 1 ||
 		Number(params.page) > numOfPages ||
-		isNaN(numOfPage)
+		isNaN(Number(params.page))
 	) {
 		return notFound();
 	}
@@ -41,7 +40,10 @@ export default async function ProductsLayout({
 
 			{children}
 
-			<Pagination totalItems={numOfProducts} currentPage={numOfPage} />
+			<Pagination
+				totalItems={numOfProducts}
+				currentPage={Number(params.page)}
+			/>
 		</section>
 	);
 }

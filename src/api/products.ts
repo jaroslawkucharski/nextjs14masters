@@ -1,14 +1,21 @@
+import { notFound } from "next/navigation";
 import { executeGraphql } from "./graphqlApi";
 import {
 	ProductGetByIdDocument,
 	ProductsGetListDocument,
 	type Product,
+	ProductsGetByCategorySlugDocument,
 } from "@/gql/graphql";
 import { type ProductItemType } from "@/ui/types";
 
 type ProductListResponse = {
 	products: ProductItemType[];
 	numOfProducts: number;
+};
+
+type ProductCategoryResponse = {
+	products: ProductItemType[];
+	category: string;
 };
 
 const productResponseItemToProductItemType = (product: Product) => {
@@ -51,6 +58,7 @@ export const getProductList = async ({
 			},
 		};
 	});
+
 	return { products, numOfProducts };
 };
 
@@ -61,7 +69,45 @@ export const getProductsById = async (
 		id,
 	});
 
+	if (!prographqlResponse.product) {
+		notFound();
+	}
+
 	return productResponseItemToProductItemType(
 		prographqlResponse.product as Product,
 	);
+};
+
+export const getProductsByCategory = async (
+	slug: string,
+): Promise<ProductCategoryResponse> => {
+	const prographqlResponse = await executeGraphql(
+		ProductsGetByCategorySlugDocument,
+		{
+			slug,
+		},
+	);
+
+	const category = prographqlResponse.category?.name || "";
+
+	const products = prographqlResponse.category?.products.map((product) => {
+		return {
+			id: product.id,
+			category: product.categories[0]?.name || "",
+			name: product.name,
+			slug: product.slug,
+			price: product.price,
+			description: product.description,
+			coverImage: product.images[0] && {
+				src: product.images[0].url,
+				alt: product.name,
+			},
+		};
+	});
+
+	if (!products) {
+		notFound();
+	}
+
+	return { products, category };
 };

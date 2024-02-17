@@ -27,11 +27,9 @@ export async function generateStaticParams() {
 }
 
 export default async function ProductsPage({ params }: ProductsPageType) {
-	const skip = params.page
-		? String(Number(params.page) * AMOUNT_OF_PRODUCTS - AMOUNT_OF_PRODUCTS)
-		: "0";
+	const skip = Number(params.page) * AMOUNT_OF_PRODUCTS - AMOUNT_OF_PRODUCTS;
 
-	const { products } = await getProductList({ skip: Number(skip) });
+	const { products } = await getProductList({ skip });
 
 	return <ProductsList products={products} />;
 }
