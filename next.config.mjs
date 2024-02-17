@@ -20,7 +20,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'static-ourstore.hyperfunctor.com',
+        hostname: process.env.GRAPHQL_IMAGE_URL,
         port: '',
         pathname: '/uploads/**',
       },
