@@ -12,11 +12,9 @@ export type ProductPageType = {
 export async function generateMetadata({
 	params,
 }: ProductPageType): Promise<Metadata> {
-	const {
-		name,
-		description,
-		coverImage: { src },
-	} = await getProductsById(params.productId);
+	const { name, description, coverImage } = await getProductsById(
+		params.productId,
+	);
 
 	return {
 		title: `${name} - Next.js Masters`,
@@ -26,7 +24,7 @@ export async function generateMetadata({
 			description,
 			images: [
 				{
-					url: src,
+					url: coverImage?.src || "",
 					alt: name,
 				},
 			],
@@ -39,7 +37,7 @@ export default async function ProductPage({ params }: ProductPageType) {
 
 	return (
 		<article className="grid w-full grid-cols-1 gap-14 sm:grid sm:grid-cols-2">
-			<ProductCoverImage {...product.coverImage} />
+			{product.coverImage && <ProductCoverImage {...product.coverImage} />}
 
 			<ProductDescription product={product} />
 		</article>
