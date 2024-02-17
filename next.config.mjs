@@ -7,13 +7,22 @@ const nextConfig = {
     mdxRs: true
 	},
   pageExtensions: ["ts", "tsx", "mdx"],
+  redirects: async () => {
+    return [
+      {
+        source: '/products',
+        destination: '/products/1',
+        permanent: false,
+      },
+    ]
+  },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'media.graphassets.com',
+        hostname: 'static-ourstore.hyperfunctor.com',
         port: '',
-        pathname: '/**',
+        pathname: '/uploads/**',
       },
     ],
   },
