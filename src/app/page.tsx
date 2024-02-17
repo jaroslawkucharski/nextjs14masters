@@ -1,8 +1,8 @@
-import { getProducts } from "@/api/products";
+import { getProductList } from "@/api/products";
 import { ProductsList } from "@/ui/organisms/ProductList";
 
 export default async function Home() {
-	const products = await getProducts({ take: "4" });
+	const { products } = await getProductList({ take: 4 });
 
 	return (
 		<>

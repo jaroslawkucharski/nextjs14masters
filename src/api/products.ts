@@ -1,6 +1,10 @@
-type ProductResponseRequest = {
-	take?: string;
-	offset?: string;
+import { executeGraphql } from "./graphqlApi";
+import { ProductsGetListDocument } from "@/gql/graphql";
+import { type ProductItemType } from "@/ui/types";
+
+type ProductListResponse = {
+	products: ProductItemType[];
+	numOfProducts: number;
 };
 
 type ProductResponseItem = {
@@ -32,23 +36,45 @@ const productResponseItemToProductItemType = (product: ProductResponseItem) => {
 	};
 };
 
-export const getProducts = async ({
-	take,
-	offset,
-}: ProductResponseRequest = {}) => {
-	const searchParams = new URLSearchParams({
-		...(take && { take }),
-		...(offset && { offset }),
+export const getProductList = async ({
+	take = 8,
+	skip = 0,
+}): Promise<ProductListResponse> => {
+	const prographqlResponse = await executeGraphql(ProductsGetListDocument, {
+		take,
+		skip,
 	});
 
-	const response = await fetch(
-		`https://naszsklep-api.vercel.app/api/products?${searchParams.toString()}`,
-	);
+	const numOfProducts = prographqlResponse.products.meta.total;
 
-	const products = (await response.json()) as ProductResponseItem[];
-
-	return products.map(productResponseItemToProductItemType);
+	const products = prographqlResponse.products.data.map((product) => {
+		return {
+			id: product.id,
+			category: "",
+			name: product.name,
+			slug: product.slug,
+			price: product.price,
+			description: product.description,
+			coverImage: product.images[0] && {
+				src: product.images[0].url,
+				alt: product.name,
+			},
+		};
+	});
+	return { products, numOfProducts };
 };
+
+// export const getProductsById = async ({
+// 	id,
+// }: {
+// 	id: ProductResponseItem["id"];
+// }) => {
+// 	const prographqlResponse = await executeGraphql(ProductGetByIdDocument, {
+// 		id,
+// 	});
+
+// 	return productResponseItemToProductItemType(prographqlResponse as Product);
+// };
 
 export const getProductsById = async (id: ProductResponseItem["id"]) => {
 	const response = await fetch(
