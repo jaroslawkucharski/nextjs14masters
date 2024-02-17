@@ -13,8 +13,9 @@ type ProductListResponse = {
 	numOfProducts: number;
 };
 
-type ProductListResponse2 = {
+type ProductCategoryResponse = {
 	products: ProductItemType[];
+	category: string;
 };
 
 const productResponseItemToProductItemType = (product: Product) => {
@@ -79,13 +80,15 @@ export const getProductsById = async (
 
 export const getProductsByCategory = async (
 	slug: string,
-): Promise<ProductListResponse2> => {
+): Promise<ProductCategoryResponse> => {
 	const prographqlResponse = await executeGraphql(
 		ProductsGetByCategorySlugDocument,
 		{
 			slug,
 		},
 	);
+
+	const category = prographqlResponse.category?.name || "";
 
 	const products = prographqlResponse.category?.products.map((product) => {
 		return {
@@ -106,5 +109,5 @@ export const getProductsByCategory = async (
 		notFound();
 	}
 
-	return { products };
+	return { products, category };
 };
