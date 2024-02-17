@@ -4,12 +4,17 @@ import {
 	ProductGetByIdDocument,
 	ProductsGetListDocument,
 	type Product,
+	ProductsGetByCategorySlugDocument,
 } from "@/gql/graphql";
 import { type ProductItemType } from "@/ui/types";
 
 type ProductListResponse = {
 	products: ProductItemType[];
 	numOfProducts: number;
+};
+
+type ProductListResponse2 = {
+	products: ProductItemType[];
 };
 
 const productResponseItemToProductItemType = (product: Product) => {
@@ -52,6 +57,7 @@ export const getProductList = async ({
 			},
 		};
 	});
+
 	return { products, numOfProducts };
 };
 
@@ -69,4 +75,36 @@ export const getProductsById = async (
 	return productResponseItemToProductItemType(
 		prographqlResponse.product as Product,
 	);
+};
+
+export const getProductsByCategory = async (
+	slug: string,
+): Promise<ProductListResponse2> => {
+	const prographqlResponse = await executeGraphql(
+		ProductsGetByCategorySlugDocument,
+		{
+			slug,
+		},
+	);
+
+	const products = prographqlResponse.category?.products.map((product) => {
+		return {
+			id: product.id,
+			category: product.categories[0]?.name || "",
+			name: product.name,
+			slug: product.slug,
+			price: product.price,
+			description: product.description,
+			coverImage: product.images[0] && {
+				src: product.images[0].url,
+				alt: product.name,
+			},
+		};
+	});
+
+	if (!products) {
+		notFound();
+	}
+
+	return { products };
 };
