@@ -1,6 +1,5 @@
 import { type Metadata } from "next";
 
-import { notFound } from "next/navigation";
 import { getProductList } from "@/api/products";
 import { ProductsList } from "@/ui/organisms/ProductList";
 import { AMOUNT_OF_PRODUCTS } from "@/constants";
