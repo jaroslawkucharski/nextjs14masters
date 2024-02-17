@@ -1,5 +1,9 @@
 import { executeGraphql } from "./graphqlApi";
-import { ProductsGetListDocument } from "@/gql/graphql";
+import {
+	ProductGetByIdDocument,
+	ProductsGetListDocument,
+	type Product,
+} from "@/gql/graphql";
 import { type ProductItemType } from "@/ui/types";
 
 type ProductListResponse = {
@@ -7,31 +11,17 @@ type ProductListResponse = {
 	numOfProducts: number;
 };
 
-type ProductResponseItem = {
-	id: string;
-	category: string;
-	title: string;
-	description: string;
-	longDescription: string;
-	price: number;
-	image: string;
-	rating: {
-		rate: number;
-		count: number;
-	};
-};
-
-const productResponseItemToProductItemType = (product: ProductResponseItem) => {
+const productResponseItemToProductItemType = (product: Product) => {
 	return {
 		id: product.id,
-		category: product.category,
-		name: product.title,
+		category: product.categories[0]?.name || "",
+		name: product.name,
+		slug: product.slug,
 		price: product.price,
 		description: product.description,
-		longDescription: product.longDescription,
-		coverImage: {
-			src: product.image,
-			alt: product.title,
+		coverImage: product.images[0] && {
+			src: product.images[0].url,
+			alt: product.name,
 		},
 	};
 };
@@ -50,7 +40,7 @@ export const getProductList = async ({
 	const products = prographqlResponse.products.data.map((product) => {
 		return {
 			id: product.id,
-			category: "",
+			category: product.categories[0]?.name || "",
 			name: product.name,
 			slug: product.slug,
 			price: product.price,
@@ -64,24 +54,16 @@ export const getProductList = async ({
 	return { products, numOfProducts };
 };
 
-// export const getProductsById = async ({
-// 	id,
-// }: {
-// 	id: ProductResponseItem["id"];
-// }) => {
-// 	const prographqlResponse = await executeGraphql(ProductGetByIdDocument, {
-// 		id,
-// 	});
+export const getProductsById = async (
+	id: ProductItemType["id"],
+): Promise<ProductItemType> => {
+	const prographqlResponse = await executeGraphql(ProductGetByIdDocument, {
+		id,
+	});
 
-// 	return productResponseItemToProductItemType(prographqlResponse as Product);
-// };
+	console.log("@@@", prographqlResponse);
 
-export const getProductsById = async (id: ProductResponseItem["id"]) => {
-	const response = await fetch(
-		`https://naszsklep-api.vercel.app/api/products/${id}`,
+	return productResponseItemToProductItemType(
+		prographqlResponse.product as Product,
 	);
-
-	const product = (await response.json()) as ProductResponseItem;
-
-	return productResponseItemToProductItemType(product);
 };
