@@ -1,6 +1,6 @@
 import { type Metadata } from "next";
 
-import { getProducts } from "@/api/products";
+import { getProductList } from "@/api/products";
 import { ProductsList } from "@/ui/organisms/ProductList";
 import { AMOUNT_OF_PRODUCTS } from "@/constants";
 
@@ -16,9 +16,9 @@ export const metadata: Metadata = {
 };
 
 export async function generateStaticParams() {
-	const products = await getProducts();
+	const { numOfProducts } = await getProductList({});
 
-	const numOfPages = Math.ceil(products.length / Number(AMOUNT_OF_PRODUCTS));
+	const numOfPages = Math.ceil(numOfProducts / AMOUNT_OF_PRODUCTS);
 	const pages = Array.from({ length: numOfPages }, (_, index) => index + 1);
 
 	return pages.map((page) => ({
@@ -27,17 +27,11 @@ export async function generateStaticParams() {
 }
 
 export default async function ProductsPage({ params }: ProductsPageType) {
-	const offset = params.page
-		? String(
-				Number(params.page) * Number(AMOUNT_OF_PRODUCTS) -
-					Number(AMOUNT_OF_PRODUCTS),
-			)
+	const skip = params.page
+		? String(Number(params.page) * AMOUNT_OF_PRODUCTS - AMOUNT_OF_PRODUCTS)
 		: "0";
 
-	const products = await getProducts({
-		take: AMOUNT_OF_PRODUCTS,
-		offset,
-	});
+	const { products } = await getProductList({ skip: Number(skip) });
 
 	return <ProductsList products={products} />;
 }
