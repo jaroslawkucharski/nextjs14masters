@@ -61,8 +61,6 @@ export const getProductsById = async (
 		id,
 	});
 
-	console.log("@@@", prographqlResponse);
-
 	return productResponseItemToProductItemType(
 		prographqlResponse.product as Product,
 	);
