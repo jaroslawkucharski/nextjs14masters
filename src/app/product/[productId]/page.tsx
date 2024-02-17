@@ -22,9 +22,9 @@ export async function generateMetadata({
 		openGraph: {
 			title: name,
 			description,
-			images: [
+			images: coverImage?.src && [
 				{
-					url: coverImage?.src || "",
+					url: coverImage?.src,
 					alt: name,
 				},
 			],
