@@ -23,9 +23,15 @@ export default async function ProductsLayout({
 }: ProductsLayoutType) {
 	const products = await getProducts({ take: "80" });
 	const numOfPages = Math.ceil(products.length / Number(AMOUNT_OF_PRODUCTS));
-	const numOfPage = params.page ? Number(params.page) : 1;
+	const numOfPage = params.page === undefined ? 1 : Number(params.page[0]);
 
-	if (Number(params.page) < 1 || Number(params.page) > numOfPages) {
+	console.log(params.page);
+
+	if (
+		Number(params.page) < 1 ||
+		Number(params.page) > numOfPages ||
+		isNaN(numOfPage)
+	) {
 		return notFound();
 	}
 
