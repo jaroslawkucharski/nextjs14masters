@@ -15,6 +15,7 @@ query ProductsGetList($take: Int!, $skip: Int!) {
 		}
 		meta {
 			total
+			count
 		}
 	}
 }

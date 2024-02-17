@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { executeGraphql } from "./graphqlApi";
 import {
 	ProductGetByIdDocument,
@@ -60,6 +61,10 @@ export const getProductsById = async (
 	const prographqlResponse = await executeGraphql(ProductGetByIdDocument, {
 		id,
 	});
+
+	if (!prographqlResponse.product) {
+		notFound();
+	}
 
 	return productResponseItemToProductItemType(
 		prographqlResponse.product as Product,

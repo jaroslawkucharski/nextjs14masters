@@ -285,7 +285,7 @@ export type ProductsGetListQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetListQuery = { products: { data: Array<{ id: string, name: string, description: string, slug: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }>, meta: { total: number } } };
+export type ProductsGetListQuery = { products: { data: Array<{ id: string, name: string, description: string, slug: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }>, meta: { total: number, count: number } } };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -337,6 +337,7 @@ export const ProductsGetListDocument = new TypedDocumentString(`
     }
     meta {
       total
+      count
     }
   }
 }

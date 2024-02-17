@@ -15,7 +15,7 @@ import * as types from './graphql';
  */
 const documents = {
     "query ProductGetById($id: ID!) {\n  product(id: $id) {\n    id\n    name\n    description\n    slug\n    categories {\n      name\n    }\n    images {\n      url\n    }\n    price\n  }\n}": types.ProductGetByIdDocument,
-    "query ProductsGetList($take: Int!, $skip: Int!) {\n  products(take: $take, skip: $skip) {\n    data {\n      id\n      name\n      description\n      slug\n      categories {\n        name\n      }\n      images {\n        url\n      }\n      price\n    }\n    meta {\n      total\n    }\n  }\n}": types.ProductsGetListDocument,
+    "query ProductsGetList($take: Int!, $skip: Int!) {\n  products(take: $take, skip: $skip) {\n    data {\n      id\n      name\n      description\n      slug\n      categories {\n        name\n      }\n      images {\n        url\n      }\n      price\n    }\n    meta {\n      total\n      count\n    }\n  }\n}": types.ProductsGetListDocument,
 };
 
 /**
@@ -25,7 +25,7 @@ export function graphql(source: "query ProductGetById($id: ID!) {\n  product(id:
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetList($take: Int!, $skip: Int!) {\n  products(take: $take, skip: $skip) {\n    data {\n      id\n      name\n      description\n      slug\n      categories {\n        name\n      }\n      images {\n        url\n      }\n      price\n    }\n    meta {\n      total\n    }\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
+export function graphql(source: "query ProductsGetList($take: Int!, $skip: Int!) {\n  products(take: $take, skip: $skip) {\n    data {\n      id\n      name\n      description\n      slug\n      categories {\n        name\n      }\n      images {\n        url\n      }\n      price\n    }\n    meta {\n      total\n      count\n    }\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
 
 
 export function graphql(source: string) {
