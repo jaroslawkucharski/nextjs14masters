@@ -2,7 +2,7 @@ import { type Metadata } from "next";
 import { type ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { Pagination } from "@/ui/molecules/Pagination";
-import { getProducts } from "@/api/products";
+import { getProductList } from "@/api/products";
 import { AMOUNT_OF_PRODUCTS } from "@/constants";
 
 type ProductsLayoutType = {
@@ -21,11 +21,9 @@ export default async function ProductsLayout({
 	children,
 	params,
 }: ProductsLayoutType) {
-	const products = await getProducts({ take: "80" });
-	const numOfPages = Math.ceil(products.length / Number(AMOUNT_OF_PRODUCTS));
+	const { numOfProducts } = await getProductList({});
+	const numOfPages = Math.ceil(numOfProducts / AMOUNT_OF_PRODUCTS);
 	const numOfPage = params.page === undefined ? 1 : Number(params.page[0]);
-
-	console.log(params.page);
 
 	if (
 		Number(params.page) < 1 ||
@@ -43,7 +41,7 @@ export default async function ProductsLayout({
 
 			{children}
 
-			<Pagination totalItems={products.length} currentPage={numOfPage} />
+			<Pagination totalItems={numOfProducts} currentPage={numOfPage} />
 		</section>
 	);
 }

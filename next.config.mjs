@@ -7,13 +7,22 @@ const nextConfig = {
     mdxRs: true
 	},
   pageExtensions: ["ts", "tsx", "mdx"],
+  redirects: async () => {
+    return [
+      {
+        source: '/products',
+        destination: '/products/1',
+        permanent: false,
+      },
+    ]
+  },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'naszsklep-api.vercel.app',
+        hostname: process.env.GRAPHQL_IMAGE_URL,
         port: '',
-        pathname: '/images/**',
+        pathname: '/uploads/**',
       },
     ],
   },

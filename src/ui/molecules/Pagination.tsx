@@ -7,7 +7,7 @@ type PaginationType = {
 };
 
 export const Pagination = ({ totalItems, currentPage }: PaginationType) => {
-	const numOfPages = Math.ceil(totalItems / Number(AMOUNT_OF_PRODUCTS));
+	const numOfPages = Math.ceil(totalItems / AMOUNT_OF_PRODUCTS);
 	const pages = Array.from({ length: numOfPages }, (_, index) => index + 1);
 	const prevIsDisabled = currentPage <= 1;
 	const nextIsDisabled = currentPage >= numOfPages;

@@ -7,7 +7,9 @@ export const ProductListItem = ({ product }: { product: ProductItemType }) => (
 	<li key={product.id}>
 		<Link prefetch href={`/product/${product.id}`}>
 			<article className="bg-white transition-transform hover:scale-105">
-				<ProductListItemCoverImage {...product.coverImage} />
+				{product.coverImage && (
+					<ProductListItemCoverImage {...product.coverImage} />
+				)}
 
 				<ProductListItemDescription product={product} />
 			</article>
