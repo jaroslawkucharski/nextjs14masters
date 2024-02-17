@@ -12,6 +12,18 @@ const navigationLinks = [
 		label: "All",
 		href: "/products",
 	},
+	{
+		label: "T-Shirts",
+		href: "/categories/t-shirts",
+	},
+	{
+		label: "Hoodies",
+		href: "/categories/hoodies",
+	},
+	{
+		label: "Accessories",
+		href: "/categories/accessories",
+	},
 ];
 
 export const Navigation = () => (
