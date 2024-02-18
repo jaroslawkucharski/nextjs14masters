@@ -1,5 +1,6 @@
 import { type ReactNode } from "react";
 import { getProductsByCategory } from "@/api/products";
+import { PageHeading } from "@/ui/atoms/PageHeading";
 
 type ProductsLayoutType = {
 	children: ReactNode;
@@ -15,12 +16,12 @@ export default async function CategoryLayout({
 	const { category } = await getProductsByCategory(params.category);
 
 	return (
-		<section>
-			<h2 className="mb-10 text-center text-lg md:text-left lg:text-left">
-				{category}
-			</h2>
+		<>
+			<PageHeading>{category.name}</PageHeading>
 
-			{children}
-		</section>
+			<section className="mx-auto max-w-md p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
+				{children}
+			</section>
+		</>
 	);
 }
