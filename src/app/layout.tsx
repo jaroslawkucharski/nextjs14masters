@@ -18,11 +18,35 @@ export const metadata: Metadata = {
 	description: "Home page.",
 };
 
+const navigationLinks = [
+	{
+		label: "Home",
+		href: "/",
+		exact: true,
+	},
+	{
+		label: "All",
+		href: "/products",
+	},
+	{
+		label: "T-Shirts",
+		href: "/categories/t-shirts",
+	},
+	{
+		label: "Hoodies",
+		href: "/categories/hoodies",
+	},
+	{
+		label: "Accessories",
+		href: "/categories/accessories",
+	},
+];
+
 export default function RootLayout({ children }: Readonly<RootLayoutType>) {
 	return (
 		<html lang="en">
 			<body className={lato.className}>
-				<Header />
+				<Header navigation={navigationLinks} />
 
 				{children}
 			</body>
