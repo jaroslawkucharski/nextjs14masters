@@ -5,32 +5,12 @@ import {
 	ProductsGetListDocument,
 	type Product,
 	ProductsGetByCategorySlugDocument,
+	type ProductListItemFragment,
 } from "@/gql/graphql";
-import { type ProductItemType } from "@/ui/types";
 
 type ProductListResponse = {
-	products: ProductItemType[];
+	products: ProductListItemFragment[];
 	numOfProducts: number;
-};
-
-type ProductCategoryResponse = {
-	products: ProductItemType[];
-	category: string;
-};
-
-const productResponseItemToProductItemType = (product: Product) => {
-	return {
-		id: product.id,
-		category: product.categories[0]?.name || "",
-		name: product.name,
-		slug: product.slug,
-		price: product.price,
-		description: product.description,
-		coverImage: product.images[0] && {
-			src: product.images[0].url,
-			alt: product.name,
-		},
-	};
 };
 
 export const getProductList = async ({
@@ -43,39 +23,33 @@ export const getProductList = async ({
 	});
 
 	const numOfProducts = prographqlResponse.products.meta.total;
-
-	const products = prographqlResponse.products.data.map((product) => {
-		return {
-			id: product.id,
-			category: product.categories[0]?.name || "",
-			name: product.name,
-			slug: product.slug,
-			price: product.price,
-			description: product.description,
-			coverImage: product.images[0] && {
-				src: product.images[0].url,
-				alt: product.name,
-			},
-		};
-	});
+	const products = prographqlResponse.products.data;
 
 	return { products, numOfProducts };
 };
 
 export const getProductsById = async (
-	id: ProductItemType["id"],
-): Promise<ProductItemType> => {
+	id: Product["id"],
+): Promise<ProductListItemFragment> => {
 	const prographqlResponse = await executeGraphql(ProductGetByIdDocument, {
 		id,
 	});
 
-	if (!prographqlResponse.product) {
+	const product = prographqlResponse.product;
+
+	if (!product) {
 		notFound();
 	}
 
-	return productResponseItemToProductItemType(
-		prographqlResponse.product as Product,
-	);
+	return product;
+};
+
+type ProductCategoryResponse = {
+	products: ProductListItemFragment[];
+	category: {
+		name: string;
+		description: string;
+	};
 };
 
 export const getProductsByCategory = async (
@@ -88,22 +62,11 @@ export const getProductsByCategory = async (
 		},
 	);
 
-	const category = prographqlResponse.category?.name || "";
-
-	const products = prographqlResponse.category?.products.map((product) => {
-		return {
-			id: product.id,
-			category: product.categories[0]?.name || "",
-			name: product.name,
-			slug: product.slug,
-			price: product.price,
-			description: product.description,
-			coverImage: product.images[0] && {
-				src: product.images[0].url,
-				alt: product.name,
-			},
-		};
-	});
+	const products = prographqlResponse.category?.products;
+	const category = {
+		name: prographqlResponse.category?.name || "",
+		description: prographqlResponse.category?.description || "",
+	};
 
 	if (!products) {
 		notFound();
