@@ -12,9 +12,9 @@ export type ProductPageType = {
 export async function generateMetadata({
 	params,
 }: ProductPageType): Promise<Metadata> {
-	const { name, description, coverImage } = await getProductsById(
-		params.productId,
-	);
+	const productId = params.productId.split("-").pop() as string;
+
+	const { name, description, images } = await getProductsById(productId);
 
 	return {
 		title: `${name} - Next.js Masters`,
@@ -22,24 +22,24 @@ export async function generateMetadata({
 		openGraph: {
 			title: name,
 			description,
-			images: coverImage?.src && [
-				{
-					url: coverImage?.src,
-					alt: name,
-				},
-			],
+			images,
 		},
 	};
 }
 
 export default async function ProductPage({ params }: ProductPageType) {
-	const product = await getProductsById(params.productId);
+	const productId = params.productId.split("-").pop() as string;
+	const product = await getProductsById(productId);
 
 	return (
-		<article className="grid w-full grid-cols-1 gap-14 sm:grid sm:grid-cols-2">
-			{product.coverImage && <ProductCoverImage {...product.coverImage} />}
+		<section className="mx-auto max-w-md p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
+			<article className="grid w-full grid-cols-1 gap-14 sm:grid sm:grid-cols-2">
+				{product.images[0]?.url && (
+					<ProductCoverImage src={product.images[0]?.url} alt={product.name} />
+				)}
 
-			<ProductDescription product={product} />
-		</article>
+				<ProductDescription product={product} />
+			</article>
+		</section>
 	);
 }

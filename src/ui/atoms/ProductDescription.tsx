@@ -1,12 +1,12 @@
-import { type ProductItemType } from "@/ui/types";
+import { type ProductListItemFragment } from "@/gql/graphql";
 import { formatMoney } from "@/utils";
 
 type ProductListItemDescriptionProps = {
-	product: ProductItemType;
+	product: ProductListItemFragment;
 };
 
 export const ProductDescription = ({
-	product: { name, category, price, description },
+	product: { name, categories, price, description },
 }: ProductListItemDescriptionProps) => (
 	<div className="flex flex-col p-4">
 		<h1 className="text-2xl font-medium text-gray-950 lg:text-4xl">{name}</h1>
@@ -26,7 +26,7 @@ export const ProductDescription = ({
 		<p className="text-lg text-gray-500">
 			<span className="sr-only">Category:</span>
 
-			{category}
+			{categories[0]?.name || ""}
 		</p>
 	</div>
 );
