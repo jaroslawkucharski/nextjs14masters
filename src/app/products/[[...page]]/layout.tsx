@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Pagination } from "@/ui/molecules/Pagination";
 import { getProductList } from "@/api/products";
 import { AMOUNT_OF_PRODUCTS } from "@/constants";
+import { PageHeading } from "@/ui/atoms/PageHeading";
 
 type ProductsLayoutType = {
 	children: ReactNode;
@@ -33,17 +34,17 @@ export default async function ProductsLayout({
 	}
 
 	return (
-		<section>
-			<h2 className="mb-10 text-center text-lg md:text-left lg:text-left">
-				All
-			</h2>
+		<>
+			<PageHeading>All products</PageHeading>
 
-			{children}
+			<section className="mx-auto max-w-md p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
+				{children}
 
-			<Pagination
-				totalItems={numOfProducts}
-				currentPage={Number(params.page)}
-			/>
-		</section>
+				<Pagination
+					totalItems={numOfProducts}
+					currentPage={Number(params.page)}
+				/>
+			</section>
+		</>
 	);
 }
