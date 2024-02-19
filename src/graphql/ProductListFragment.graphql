@@ -1,0 +1,11 @@
+fragment ProductList on Query {
+	products(take: $take, skip: $skip) {
+		data {
+			...ProductListItem
+		}
+		meta {
+			total
+			count
+		}
+	}
+}
