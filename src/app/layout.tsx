@@ -14,7 +14,7 @@ const lato = Lato({
 });
 
 export const metadata: Metadata = {
-	title: "HOME",
+	title: "Home",
 	description: "Home page.",
 };
 

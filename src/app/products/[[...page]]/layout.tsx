@@ -14,7 +14,7 @@ type ProductsLayoutType = {
 };
 
 export const metadata: Metadata = {
-	title: "ALL PRODUCTS",
+	title: "All products",
 	description: "Products page.",
 };
 

@@ -18,7 +18,7 @@ export async function generateMetadata({
 	const { category } = await getProductsByCategory(params.categoryName);
 
 	return {
-		title: category.name.toLocaleUpperCase(),
+		title: category.name,
 		description: category.description,
 	};
 }
