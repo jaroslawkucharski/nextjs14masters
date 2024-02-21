@@ -2,7 +2,7 @@ import { type Metadata } from "next";
 import { type ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { Pagination } from "@/ui/molecules/Pagination";
-import { getProductList } from "@/api/products";
+import { getProductList } from "@/api/getProductList";
 import { AMOUNT_OF_PRODUCTS } from "@/constants";
 import { PageHeading } from "@/ui/atoms/PageHeading";
 
