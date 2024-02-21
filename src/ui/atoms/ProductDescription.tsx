@@ -17,7 +17,7 @@ export const ProductDescription = ({
 			{formatMoney(price)}
 		</p>
 
-		<p className="text-md my-4 pt-1 text-gray-900 lg:text-xl">
+		<p className="text-md my-4 pt-1 text-gray-900 lg:text-lg">
 			<span className="sr-only">Description:</span>
 
 			{description}
