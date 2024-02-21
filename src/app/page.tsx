@@ -4,20 +4,6 @@ import { PageHeading } from "@/ui/atoms/PageHeading";
 import { CollectionList } from "@/ui/organisms/CollectionList";
 import { ProductsList } from "@/ui/organisms/ProductList";
 
-export async function generateStaticParams() {
-	const { products } = await getProductList({
-		take: 4,
-		orderBy: "PRICE",
-	});
-
-	const collections = await getCollectionsList({});
-
-	return {
-		products,
-		collections,
-	};
-}
-
 export default async function Home() {
 	const { products } = await getProductList({
 		take: 4,
