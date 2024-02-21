@@ -48,7 +48,7 @@ export default function RootLayout({ children }: Readonly<RootLayoutType>) {
 			<body className={lato.className}>
 				<Header navigation={navigationLinks} />
 
-				{children}
+				<main className="pt-16">{children}</main>
 			</body>
 		</html>
 	);

@@ -1,5 +1,3 @@
-import { type Metadata } from "next";
-
 import { getProductList } from "@/api/getProductList";
 import { ProductsList } from "@/ui/organisms/ProductList";
 import { AMOUNT_OF_PRODUCTS } from "@/constants";
