@@ -18,7 +18,7 @@ export async function generateMetadata({
 	const { category } = await getProductsByCategory(params.categoryName);
 
 	return {
-		title: `${category.name} - Next.js Masters`,
+		title: category.name,
 		description: category.description,
 	};
 }
@@ -37,13 +37,18 @@ export async function generateStaticParams() {
 export default async function CategoryPage({ params }: CategoryPageType) {
 	const { products } = await getProductsByCategory(params.categoryName);
 
+	const fakePagination =
+		params.page === "1" ? products.slice(0, 4) : products.slice(4);
+
 	return (
 		<>
-			<ProductsList products={products} />
+			<ProductsList products={fakePagination} />
 
 			<Pagination
 				totalItems={products.length}
 				currentPage={Number(params.page)}
+				path={`categories/${params.categoryName}`}
+				limit={4}
 			/>
 		</>
 	);

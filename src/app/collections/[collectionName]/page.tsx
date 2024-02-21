@@ -14,7 +14,7 @@ export async function generateMetadata({
 	const { collection } = await getProductsByCollection(params.collectionName);
 
 	return {
-		title: `${collection.name} - Next.js Masters`,
+		title: collection.name,
 		description: collection.description,
 	};
 }

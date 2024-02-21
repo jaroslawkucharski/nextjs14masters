@@ -43,6 +43,7 @@ export default async function ProductsLayout({
 				<Pagination
 					totalItems={numOfProducts}
 					currentPage={Number(params.page)}
+					path="products"
 				/>
 			</section>
 		</>

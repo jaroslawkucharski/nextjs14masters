@@ -11,7 +11,7 @@ export type ProductsPageType = {
 };
 
 export const metadata: Metadata = {
-	title: "All - Next.js Masters",
+	title: "All products",
 	description: "Products page.",
 };
 
