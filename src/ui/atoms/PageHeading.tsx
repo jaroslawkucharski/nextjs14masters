@@ -20,6 +20,6 @@ export const PageHeading = ({
 
 		{description && <p className="text-gray-600">{description}</p>}
 
-		{children}
+		<div className="my-4">{children}</div>
 	</div>
 );
