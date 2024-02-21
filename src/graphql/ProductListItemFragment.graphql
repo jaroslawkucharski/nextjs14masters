@@ -10,4 +10,5 @@ fragment ProductListItem on Product {
 	}
 	price
 	rating
+	slug
 }
