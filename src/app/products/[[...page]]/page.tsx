@@ -10,11 +10,6 @@ export type ProductsPageType = {
 	};
 };
 
-export const metadata: Metadata = {
-	title: "All products",
-	description: "Products page.",
-};
-
 export async function generateStaticParams() {
 	const { numOfProducts } = await getProductList({});
 

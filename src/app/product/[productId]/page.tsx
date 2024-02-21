@@ -19,7 +19,7 @@ export async function generateMetadata({
 	const { name, description, images } = await getProductsById(productId);
 
 	return {
-		title: name,
+		title: name.toLocaleUpperCase(),
 		description,
 		openGraph: {
 			title: name,
