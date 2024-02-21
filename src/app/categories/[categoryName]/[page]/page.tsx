@@ -1,4 +1,6 @@
+// TODO - fake pagination
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { ProductsList } from "@/ui/organisms/ProductList";
 import { getProductsByCategory } from "@/api/getProductsByCategory";
 import { Pagination } from "@/ui/molecules/Pagination";
@@ -36,6 +38,16 @@ export async function generateStaticParams() {
 
 export default async function CategoryPage({ params }: CategoryPageType) {
 	const { products } = await getProductsByCategory(params.categoryName);
+
+	const numOfPages = Math.ceil(products.length / 4);
+
+	if (
+		Number(params.page) < 1 ||
+		Number(params.page) > numOfPages ||
+		isNaN(Number(params.page))
+	) {
+		return notFound();
+	}
 
 	const fakePagination =
 		params.page === "1" ? products.slice(0, 4) : products.slice(4);
