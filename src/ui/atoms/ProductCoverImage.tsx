@@ -9,7 +9,7 @@ export const ProductCoverImage = ({
 	src,
 	alt,
 }: ProductListItemCoverImageProps) => (
-	<div className=" aspect-auto overflow-hidden">
+	<div className="aspect-auto overflow-hidden">
 		<Image
 			className="h-full w-full object-cover object-top"
 			src={src}

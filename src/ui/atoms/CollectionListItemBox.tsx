@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { type CollectionGetListQuery } from "@/gql/graphql";
 
 type CollectionListItemBoxProps = {
@@ -5,17 +6,19 @@ type CollectionListItemBoxProps = {
 };
 
 export const CollectionListItemBox = ({
-	collection: { name, description },
+	collection: { name, slug },
 }: CollectionListItemBoxProps) => (
 	<div className="p-4">
-		<h3 className="truncate text-sm font-semibold text-gray-950">
+		<Image
+			className="h-full w-full object-cover object-top"
+			src={`/collections/${slug}.avif`}
+			alt={name}
+			width={400}
+			height={400}
+		/>
+
+		<h3 className="mt-4 truncate text-sm font-semibold text-gray-950">
 			{name.toLocaleUpperCase()}
 		</h3>
-
-		<p className="mt-6 text-sm text-gray-500">
-			<span className="sr-only">Category:</span>
-
-			{description}
-		</p>
 	</div>
 );
