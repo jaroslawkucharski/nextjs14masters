@@ -11,6 +11,7 @@ type ProductListRequest = {
 	skip?: number;
 	orderBy?: ProductSortBy;
 	order?: SortDirection;
+	search?: string;
 };
 
 type ProductListResponse = {
@@ -23,12 +24,14 @@ export const getProductList = async ({
 	skip = 0,
 	orderBy = "DEFAULT",
 	order = "ASC",
+	search,
 }: ProductListRequest): Promise<ProductListResponse> => {
 	const prographqlResponse = await executeGraphql(ProductsGetListDocument, {
 		take,
 		skip,
 		orderBy,
 		order,
+		search,
 	});
 
 	const numOfProducts = prographqlResponse.products.meta.total;

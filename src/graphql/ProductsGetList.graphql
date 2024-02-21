@@ -3,8 +3,15 @@ query ProductsGetList(
 	$skip: Int!
 	$orderBy: ProductSortBy
 	$order: SortDirection
+	$search: String
 ) {
-	products(take: $take, skip: $skip, orderBy: $orderBy, order: $order) {
+	products(
+		take: $take
+		skip: $skip
+		orderBy: $orderBy
+		order: $order
+		search: $search
+	) {
 		data {
 			...ProductListItem
 		}

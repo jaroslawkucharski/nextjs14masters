@@ -318,6 +318,7 @@ export type ProductsGetListQueryVariables = Exact<{
   skip: Scalars['Int']['input'];
   orderBy?: InputMaybe<ProductSortBy>;
   order?: InputMaybe<SortDirection>;
+  search?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
@@ -469,8 +470,14 @@ export const ProductsGetByCollectionSlugDocument = new TypedDocumentString(`
   slug
 }`) as unknown as TypedDocumentString<ProductsGetByCollectionSlugQuery, ProductsGetByCollectionSlugQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
-    query ProductsGetList($take: Int!, $skip: Int!, $orderBy: ProductSortBy, $order: SortDirection) {
-  products(take: $take, skip: $skip, orderBy: $orderBy, order: $order) {
+    query ProductsGetList($take: Int!, $skip: Int!, $orderBy: ProductSortBy, $order: SortDirection, $search: String) {
+  products(
+    take: $take
+    skip: $skip
+    orderBy: $orderBy
+    order: $order
+    search: $search
+  ) {
     data {
       ...ProductListItem
     }
