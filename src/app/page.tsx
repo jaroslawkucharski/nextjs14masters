@@ -18,10 +18,7 @@ export default async function Home() {
 				<CollectionList collections={collections} />
 			</PageHeading>
 
-			<section
-				className="mx-auto max-w-md p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl"
-				data-testid="related-products"
-			>
+			<section className="mx-auto max-w-md p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
 				<ProductsList products={products} />
 			</section>
 		</>

@@ -11,7 +11,7 @@ export const PageHeading = ({
 	description,
 	children,
 }: PageHeadingProps) => (
-	<div className="bg-slate-100 px-36 py-10">
+	<div className="bg-slate-100 px-2 py-10 text-center sm:px-36 sm:text-left">
 		{title && (
 			<h2 className="text-lg font-semibold md:text-left lg:text-left">
 				{title}
