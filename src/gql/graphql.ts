@@ -272,6 +272,22 @@ export type SortDirection =
   | 'ASC'
   | 'DESC';
 
+export type CategoryGetListQueryVariables = Exact<{
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type CategoryGetListQuery = { categories: { data: Array<{ id: string, name: string, slug: string }> } };
+
+export type CollectionGetListQueryVariables = Exact<{
+  take?: InputMaybe<Scalars['Int']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type CollectionGetListQuery = { collections: { data: Array<{ id: string, name: string, description: string, slug: string }> } };
+
 export type ProductGetByIdQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;
@@ -293,8 +309,8 @@ export type ProductsGetByCategorySlugQuery = { category?: { name: string, descri
 export type ProductsGetListQueryVariables = Exact<{
   take: Scalars['Int']['input'];
   skip: Scalars['Int']['input'];
-  orderBy: ProductSortBy;
-  order: SortDirection;
+  orderBy?: InputMaybe<ProductSortBy>;
+  order?: InputMaybe<SortDirection>;
 }>;
 
 
@@ -354,6 +370,29 @@ export const ProductListFragmentDoc = new TypedDocumentString(`
   price
   rating
 }`, {"fragmentName":"ProductList"}) as unknown as TypedDocumentString<ProductListFragment, unknown>;
+export const CategoryGetListDocument = new TypedDocumentString(`
+    query CategoryGetList($take: Int, $skip: Int) {
+  categories(take: $take, skip: $skip) {
+    data {
+      id
+      name
+      slug
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<CategoryGetListQuery, CategoryGetListQueryVariables>;
+export const CollectionGetListDocument = new TypedDocumentString(`
+    query CollectionGetList($take: Int, $skip: Int) {
+  collections(take: $take, skip: $skip) {
+    data {
+      id
+      name
+      description
+      slug
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<CollectionGetListQuery, CollectionGetListQueryVariables>;
 export const ProductGetByIdDocument = new TypedDocumentString(`
     query ProductGetById($id: ID!) {
   product(id: $id) {
@@ -396,7 +435,7 @@ export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
   rating
 }`) as unknown as TypedDocumentString<ProductsGetByCategorySlugQuery, ProductsGetByCategorySlugQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
-    query ProductsGetList($take: Int!, $skip: Int!, $orderBy: ProductSortBy!, $order: SortDirection!) {
+    query ProductsGetList($take: Int!, $skip: Int!, $orderBy: ProductSortBy, $order: SortDirection) {
   products(take: $take, skip: $skip, orderBy: $orderBy, order: $order) {
     data {
       ...ProductListItem
