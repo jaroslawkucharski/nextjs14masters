@@ -11,6 +11,8 @@ export const ProductListItemDescription = ({
 }: ProductListItemDescriptionProps) => (
 	<div className="flex flex-col p-4">
 		<h3 className="truncate text-sm font-semibold text-gray-950">
+			<span className="sr-only">Name:</span>
+
 			{name.toLocaleUpperCase()}
 		</h3>
 

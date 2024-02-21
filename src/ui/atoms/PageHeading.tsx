@@ -1,13 +1,25 @@
 import { type ReactNode } from "react";
 
 type PageHeadingProps = {
-	children: ReactNode;
+	title?: string;
+	description?: string;
+	children?: ReactNode;
 };
 
-export const PageHeading = ({ children }: PageHeadingProps) => (
+export const PageHeading = ({
+	title,
+	description,
+	children,
+}: PageHeadingProps) => (
 	<div className="bg-slate-100 px-36 py-10">
-		<h2 className="text-center text-lg md:text-left lg:text-left">
-			{children}
-		</h2>
+		{title && (
+			<h2 className="text-lg font-semibold md:text-left lg:text-left">
+				{title}
+			</h2>
+		)}
+
+		{description && <p className="text-gray-600">{description}</p>}
+
+		{children && <div className="mt-8">{children}</div>}
 	</div>
 );

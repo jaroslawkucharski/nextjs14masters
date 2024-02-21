@@ -12,35 +12,34 @@ export const Pagination = ({ totalItems, currentPage }: PaginationType) => {
 	const prevIsDisabled = currentPage <= 1;
 	const nextIsDisabled = currentPage >= numOfPages;
 
+	// TODO - add `numOfPages > 1 &&`
 	return (
-		numOfPages > 1 && (
-			<nav>
-				<ul
-					className="mt-20 flex w-full justify-center gap-2"
-					aria-label="pagination"
-				>
-					<PaginationButton
-						label="<"
-						href={`/products/${currentPage - 1}`}
-						isDisabled={prevIsDisabled}
-					/>
+		<nav>
+			<ul
+				className="mt-20 flex w-full justify-center gap-2"
+				aria-label="pagination"
+			>
+				<PaginationButton
+					label="<"
+					href={`/products/${currentPage - 1}`}
+					isDisabled={prevIsDisabled}
+				/>
 
-					{pages.map((page) => (
-						<PaginationButton
-							key={page}
-							label={page}
-							href={`/products/${page}`}
-							isActive={page === currentPage}
-						/>
-					))}
-
+				{pages.map((page) => (
 					<PaginationButton
-						label=">"
-						href={`/products/${currentPage + 1}`}
-						isDisabled={nextIsDisabled}
+						key={page}
+						label={page}
+						href={`/products/${page}`}
+						isActive={page === currentPage}
 					/>
-				</ul>
-			</nav>
-		)
+				))}
+
+				<PaginationButton
+					label=">"
+					href={`/products/${currentPage + 1}`}
+					isDisabled={nextIsDisabled}
+				/>
+			</ul>
+		</nav>
 	);
 };

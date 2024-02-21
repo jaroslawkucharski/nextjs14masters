@@ -24,6 +24,7 @@ export const ActiveLink = ({
 	children,
 	exact,
 	isDisabled,
+	...props
 }: ActiveLinkProps) => {
 	const pathname = usePathname();
 	const isActive = exact ? pathname === href : pathname.startsWith(href);
@@ -40,6 +41,7 @@ export const ActiveLink = ({
 			href={href}
 			aria-current={isActive || undefined}
 			aria-disabled={isDisabled}
+			{...props}
 		>
 			{children}
 		</Link>
