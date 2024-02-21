@@ -19,7 +19,7 @@ export async function generateMetadata({
 	const { name, description, images } = await getProductsById(productId);
 
 	return {
-		title: `${name} - Next.js Masters`,
+		title: name,
 		description,
 		openGraph: {
 			title: name,
