@@ -5,7 +5,7 @@ import { PageHeading } from "@/ui/atoms/PageHeading";
 type ProductsLayoutType = {
 	children: ReactNode;
 	params: {
-		category: string;
+		categoryName: string;
 	};
 };
 
@@ -13,7 +13,7 @@ export default async function CategoryLayout({
 	children,
 	params,
 }: ProductsLayoutType) {
-	const { category } = await getProductsByCategory(params.category);
+	const { category } = await getProductsByCategory(params.categoryName);
 
 	return (
 		<>
