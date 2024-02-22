@@ -1,5 +1,6 @@
 import { type Route } from "next";
 import { ShoppingCart } from "lucide-react";
+import { Suspense } from "react";
 import { Searcher } from "@/ui/atoms/Searcher";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 
@@ -29,7 +30,10 @@ export const Navigation = ({ navigation }: NavigationProps) => (
 		</ul>
 
 		<div className="flex flex-1 flex-col justify-end gap-8 pb-4 lg:flex-row">
-			<Searcher />
+			<Suspense>
+				<Searcher />
+			</Suspense>
+
 			<div className="relative self-center">
 				<ShoppingCart />
 
