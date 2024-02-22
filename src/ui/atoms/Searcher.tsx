@@ -6,6 +6,7 @@ import { useDebouncedCallback } from "use-debounce";
 
 export const Searcher = () => {
 	const searchParams = useSearchParams();
+
 	const router = useRouter();
 
 	const handleSearch = useDebouncedCallback(
@@ -16,11 +17,11 @@ export const Searcher = () => {
 
 			if (value && value.length > 1) {
 				params.set("query", value);
+
+				router.replace(`/search?${params.toString()}`);
 			} else {
 				params.delete("query");
 			}
-
-			router.replace(`/search?${params.toString()}`);
 		},
 		500,
 	);
