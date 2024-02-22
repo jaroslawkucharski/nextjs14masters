@@ -16,19 +16,24 @@ export type SearchPageType = {
 };
 
 export default async function SearchPage({ searchParams }: SearchPageType) {
-	const { products } = await getProductList({
-		search: searchParams.query,
-	});
+	const data = searchParams.query
+		? await getProductList({
+				take: 4,
+				search: searchParams.query,
+			})
+		: null;
+
+	const products = data?.products;
 
 	return (
 		<>
 			<PageHeading
-				title={`Search results for '${searchParams.query}'`}
-				description={`Found ${products.length} products.`}
+				title={`Search results for "${searchParams.query ?? ""}"`}
+				description={`Found ${products?.length ?? 0} products.`}
 			/>
 
 			<section className="mx-auto max-w-md p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
-				<ProductsList products={products} />
+				{products && <ProductsList products={products} />}
 			</section>
 		</>
 	);
