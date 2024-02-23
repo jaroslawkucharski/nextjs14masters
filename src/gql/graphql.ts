@@ -272,6 +272,30 @@ export type SortDirection =
   | 'ASC'
   | 'DESC';
 
+export type CartAddItemMutationVariables = Exact<{
+  productId: Scalars['String']['input'];
+  quantity: Scalars['Int']['input'];
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type CartAddItemMutation = { cartAddItem: { id: string } };
+
+export type CartCreateMutationVariables = Exact<{
+  productId: Scalars['String']['input'];
+  quantity: Scalars['Int']['input'];
+}>;
+
+
+export type CartCreateMutation = { cartFindOrCreate: { id: string } };
+
+export type CartGetByIdQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type CartGetByIdQuery = { cart?: { id: string, items: Array<{ quantity: number, product: { id: string, name: string, description: string, price: number } }> } | null };
+
 export type CategoryGetListQueryVariables = Exact<{
   take?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
@@ -380,6 +404,39 @@ export const ProductListFragmentDoc = new TypedDocumentString(`
   rating
   slug
 }`, {"fragmentName":"ProductList"}) as unknown as TypedDocumentString<ProductListFragment, unknown>;
+export const CartAddItemDocument = new TypedDocumentString(`
+    mutation CartAddItem($productId: String!, $quantity: Int!, $id: ID!) {
+  cartAddItem(
+    input: {item: {productId: $productId, quantity: $quantity}}
+    id: $id
+  ) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<CartAddItemMutation, CartAddItemMutationVariables>;
+export const CartCreateDocument = new TypedDocumentString(`
+    mutation CartCreate($productId: String!, $quantity: Int!) {
+  cartFindOrCreate(input: {items: {productId: $productId, quantity: $quantity}}) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<CartCreateMutation, CartCreateMutationVariables>;
+export const CartGetByIdDocument = new TypedDocumentString(`
+    query CartGetById($id: ID!) {
+  cart(id: $id) {
+    id
+    items {
+      product {
+        id
+        name
+        description
+        price
+      }
+      quantity
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<CartGetByIdQuery, CartGetByIdQueryVariables>;
 export const CategoryGetListDocument = new TypedDocumentString(`
     query CategoryGetList($take: Int, $skip: Int) {
   categories(take: $take, skip: $skip) {

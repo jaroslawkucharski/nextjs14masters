@@ -26,7 +26,7 @@ export const getProductList = async ({
 	order = "ASC",
 	search,
 }: ProductListRequest): Promise<ProductListResponse> => {
-	const prographqlResponse = await executeGraphql(ProductsGetListDocument, {
+	const graphqlResponse = await executeGraphql(ProductsGetListDocument, {
 		take,
 		skip,
 		orderBy,
@@ -34,8 +34,8 @@ export const getProductList = async ({
 		search,
 	});
 
-	const numOfProducts = prographqlResponse.products.meta.total;
-	const products = prographqlResponse.products.data;
+	const numOfProducts = graphqlResponse.products.meta.total;
+	const products = graphqlResponse.products.data;
 
 	return { products, numOfProducts };
 };

@@ -6,14 +6,14 @@ import {
 	type ProductListItemFragment,
 } from "@/gql/graphql";
 
-export const getProductsById = async (
+export const getProductById = async (
 	id: Product["id"],
 ): Promise<ProductListItemFragment> => {
-	const prographqlResponse = await executeGraphql(ProductGetByIdDocument, {
+	const graphqlResponse = await executeGraphql(ProductGetByIdDocument, {
 		id,
 	});
 
-	const product = prographqlResponse.product;
+	const product = graphqlResponse.product;
 
 	if (!product) {
 		return notFound();
