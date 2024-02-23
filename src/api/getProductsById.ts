@@ -16,7 +16,7 @@ export const getProductsById = async (
 	const product = prographqlResponse.product;
 
 	if (!product) {
-		notFound();
+		return notFound();
 	}
 
 	return product;

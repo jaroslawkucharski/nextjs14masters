@@ -30,7 +30,7 @@ export const getProductsByCategory = async (
 	};
 
 	if (!products) {
-		notFound();
+		return notFound();
 	}
 
 	return { products, category };

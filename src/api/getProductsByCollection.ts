@@ -30,7 +30,7 @@ export const getProductsByCollection = async (
 	};
 
 	if (!products) {
-		notFound();
+		return notFound();
 	}
 
 	return { products, collection };
