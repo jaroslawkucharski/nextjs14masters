@@ -39,6 +39,10 @@ export default async function ProductPage({ params }: ProductPageType) {
 		orderBy: "PRICE",
 	});
 
+	const addToCartAction = async () => {
+		"use server";
+	};
+
 	return (
 		<>
 			<section className="mx-auto max-w-md p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
@@ -50,7 +54,18 @@ export default async function ProductPage({ params }: ProductPageType) {
 						/>
 					)}
 
-					<ProductDescription product={product} />
+					<div>
+						<ProductDescription product={product} />
+
+						<form action={addToCartAction}>
+							<button
+								type="submit"
+								className="w-full rounded-md border bg-slate-700 px-8 py-3 text-white"
+							>
+								Add to cart
+							</button>
+						</form>
+					</div>
 				</article>
 
 				<section
