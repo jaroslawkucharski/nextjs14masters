@@ -1,13 +1,14 @@
 import { type Metadata } from "next";
 import { cookies } from "next/headers";
 import Image from "next/image";
-import { CornerDownLeft, Store } from "lucide-react";
+import { CornerDownLeft, Store, Trash2 } from "lucide-react";
 import { Suspense } from "react";
 import { getCartById } from "@/api/getCartById";
 import { formatMoney } from "@/utils";
 import { PageHeading } from "@/ui/atoms/PageHeading";
 import { ProductCounter } from "@/ui/atoms/ProductCounter";
-import { ButtonRemoveItem } from "@/ui/atoms/ButtonRemoveItem";
+import { Button } from "@/ui/atoms/Button";
+import { removeProductFromCard } from "@/api/removeProductFromCard";
 
 export const metadata: Metadata = {
 	title: "Cart",
@@ -63,12 +64,26 @@ export default async function CartPage() {
 									</td>
 
 									<td className="self-end px-8 py-2">
-										<Suspense>
-											<ButtonRemoveItem
-												cartId={cartId}
-												productId={item.product.id}
-											/>
-										</Suspense>
+										<form
+											action={async () => {
+												"use server";
+
+												console.log(item);
+
+												if (cartId) {
+													const remove = await removeProductFromCard({
+														id: cartId,
+														productId: item.product.id,
+													});
+
+													return remove;
+												}
+											}}
+										>
+											<Button variant="remove">
+												<Trash2 className="h-4 w-4" /> Remove
+											</Button>
+										</form>
 
 										<p>{formatMoney(item.product.price * item.quantity)}</p>
 									</td>
@@ -99,12 +114,7 @@ export default async function CartPage() {
 						</div>
 
 						<form>
-							<button
-								type="submit"
-								className="w-full rounded-md border bg-gray-900 px-8 py-3 text-white hover:bg-gray-800"
-							>
-								Order it
-							</button>
+							<Button type="submit">Order it</Button>
 						</form>
 
 						<div className="mt-8 flex flex-col gap-2">
