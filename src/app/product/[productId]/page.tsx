@@ -8,6 +8,7 @@ import { ProductsList } from "@/ui/organisms/ProductList";
 import { getProductList } from "@/api/getProductList";
 import { createCart } from "@/api/createCart";
 import { addProductToCart } from "@/api/addProductToCard";
+import { Button } from "@/ui/atoms/Button";
 
 export type ProductPageType = {
 	params: {
@@ -85,12 +86,7 @@ export default async function ProductPage({ params }: ProductPageType) {
 						<ProductDescription product={product} />
 
 						<form action={addToCartAction}>
-							<button
-								type="submit"
-								className="w-full rounded-md border bg-gray-900 px-8 py-3 text-white hover:bg-gray-800"
-							>
-								Add to cart
-							</button>
+							<Button type="submit">Add to cart</Button>
 						</form>
 					</div>
 				</article>
