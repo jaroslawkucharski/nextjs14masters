@@ -24,7 +24,10 @@ export const ProductListItemDescription = ({
 			<span className="sr-only">Rating:</span>
 
 			<span className="flex gap-2">
-				<span className="self-center text-xs">4.7 / 5</span>
+				<span className="self-center text-xs" data-testid="product-rating">
+					4.7 / 5
+				</span>
+
 				<span className="flex justify-end self-center">
 					<Star className="h-4 w-4 fill-current text-yellow-400" />
 
@@ -36,7 +39,7 @@ export const ProductListItemDescription = ({
 
 			<span className="sr-only">Price:</span>
 
-			{formatMoney(price)}
+			<span data-testid="product-price">{formatMoney(price)}</span>
 		</p>
 	</div>
 );

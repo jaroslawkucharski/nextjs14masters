@@ -15,6 +15,7 @@ export const ProductCounter = ({ values }: ProductCounterProps) => {
 				<button
 					onClick={() => counter > 1 && setCounter((counter) => counter - 1)}
 					className="w-8 border bg-gray-950 text-center text-lg text-white"
+					data-testid="decrement"
 				>
 					-
 				</button>
@@ -23,11 +24,13 @@ export const ProductCounter = ({ values }: ProductCounterProps) => {
 					readOnly
 					value={counter}
 					className="w-16 border border-slate-200 px-2 text-center text-lg"
+					data-testid="quantity"
 				/>
 
 				<button
 					onClick={() => setCounter((counter) => counter + 1)}
 					className="w-8 border bg-gray-950 text-center text-lg text-white"
+					data-testid="increment"
 				>
 					+
 				</button>
