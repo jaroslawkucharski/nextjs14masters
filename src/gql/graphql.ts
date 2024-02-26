@@ -470,14 +470,12 @@ export const CartGetByIdDocument = new TypedDocumentString(`
     id
     items {
       product {
-        ... on Product {
+        id
+        name
+        price
+        images {
           id
-          name
-          price
-          images {
-            id
-            url
-          }
+          url
         }
       }
       quantity
