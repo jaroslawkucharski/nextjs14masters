@@ -4,7 +4,8 @@ import mdx from "@next/mdx"
 const nextConfig = {
   experimental: {
 		typedRoutes: true,
-    mdxRs: true
+    mdxRs: true,
+    serverActions: true,
 	},
   pageExtensions: ["ts", "tsx", "mdx"],
   redirects: async () => {

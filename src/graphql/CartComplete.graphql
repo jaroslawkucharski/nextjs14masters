@@ -1,0 +1,10 @@
+mutation CartComplete($id: ID!) {
+	cartComplete(cartId: $id) {
+		id
+		createdAt
+		lines
+		status
+		totalAmount
+		updatedAt
+	}
+}

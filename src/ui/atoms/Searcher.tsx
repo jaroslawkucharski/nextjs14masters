@@ -1,5 +1,6 @@
 "use client";
 
+import { Search } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { type ChangeEvent } from "react";
 import { useDebouncedCallback } from "use-debounce";
@@ -27,13 +28,17 @@ export const Searcher = () => {
 	);
 
 	return (
-		<input
-			className="w-full min-w-64 max-w-64 self-start rounded-md border-0 bg-slate-50 py-2 pl-4 pr-4 text-sm text-slate-800 ring-1 ring-inset ring-gray-300 placeholder:text-slate-400 focus:ring-2 focus:ring-inset focus:ring-blue-400 lg:min-w-40"
-			placeholder="Search"
-			type="search"
-			name="search"
-			defaultValue={searchParams.get("query")?.toString()}
-			onChange={handleSearch}
-		/>
+		<div className="relative self-center">
+			<Search className="absolute left-2 top-2 h-5 w-5 text-slate-400" />
+
+			<input
+				className="w-64 min-w-64 appearance-none self-start rounded-md border-0 bg-white py-2 pl-8 pr-4 text-sm text-slate-400 ring-1 ring-inset ring-gray-400 placeholder:text-slate-400 focus:border-gray-900 focus:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-900 lg:min-w-4"
+				placeholder="Search"
+				type="search"
+				name="search"
+				defaultValue={searchParams.get("query")?.toString()}
+				onChange={handleSearch}
+			></input>
+		</div>
 	);
 };

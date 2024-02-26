@@ -1,10 +1,13 @@
 // TODO - not found page
 import { type Metadata } from "next";
-import { getProductsById } from "@/api/getProductsById";
+import { cookies } from "next/headers";
+import { getProductById } from "@/api/getProductById";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductDescription } from "@/ui/atoms/ProductDescription";
 import { ProductsList } from "@/ui/organisms/ProductList";
 import { getProductList } from "@/api/getProductList";
+import { createCart } from "@/api/createCart";
+import { addProductToCart } from "@/api/addProductToCard";
 
 export type ProductPageType = {
 	params: {
@@ -17,7 +20,7 @@ export async function generateMetadata({
 }: ProductPageType): Promise<Metadata> {
 	const productId = params.productId.split("-").pop() as string;
 
-	const { name, description, images } = await getProductsById(productId);
+	const { name, description, images } = await getProductById(productId);
 
 	return {
 		title: name,
@@ -32,12 +35,40 @@ export async function generateMetadata({
 
 export default async function ProductPage({ params }: ProductPageType) {
 	const productId = params.productId.split("-").pop() as string;
-	const product = await getProductsById(productId);
+	const product = await getProductById(productId);
 
 	const { products } = await getProductList({
 		take: 4,
 		orderBy: "PRICE",
 	});
+
+	const getOrCreateCart = async () => {
+		"use server";
+
+		const cartId = cookies().get("cartId")?.value;
+
+		if (cartId) {
+			const add = await addProductToCart({
+				id: cartId,
+				productId,
+				quantity: 1,
+			});
+
+			return add;
+		} else {
+			const newCart = await createCart({ productId, quantity: 1 });
+
+			return newCart;
+		}
+	};
+
+	const addToCartAction = async () => {
+		"use server";
+
+		const cart = await getOrCreateCart();
+
+		return cart;
+	};
 
 	return (
 		<>
@@ -50,7 +81,18 @@ export default async function ProductPage({ params }: ProductPageType) {
 						/>
 					)}
 
-					<ProductDescription product={product} />
+					<div>
+						<ProductDescription product={product} />
+
+						<form action={addToCartAction}>
+							<button
+								type="submit"
+								className="w-full rounded-md border bg-gray-900 px-8 py-3 text-white hover:bg-gray-800"
+							>
+								Add to cart
+							</button>
+						</form>
+					</div>
 				</article>
 
 				<section

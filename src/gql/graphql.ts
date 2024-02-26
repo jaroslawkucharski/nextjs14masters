@@ -272,6 +272,54 @@ export type SortDirection =
   | 'ASC'
   | 'DESC';
 
+export type CartAddItemMutationVariables = Exact<{
+  productId: Scalars['String']['input'];
+  quantity: Scalars['Int']['input'];
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type CartAddItemMutation = { cartAddItem: { id: string } };
+
+export type CartChangeItemQuantityMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  quantity: Scalars['Int']['input'];
+  productId: Scalars['ID']['input'];
+}>;
+
+
+export type CartChangeItemQuantityMutation = { cartChangeItemQuantity: { id: string } };
+
+export type CartCompleteMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type CartCompleteMutation = { cartComplete: { id: string, createdAt: unknown, lines: unknown, status: OrderStatus, totalAmount: number, updatedAt: unknown } };
+
+export type CartCreateMutationVariables = Exact<{
+  productId: Scalars['String']['input'];
+  quantity: Scalars['Int']['input'];
+}>;
+
+
+export type CartCreateMutation = { cartFindOrCreate: { id: string } };
+
+export type CartGetByIdQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type CartGetByIdQuery = { cart?: { id: string, items: Array<{ quantity: number, product: { id: string, name: string, price: number, images: Array<{ id: string, url: string }> } }> } | null };
+
+export type CartRemoveItemMutationVariables = Exact<{
+  productId: Scalars['ID']['input'];
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type CartRemoveItemMutation = { cartRemoveItem: { id: string } };
+
 export type CategoryGetListQueryVariables = Exact<{
   take?: InputMaybe<Scalars['Int']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
@@ -380,6 +428,70 @@ export const ProductListFragmentDoc = new TypedDocumentString(`
   rating
   slug
 }`, {"fragmentName":"ProductList"}) as unknown as TypedDocumentString<ProductListFragment, unknown>;
+export const CartAddItemDocument = new TypedDocumentString(`
+    mutation CartAddItem($productId: String!, $quantity: Int!, $id: ID!) {
+  cartAddItem(
+    input: {item: {productId: $productId, quantity: $quantity}}
+    id: $id
+  ) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<CartAddItemMutation, CartAddItemMutationVariables>;
+export const CartChangeItemQuantityDocument = new TypedDocumentString(`
+    mutation CartChangeItemQuantity($id: ID!, $quantity: Int!, $productId: ID!) {
+  cartChangeItemQuantity(id: $id, quantity: $quantity, productId: $productId) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<CartChangeItemQuantityMutation, CartChangeItemQuantityMutationVariables>;
+export const CartCompleteDocument = new TypedDocumentString(`
+    mutation CartComplete($id: ID!) {
+  cartComplete(cartId: $id) {
+    id
+    createdAt
+    lines
+    status
+    totalAmount
+    updatedAt
+  }
+}
+    `) as unknown as TypedDocumentString<CartCompleteMutation, CartCompleteMutationVariables>;
+export const CartCreateDocument = new TypedDocumentString(`
+    mutation CartCreate($productId: String!, $quantity: Int!) {
+  cartFindOrCreate(input: {items: {productId: $productId, quantity: $quantity}}) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<CartCreateMutation, CartCreateMutationVariables>;
+export const CartGetByIdDocument = new TypedDocumentString(`
+    query CartGetById($id: ID!) {
+  cart(id: $id) {
+    id
+    items {
+      product {
+        ... on Product {
+          id
+          name
+          price
+          images {
+            id
+            url
+          }
+        }
+      }
+      quantity
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<CartGetByIdQuery, CartGetByIdQueryVariables>;
+export const CartRemoveItemDocument = new TypedDocumentString(`
+    mutation CartRemoveItem($productId: ID!, $id: ID!) {
+  cartRemoveItem(productId: $productId, id: $id) {
+    id
+  }
+}
+    `) as unknown as TypedDocumentString<CartRemoveItemMutation, CartRemoveItemMutationVariables>;
 export const CategoryGetListDocument = new TypedDocumentString(`
     query CategoryGetList($take: Int, $skip: Int) {
   categories(take: $take, skip: $skip) {

@@ -16,21 +16,21 @@ type ProductCollectionResponse = {
 export const getProductsByCollection = async (
 	slug: string,
 ): Promise<ProductCollectionResponse> => {
-	const prographqlResponse = await executeGraphql(
+	const graphqlResponse = await executeGraphql(
 		ProductsGetByCollectionSlugDocument,
 		{
 			slug,
 		},
 	);
 
-	const products = prographqlResponse.collection?.products;
+	const products = graphqlResponse.collection?.products;
 	const collection = {
-		name: prographqlResponse.collection?.name || "",
-		description: prographqlResponse.collection?.description || "",
+		name: graphqlResponse.collection?.name || "",
+		description: graphqlResponse.collection?.description || "",
 	};
 
 	if (!products) {
-		notFound();
+		return notFound();
 	}
 
 	return { products, collection };

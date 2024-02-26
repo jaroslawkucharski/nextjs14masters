@@ -9,7 +9,7 @@ type RootLayoutType = {
 };
 
 const lato = Lato({
-	subsets: ["latin"],
+	subsets: ["latin", "latin-ext"],
 	weight: ["100", "300", "400", "700", "900"],
 });
 
@@ -48,7 +48,7 @@ export default function RootLayout({ children }: Readonly<RootLayoutType>) {
 			<body className={lato.className}>
 				<Header navigation={navigationLinks} />
 
-				<main className="pt-16">{children}</main>
+				{children}
 			</body>
 		</html>
 	);

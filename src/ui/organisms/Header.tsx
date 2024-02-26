@@ -11,7 +11,7 @@ type HeaderProps = {
 };
 
 export const Header = ({ navigation }: HeaderProps) => (
-	<header className="fixed flex h-fit w-full flex-col justify-center gap-12 border-b bg-white px-12 lg:flex-row lg:justify-between">
+	<header className="static z-10 flex h-fit w-full flex-col justify-center gap-12 border-b bg-white px-12 py-4 max-lg:justify-between lg:fixed lg:flex-row">
 		<Link href="/" className="self-center">
 			<Logo />
 		</Link>
