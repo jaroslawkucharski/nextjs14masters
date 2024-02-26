@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { type Route } from "next";
-import { type ReactNode } from "react";
+import { type LinkHTMLAttributes, type ReactNode } from "react";
 
 type ActiveLinkProps = {
 	className?: string;
@@ -25,7 +25,7 @@ export const ActiveLink = ({
 	exact,
 	isDisabled,
 	...props
-}: ActiveLinkProps) => {
+}: ActiveLinkProps & LinkHTMLAttributes<HTMLElement>) => {
 	const pathname = usePathname();
 	const isActive = exact ? pathname === href : pathname.startsWith(href);
 
