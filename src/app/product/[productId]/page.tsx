@@ -48,13 +48,13 @@ export default async function ProductPage({ params }: ProductPageType) {
 		const cartId = cookies().get("cartId")?.value;
 
 		if (cartId) {
-			const dupa = await addProductToCart({
+			const add = await addProductToCart({
 				id: cartId,
 				productId,
 				quantity: 1,
 			});
 
-			return dupa;
+			return add;
 		} else {
 			const newCart = await createCart({ productId, quantity: 1 });
 
@@ -87,7 +87,7 @@ export default async function ProductPage({ params }: ProductPageType) {
 						<form action={addToCartAction}>
 							<button
 								type="submit"
-								className="w-full rounded-md border bg-slate-700 px-8 py-3 text-white"
+								className="w-full rounded-md border bg-gray-900 px-8 py-3 text-white hover:bg-gray-800"
 							>
 								Add to cart
 							</button>
