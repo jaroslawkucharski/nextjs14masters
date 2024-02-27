@@ -1,6 +1,7 @@
 "use server";
 
-import { executeGraphql } from "./graphqlApi";
+import { revalidateTag } from "next/cache";
+import { executeGraphQl } from "./graphqlApi";
 import {
 	CartChangeItemQuantityDocument,
 	type CartChangeItemQuantityMutationVariables,
@@ -11,11 +12,19 @@ export const changeProductQuantity = async ({
 	productId,
 	quantity,
 }: CartChangeItemQuantityMutationVariables) => {
-	const graphqlResponse = await executeGraphql(CartChangeItemQuantityDocument, {
-		productId,
-		id,
-		quantity,
+	const graphqlResponse = await executeGraphQl({
+		query: CartChangeItemQuantityDocument,
+		variables: {
+			productId,
+			id,
+			quantity,
+		},
+		next: {
+			tags: ["cart"],
+		},
 	});
+
+	revalidateTag("cart");
 
 	return graphqlResponse;
 };

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { executeGraphql } from "./graphqlApi";
+import { executeGraphQl } from "./graphqlApi";
 import {
 	type ProductListItemFragment,
 	ProductsGetByCollectionSlugDocument,
@@ -16,12 +16,12 @@ type ProductCollectionResponse = {
 export const getProductsByCollection = async (
 	slug: string,
 ): Promise<ProductCollectionResponse> => {
-	const graphqlResponse = await executeGraphql(
-		ProductsGetByCollectionSlugDocument,
-		{
+	const graphqlResponse = await executeGraphQl({
+		query: ProductsGetByCollectionSlugDocument,
+		variables: {
 			slug,
 		},
-	);
+	});
 
 	const products = graphqlResponse.collection?.products;
 	const collection = {

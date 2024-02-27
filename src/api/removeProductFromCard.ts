@@ -1,4 +1,4 @@
-import { executeGraphql } from "./graphqlApi";
+import { executeGraphQl } from "./graphqlApi";
 import {
 	CartRemoveItemDocument,
 	type CartRemoveItemMutationVariables,
@@ -8,9 +8,15 @@ export const removeProductFromCard = async ({
 	id,
 	productId,
 }: CartRemoveItemMutationVariables) => {
-	const graphqlResponse = await executeGraphql(CartRemoveItemDocument, {
-		productId,
-		id,
+	const graphqlResponse = await executeGraphQl({
+		query: CartRemoveItemDocument,
+		variables: {
+			productId,
+			id,
+		},
+		next: {
+			tags: ["cart"],
+		},
 	});
 
 	return graphqlResponse;

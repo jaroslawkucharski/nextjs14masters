@@ -1,4 +1,4 @@
-import { executeGraphql } from "./graphqlApi";
+import { executeGraphQl } from "./graphqlApi";
 import {
 	type CategoryGetListQuery,
 	CategoryGetListDocument,
@@ -11,9 +11,12 @@ export const getCategoryList = async ({
 }: CategoryGetListQueryVariables): Promise<
 	CategoryGetListQuery["categories"]["data"]
 > => {
-	const graphqlResponse = await executeGraphql(CategoryGetListDocument, {
-		take,
-		skip,
+	const graphqlResponse = await executeGraphQl({
+		query: CategoryGetListDocument,
+		variables: {
+			take,
+			skip,
+		},
 	});
 
 	const categories = graphqlResponse.categories.data;

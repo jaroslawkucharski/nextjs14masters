@@ -1,4 +1,4 @@
-import { executeGraphql } from "./graphqlApi";
+import { executeGraphQl } from "./graphqlApi";
 import {
 	CartCompleteDocument,
 	type CartCompleteMutation,
@@ -8,8 +8,11 @@ import {
 export const cartComplete = async (
 	id: CartCompleteMutationVariables["id"],
 ): Promise<CartCompleteMutation["cartComplete"]> => {
-	const graphqlResponse = await executeGraphql(CartCompleteDocument, {
-		id,
+	const graphqlResponse = await executeGraphQl({
+		query: CartCompleteDocument,
+		variables: {
+			id,
+		},
 	});
 
 	return graphqlResponse.cartComplete;
