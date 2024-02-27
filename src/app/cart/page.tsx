@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import Image from "next/image";
 import { CornerDownLeft, Store, Trash2 } from "lucide-react";
 import { redirect } from "next/navigation";
+import { revalidateTag } from "next/cache";
 import { getCartById } from "@/api/getCartById";
 import { formatMoney } from "@/utils";
 import { PageHeading } from "@/ui/atoms/PageHeading";
@@ -79,6 +80,8 @@ export default async function CartPage() {
 														id: cartId,
 														productId: item.product.id,
 													});
+
+													revalidateTag("cart");
 
 													return remove;
 												}

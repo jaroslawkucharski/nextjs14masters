@@ -1,6 +1,8 @@
 // TODO - not found page
 import { type Metadata } from "next";
 import { cookies } from "next/headers";
+import { revalidateTag } from "next/cache";
+import { AddProductToCart } from "./components/AddProductToCart";
 import { getProductById } from "@/api/getProductById";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductDescription } from "@/ui/atoms/ProductDescription";
@@ -8,7 +10,6 @@ import { ProductsList } from "@/ui/organisms/ProductList";
 import { getProductList } from "@/api/getProductList";
 import { createCart } from "@/api/createCart";
 import { addProductToCart } from "@/api/addProductToCard";
-import { Button } from "@/ui/atoms/Button";
 
 export type ProductPageType = {
 	params: {
@@ -55,9 +56,13 @@ export default async function ProductPage({ params }: ProductPageType) {
 				quantity: 1,
 			});
 
+			revalidateTag("cart");
+
 			return add;
 		} else {
 			const newCart = await createCart({ productId, quantity: 1 });
+
+			revalidateTag("cart");
 
 			return newCart;
 		}
@@ -86,9 +91,7 @@ export default async function ProductPage({ params }: ProductPageType) {
 						<ProductDescription product={product} />
 
 						<form action={addToCartAction}>
-							<Button type="submit" data-testid="add-to-cart-button">
-								Add to cart
-							</Button>
+							<AddProductToCart />
 						</form>
 					</div>
 				</article>
