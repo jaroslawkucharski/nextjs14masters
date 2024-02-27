@@ -2,7 +2,7 @@
 import { type Metadata } from "next";
 import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
-import { AddProductToCart } from "./components/AddProductToCart";
+import { AddProductToCart } from "@/ui/molecules/AddProductToCart";
 import { getProductById } from "@/api/getProductById";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductDescription } from "@/ui/atoms/ProductDescription";
