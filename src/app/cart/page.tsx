@@ -2,7 +2,6 @@ import { type Metadata } from "next";
 import { cookies } from "next/headers";
 import Image from "next/image";
 import { CornerDownLeft, Store } from "lucide-react";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import { getCartById } from "@/api/getCartById";
 import { formatMoney } from "@/utils";
@@ -26,8 +25,15 @@ export default async function CartPage() {
 		0,
 	);
 
-	if (!cart) {
-		redirect("/");
+	if (!cart || !cart.items.length) {
+		return (
+			<section className="flex h-[calc(100vh-4rem)] w-full flex-col items-center justify-center text-center">
+				<h1 className="text-6xl">Your cart is empty.</h1>
+				<p className="mt-8 text-xl">
+					<Link href="/"> Continue shopping</Link>
+				</p>
+			</section>
+		);
 	}
 
 	return (
