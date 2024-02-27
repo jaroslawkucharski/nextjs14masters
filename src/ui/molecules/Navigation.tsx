@@ -1,7 +1,4 @@
 import { type Route } from "next";
-import { Suspense } from "react";
-import { Cart } from "@/ui/atoms/Cart";
-import { Searcher } from "@/ui/atoms/Searcher";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 
 type NavigationProps = {
@@ -28,13 +25,5 @@ export const Navigation = ({ navigation }: NavigationProps) => (
 				</li>
 			))}
 		</ul>
-
-		<div className="flex flex-1 flex-col justify-end gap-8 lg:flex-row">
-			<Suspense>
-				<Searcher />
-			</Suspense>
-
-			<Cart />
-		</div>
 	</nav>
 );

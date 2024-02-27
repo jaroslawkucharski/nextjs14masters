@@ -1,6 +1,9 @@
 import Link from "next/link";
-import { Navigation } from "@/ui/molecules/Navigation";
+import { Suspense } from "react";
+import { Searcher } from "../atoms/Searcher";
+import { Cart } from "../atoms/Cart";
 import { Logo } from "@/ui/atoms/Logo";
+import { Navigation } from "@/ui/molecules/Navigation";
 
 type HeaderProps = {
 	navigation: {
@@ -17,5 +20,13 @@ export const Header = ({ navigation }: HeaderProps) => (
 		</Link>
 
 		<Navigation navigation={navigation} />
+
+		<div className="flex flex-1 flex-col justify-end gap-8 lg:flex-row">
+			<Suspense>
+				<Searcher />
+			</Suspense>
+
+			<Cart />
+		</div>
 	</header>
 );
