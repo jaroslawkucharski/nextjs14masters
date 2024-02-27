@@ -43,6 +43,7 @@ export default async function CartPage() {
 							<th className="sr-only px-4 py-2">Price</th>
 						</tr>
 					</thead>
+
 					<tbody>
 						{cart?.items &&
 							cart.items.map((item) => (

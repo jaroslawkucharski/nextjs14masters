@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import clsx from "clsx";
 import { formatMoney } from "@/utils";
 import { type ProductListItemFragment } from "@/gql/graphql";
 
@@ -7,7 +8,7 @@ type ProductListItemDescriptionProps = {
 };
 
 export const ProductListItemDescription = ({
-	product: { name, categories, price },
+	product: { name, categories, price, rating },
 }: ProductListItemDescriptionProps) => (
 	<div className="flex flex-col p-4">
 		<h3 className="truncate text-sm font-semibold text-gray-950">
@@ -25,15 +26,22 @@ export const ProductListItemDescription = ({
 
 			<span className="flex gap-2">
 				<span className="self-center text-xs" data-testid="product-rating">
-					4.7 / 5
+					{`${rating?.toFixed(1)} / 5`}
 				</span>
 
-				<span className="flex justify-end self-center">
-					<Star className="h-4 w-4 fill-current text-yellow-400" />
-
-					<Star className="h-4 w-4 fill-current text-yellow-400" />
-
-					<Star className="h-4 w-4 fill-current text-yellow-400" />
+				<span
+					className="flex justify-end self-center"
+					data-testid="product-rating"
+				>
+					{[...Array<number>(5)].map((_, index) => (
+						<Star
+							key={index}
+							className={clsx("h-4 w-4 text-gray-400", {
+								["fill-current text-yellow-400"]:
+									index < Math.round(rating || 0),
+							})}
+						/>
+					))}
 				</span>
 			</span>
 
