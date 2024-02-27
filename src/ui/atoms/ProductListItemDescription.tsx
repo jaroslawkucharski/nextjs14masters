@@ -26,7 +26,7 @@ export const ProductListItemDescription = ({
 
 			<span className="flex gap-2">
 				<span className="self-center text-xs" data-testid="product-rating">
-					{`${rating?.toFixed(1)} / 5`}
+					{`${rating?.toFixed(1) ?? 0} / 5`}
 				</span>
 
 				<span
