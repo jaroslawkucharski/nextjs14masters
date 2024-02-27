@@ -4,6 +4,7 @@ import Image from "next/image";
 import { CornerDownLeft, Store, Trash2 } from "lucide-react";
 import { redirect } from "next/navigation";
 import { revalidateTag } from "next/cache";
+import Link from "next/link";
 import { getCartById } from "@/api/getCartById";
 import { formatMoney } from "@/utils";
 import { PageHeading } from "@/ui/atoms/PageHeading";
@@ -49,17 +50,30 @@ export default async function CartPage() {
 								<tr key={item.product.id} className="h-fit border-b">
 									<td className="invisible py-4 sm:visible sm:min-w-48 sm:px-4">
 										{item.product.images?.[0] && (
-											<Image
-												src={item.product.images[0].url}
-												alt={item.product.name}
-												width={150}
-												height={150}
-											/>
+											<Link
+												prefetch
+												href={`/product/${item.product.slug}-${item.product.id}`}
+											>
+												<Image
+													src={item.product.images[0].url}
+													alt={item.product.name}
+													width={150}
+													height={150}
+												/>
+											</Link>
 										)}
 									</td>
 
 									<td className="w-full px-4 py-8">
-										<p className="mb-10 text-xl">{item.product.name}</p>
+										<p className="mb-10 text-xl">
+											<Link
+												className="h-fit hover:underline"
+												prefetch
+												href={`/product/${item.product.slug}-${item.product.id}`}
+											>
+												{item.product.name}
+											</Link>
+										</p>
 
 										<div className="pr-8 text-sm text-gray-600">
 											<ProductCounter
