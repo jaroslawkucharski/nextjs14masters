@@ -18,13 +18,13 @@ export const PaginationButton = ({
 	<li className="flex justify-center">
 		<ActiveLink
 			className={clsx(
-				`flex h-10 w-10 items-center justify-center rounded-full border border-gray-300 text-lg hover:bg-gray-900 hover:text-white`,
+				`h-8 w-8 rounded-md border border-gray-400 text-center text-lg text-gray-950 hover:bg-gray-100`,
 				{
 					["bg-gray-900 text-white"]: isActive,
 				},
 			)}
-			activeClassName="bg-gray-900 text-white"
-			disabledClassName="bg-gray-100"
+			activeClassName="bg-gray-900 hover:hover:bg-gray-800 text-white hover:text-white"
+			disabledClassName="bg-gray-200"
 			href={href as Route}
 			isDisabled={isDisabled}
 		>
