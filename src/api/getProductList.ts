@@ -1,4 +1,4 @@
-import { executeGraphql } from "./graphqlApi";
+import { executeGraphQl } from "./graphqlApi";
 import {
 	ProductsGetListDocument,
 	type ProductListItemFragment,
@@ -26,12 +26,15 @@ export const getProductList = async ({
 	order = "ASC",
 	search,
 }: ProductListRequest): Promise<ProductListResponse> => {
-	const graphqlResponse = await executeGraphql(ProductsGetListDocument, {
-		take,
-		skip,
-		orderBy,
-		order,
-		search,
+	const graphqlResponse = await executeGraphQl({
+		query: ProductsGetListDocument,
+		variables: {
+			take,
+			skip,
+			orderBy,
+			order,
+			search,
+		},
 	});
 
 	const numOfProducts = graphqlResponse.products.meta.total;

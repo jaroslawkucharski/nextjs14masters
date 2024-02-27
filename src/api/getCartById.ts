@@ -1,4 +1,4 @@
-import { executeGraphql } from "./graphqlApi";
+import { executeGraphQl } from "./graphqlApi";
 import {
 	CartGetByIdDocument,
 	type Cart,
@@ -8,8 +8,14 @@ import {
 export const getCartById = async (
 	id: Cart["id"],
 ): Promise<CartGetByIdQuery["cart"]> => {
-	const graphqlResponse = await executeGraphql(CartGetByIdDocument, {
-		id,
+	const graphqlResponse = await executeGraphQl({
+		query: CartGetByIdDocument,
+		variables: {
+			id,
+		},
+		next: {
+			tags: ["cart"],
+		},
 	});
 
 	const cart = graphqlResponse?.cart;

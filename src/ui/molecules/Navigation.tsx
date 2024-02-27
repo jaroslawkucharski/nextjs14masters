@@ -1,6 +1,6 @@
 import { type Route } from "next";
-import { ShoppingCart } from "lucide-react";
 import { Suspense } from "react";
+import { Cart } from "../atoms/Cart";
 import { Searcher } from "@/ui/atoms/Searcher";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 
@@ -34,13 +34,7 @@ export const Navigation = ({ navigation }: NavigationProps) => (
 				<Searcher />
 			</Suspense>
 
-			<div className="relative self-center">
-				<ShoppingCart />
-
-				<span className="absolute bottom-4 left-4 rounded-full bg-red-500 px-1 text-xs text-white">
-					0
-				</span>
-			</div>
+			<Cart />
 		</div>
 	</nav>
 );

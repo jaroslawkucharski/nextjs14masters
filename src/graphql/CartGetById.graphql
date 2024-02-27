@@ -3,14 +3,13 @@ query CartGetById($id: ID!) {
 		id
 		items {
 			product {
-				... on Product {
+				id
+				name
+				price
+				slug
+				images {
 					id
-					name
-					price
-					images {
-						id
-						url
-					}
+					url
 				}
 			}
 			quantity

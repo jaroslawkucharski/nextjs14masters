@@ -25,6 +25,7 @@ export async function generateMetadata({
 	};
 }
 
+// TODO - generateStaticParams
 export async function generateStaticParams() {
 	const { numOfProducts } = await getProductList({});
 

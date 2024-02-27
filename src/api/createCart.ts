@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { executeGraphql } from "./graphqlApi";
+import { executeGraphQl } from "./graphqlApi";
 import {
 	CartCreateDocument,
 	type CartCreateMutation,
@@ -10,16 +10,25 @@ export const createCart = async ({
 	productId,
 	quantity,
 }: CartCreateMutationVariables): Promise<CartCreateMutation> => {
-	const newCart = await executeGraphql(CartCreateDocument, {
-		productId,
-		quantity,
+	const newCart = await executeGraphQl({
+		query: CartCreateDocument,
+		variables: {
+			productId,
+			quantity,
+		},
+		next: {
+			tags: ["cart"],
+		},
 	});
 
 	if (!newCart) {
 		throw new Error("Failed to create cart");
 	}
 
-	cookies().set("cartId", newCart.cartFindOrCreate.id);
+	cookies().set("cartId", newCart.cartFindOrCreate.id, {
+		httpOnly: true,
+		sameSite: "strict",
+	});
 
 	return newCart;
 };

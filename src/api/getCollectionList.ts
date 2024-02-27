@@ -1,4 +1,4 @@
-import { executeGraphql } from "./graphqlApi";
+import { executeGraphQl } from "./graphqlApi";
 import {
 	type CollectionGetListQuery,
 	CollectionGetListDocument,
@@ -11,9 +11,12 @@ export const getCollectionsList = async ({
 }: CollectionGetListQueryVariables): Promise<
 	CollectionGetListQuery["collections"]["data"]
 > => {
-	const graphqlResponse = await executeGraphql(CollectionGetListDocument, {
-		take,
-		skip,
+	const graphqlResponse = await executeGraphQl({
+		query: CollectionGetListDocument,
+		variables: {
+			take,
+			skip,
+		},
 	});
 
 	const collections = graphqlResponse.collections.data;
