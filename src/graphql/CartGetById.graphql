@@ -6,6 +6,7 @@ query CartGetById($id: ID!) {
 				id
 				name
 				price
+				slug
 				images {
 					id
 					url
