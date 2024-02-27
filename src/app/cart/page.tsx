@@ -1,16 +1,15 @@
 import { type Metadata } from "next";
 import { cookies } from "next/headers";
 import Image from "next/image";
-import { CornerDownLeft, Store, Trash2 } from "lucide-react";
+import { CornerDownLeft, Store } from "lucide-react";
 import { redirect } from "next/navigation";
-import { revalidateTag } from "next/cache";
 import Link from "next/link";
 import { getCartById } from "@/api/getCartById";
 import { formatMoney } from "@/utils";
 import { PageHeading } from "@/ui/atoms/PageHeading";
 import { Button } from "@/ui/atoms/Button";
-import { removeProductFromCard } from "@/api/removeProductFromCard";
 import { ProductCounter } from "@/ui/molecules/ProductCounter";
+import { RemoveProductFromCart } from "@/ui/molecules/RemoveProductFromCart";
 
 export const metadata: Metadata = {
 	title: "Cart",
@@ -85,26 +84,10 @@ export default async function CartPage() {
 									</td>
 
 									<td className="self-end px-4 py-8">
-										<form
-											action={async () => {
-												"use server";
-
-												if (cartId) {
-													const remove = await removeProductFromCard({
-														id: cartId,
-														productId: item.product.id,
-													});
-
-													revalidateTag("cart");
-
-													return remove;
-												}
-											}}
-										>
-											<Button variant="remove">
-												<Trash2 className="h-3 w-3" /> Remove
-											</Button>
-										</form>
+										<RemoveProductFromCart
+											cartId={cartId}
+											productId={item.product.id}
+										/>
 
 										<p>{formatMoney(item.product.price * item.quantity)}</p>
 									</td>

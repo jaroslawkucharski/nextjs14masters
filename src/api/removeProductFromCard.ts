@@ -1,3 +1,5 @@
+"use server";
+
 import { executeGraphQl } from "./graphqlApi";
 import {
 	CartRemoveItemDocument,

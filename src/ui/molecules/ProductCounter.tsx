@@ -21,8 +21,6 @@ export const ProductCounter = ({
 		// (_state, newQuantity: number) => newQuantity,
 	);
 
-	console.log(quantity);
-
 	const handleDecrement = async () => {
 		if (optimisticQuantity > 1) {
 			setOptimisticQuantity(optimisticQuantity - 1);
