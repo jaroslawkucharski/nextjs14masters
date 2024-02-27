@@ -19,7 +19,10 @@ export const createCart = async ({
 		throw new Error("Failed to create cart");
 	}
 
-	cookies().set("cartId", newCart.cartFindOrCreate.id);
+	cookies().set("cartId", newCart.cartFindOrCreate.id, {
+		httpOnly: true,
+		sameSite: "strict",
+	});
 
 	return newCart;
 };

@@ -1,10 +1,12 @@
+"use server";
+
 import { executeGraphql } from "./graphqlApi";
 import {
 	CartChangeItemQuantityDocument,
 	type CartChangeItemQuantityMutationVariables,
 } from "@/gql/graphql";
 
-export const ChangeProductQuantity = async ({
+export const changeProductQuantity = async ({
 	id,
 	productId,
 	quantity,
