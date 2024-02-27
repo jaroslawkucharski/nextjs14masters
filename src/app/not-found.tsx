@@ -1,4 +1,4 @@
-export default async function Loading() {
+export default async function NotFound() {
 	return (
 		<div className="flex h-[calc(100vh-4rem)] w-full flex-col items-center justify-center text-center">
 			<h1 className="text-6xl">404</h1>
