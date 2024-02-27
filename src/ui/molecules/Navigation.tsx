@@ -1,6 +1,6 @@
 import { type Route } from "next";
 import { Suspense } from "react";
-import { Cart } from "../atoms/Cart";
+import { Cart } from "@/ui/atoms/Cart";
 import { Searcher } from "@/ui/atoms/Searcher";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 
