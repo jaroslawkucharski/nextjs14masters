@@ -8,17 +8,16 @@ export type ProductsPageType = {
 	};
 };
 
-// TODO - generateStaticParams
-// export async function generateStaticParams() {
-// 	const { numOfProducts } = await getProductList({});
+export async function generateStaticParams() {
+	const { numOfProducts } = await getProductList({});
 
-// 	const numOfPages = Math.ceil(numOfProducts / AMOUNT_OF_PRODUCTS);
-// 	const pages = Array.from({ length: numOfPages }, (_, index) => index + 1);
+	const numOfPages = Math.ceil(numOfProducts / AMOUNT_OF_PRODUCTS);
+	const pages = Array.from({ length: numOfPages }, (_, index) => index + 1);
 
-// 	return pages.map((page) => ({
-// 		params: { page: String(page) },
-// 	}));
-// }
+	return pages.map((page) => ({
+		params: { page: String(page) },
+	}));
+}
 
 export default async function ProductsPage({ params }: ProductsPageType) {
 	const skip = Number(params.page) * AMOUNT_OF_PRODUCTS - AMOUNT_OF_PRODUCTS;
