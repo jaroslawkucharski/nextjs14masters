@@ -20,7 +20,7 @@ export const Button = ({
 				variant === "primary",
 			["mb-8 flex items-center gap-1 text-sm text-red-500 disabled:text-gray-500"]:
 				variant === "remove",
-			["h-8 w-8 rounded-md border border-gray-400 text-center text-lg text-gray-950 disabled:bg-gray-400"]:
+			["h-8 w-8 rounded-md border border-gray-400 text-center text-lg text-gray-950 hover:bg-gray-100 disabled:bg-gray-200"]:
 				variant === "square",
 			["cursor-wait"]: isLoading,
 		})}
