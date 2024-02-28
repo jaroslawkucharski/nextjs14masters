@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useOptimistic } from "react";
 import { changeProductQuantity } from "@/api/changeProductQuantity";
 import { Button } from "@/ui/atoms/Button";
 
@@ -15,10 +15,9 @@ export const ProductCounter = ({
 	productId,
 	quantity,
 }: ProductCounterProps) => {
-	// TODO - useOptimistic
-	const [optimisticQuantity, setOptimisticQuantity] = useState(
+	const [optimisticQuantity, setOptimisticQuantity] = useOptimistic(
 		quantity,
-		// (_state, newQuantity: number) => newQuantity,
+		(_state, newQuantity: number) => newQuantity,
 	);
 
 	const handleDecrement = async () => {
