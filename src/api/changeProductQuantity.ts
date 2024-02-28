@@ -19,6 +19,7 @@ export const changeProductQuantity = async ({
 			id,
 			quantity,
 		},
+		cache: "no-store",
 		next: {
 			tags: ["cart"],
 		},

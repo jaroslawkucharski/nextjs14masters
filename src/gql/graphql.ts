@@ -310,7 +310,7 @@ export type CartGetByIdQueryVariables = Exact<{
 }>;
 
 
-export type CartGetByIdQuery = { cart?: { id: string, items: Array<{ quantity: number, product: { id: string, name: string, price: number, slug: string, images: Array<{ id: string, url: string }> } }> } | null };
+export type CartGetByIdQuery = { cart?: { id: string, items: Array<{ quantity: number, product: { id: string, name: string, price: number, slug: string, description: string, images: Array<{ id: string, url: string }> } }> } | null };
 
 export type CartRemoveItemMutationVariables = Exact<{
   productId: Scalars['ID']['input'];
@@ -474,6 +474,7 @@ export const CartGetByIdDocument = new TypedDocumentString(`
         name
         price
         slug
+        description
         images {
           id
           url

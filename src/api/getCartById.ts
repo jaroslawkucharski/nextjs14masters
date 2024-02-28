@@ -13,6 +13,7 @@ export const getCartById = async (
 		variables: {
 			id,
 		},
+		cache: "no-store",
 		next: {
 			tags: ["cart"],
 		},

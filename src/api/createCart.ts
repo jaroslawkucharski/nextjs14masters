@@ -16,6 +16,7 @@ export const createCart = async ({
 			productId,
 			quantity,
 		},
+		cache: "no-store",
 		next: {
 			tags: ["cart"],
 		},
