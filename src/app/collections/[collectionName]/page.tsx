@@ -9,6 +9,8 @@ export type CollectionPageType = {
 	};
 };
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({
 	params,
 }: CollectionPageType): Promise<Metadata> {

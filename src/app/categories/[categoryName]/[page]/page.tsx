@@ -14,6 +14,8 @@ export type CategoryPageType = {
 	};
 };
 
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({
 	params,
 }: CategoryPageType): Promise<Metadata> {
