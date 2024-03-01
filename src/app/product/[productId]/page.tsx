@@ -93,7 +93,9 @@ export default async function ProductPage({ params }: ProductPageType) {
 						<ProductDescription product={product} />
 
 						<form action={addToCartAction}>
-							<StatusButton>Add to cart</StatusButton>
+							<StatusButton data-testid="add-to-cart-button">
+								Add to cart
+							</StatusButton>
 						</form>
 					</div>
 				</article>
