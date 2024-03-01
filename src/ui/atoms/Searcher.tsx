@@ -38,7 +38,7 @@ export const Searcher = () => {
 				name="search"
 				defaultValue={searchParams.get("query")?.toString()}
 				onChange={handleSearch}
-			></input>
+			/>
 		</div>
 	);
 };
