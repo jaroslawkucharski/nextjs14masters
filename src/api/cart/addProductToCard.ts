@@ -9,7 +9,7 @@ export const addProductToCart = async ({
 	productId,
 	quantity,
 }: CartAddItemMutationVariables) => {
-	const graphqlResponse = await executeGraphQl({
+	const addProduct = await executeGraphQl({
 		query: CartAddItemDocument,
 		variables: {
 			id,
@@ -22,5 +22,5 @@ export const addProductToCart = async ({
 		},
 	});
 
-	return graphqlResponse;
+	return addProduct;
 };

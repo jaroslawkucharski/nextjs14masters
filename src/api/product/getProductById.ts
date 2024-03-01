@@ -14,6 +14,10 @@ export const getProductById = async (
 		variables: {
 			id,
 		},
+		cache: "no-store",
+		next: {
+			tags: ["product"],
+		},
 	});
 
 	const product = graphqlResponse.product;

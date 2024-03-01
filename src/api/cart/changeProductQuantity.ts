@@ -12,7 +12,7 @@ export const changeProductQuantity = async ({
 	productId,
 	quantity,
 }: CartChangeItemQuantityMutationVariables) => {
-	const graphqlResponse = await executeGraphQl({
+	const changeQuantity = await executeGraphQl({
 		query: CartChangeItemQuantityDocument,
 		variables: {
 			productId,
@@ -27,5 +27,5 @@ export const changeProductQuantity = async ({
 
 	revalidateTag("cart");
 
-	return graphqlResponse;
+	return changeQuantity;
 };

@@ -10,7 +10,7 @@ export const removeProductFromCard = async ({
 	id,
 	productId,
 }: CartRemoveItemMutationVariables) => {
-	const graphqlResponse = await executeGraphQl({
+	const removeProduct = await executeGraphQl({
 		query: CartRemoveItemDocument,
 		variables: {
 			productId,
@@ -22,5 +22,5 @@ export const removeProductFromCard = async ({
 		},
 	});
 
-	return graphqlResponse;
+	return removeProduct;
 };
