@@ -1,7 +1,7 @@
 import Stripe from "stripe";
 import { cookies } from "next/headers";
 import { StripeForm } from "./stripeForm";
-import { getCartById } from "@/api/getCartById";
+import { getCartById } from "@/api/cart/getCartById";
 
 export default async function PaymentPage() {
 	const cartId = cookies().get("cartId")?.value || "";

@@ -2,9 +2,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductsList } from "@/ui/organisms/ProductList";
-import { getProductsByCategory } from "@/api/getProductsByCategory";
+import { getProductsByCategory } from "@/api/products/getProductsByCategory";
 import { Pagination } from "@/ui/molecules/Pagination";
-import { getProductList } from "@/api/getProductList";
+import { getProductList } from "@/api/products/getProductList";
 import { AMOUNT_OF_PRODUCTS } from "@/constants";
 
 export type CategoryPageType = {

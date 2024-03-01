@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { getProductsByCategory } from "@/api/getProductsByCategory";
+import { getProductsByCategory } from "@/api/products/getProductsByCategory";
 import { PageHeading } from "@/ui/atoms/PageHeading";
 
 type ProductsLayoutType = {

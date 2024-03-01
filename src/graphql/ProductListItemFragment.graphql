@@ -11,4 +11,14 @@ fragment ProductListItem on Product {
 	price
 	rating
 	slug
+	reviews {
+		createdAt
+		updatedAt
+		id
+		author
+		title
+		description
+		email
+		rating
+	}
 }

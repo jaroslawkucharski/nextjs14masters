@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ProductsList } from "@/ui/organisms/ProductList";
-import { getProductsByCollection } from "@/api/getProductsByCollection";
-import { getCollectionsList } from "@/api/getCollectionList";
+import { getProductsByCollection } from "@/api/products/getProductsByCollection";
+import { getCollectionsList } from "@/api/collections/getCollectionList";
 
 export type CollectionPageType = {
 	params: {

@@ -2,7 +2,7 @@
 import { type Metadata } from "next";
 import { Suspense } from "react";
 import { PageHeading } from "@/ui/atoms/PageHeading";
-import { getProductList } from "@/api/getProductList";
+import { getProductList } from "@/api/products/getProductList";
 import { ProductsList } from "@/ui/organisms/ProductList";
 import { Loader } from "@/ui/atoms/Loader";
 

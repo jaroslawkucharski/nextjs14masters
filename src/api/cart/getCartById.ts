@@ -1,4 +1,4 @@
-import { executeGraphQl } from "./graphqlApi";
+import { executeGraphQl } from "../graphqlApi";
 import {
 	CartGetByIdDocument,
 	type Cart,

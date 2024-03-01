@@ -1,5 +1,5 @@
-import { getCollectionsList } from "@/api/getCollectionList";
-import { getProductList } from "@/api/getProductList";
+import { getCollectionsList } from "@/api/collections/getCollectionList";
+import { getProductList } from "@/api/products/getProductList";
 import { PageHeading } from "@/ui/atoms/PageHeading";
 import { CollectionList } from "@/ui/organisms/CollectionList";
 import { ProductsList } from "@/ui/organisms/ProductList";

@@ -3,3 +3,8 @@ export const formatMoney = (amount: number) =>
 		style: "currency",
 		currency: "USD",
 	}).format(amount / 100);
+
+export const formatDate = (date: string) =>
+	new Intl.DateTimeFormat("en-US", {
+		dateStyle: "medium",
+	}).format(new Date(date));

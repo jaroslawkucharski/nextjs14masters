@@ -1,7 +1,7 @@
 "use client";
 
 import { useOptimistic } from "react";
-import { changeProductQuantity } from "@/api/changeProductQuantity";
+import { changeProductQuantity } from "@/api/cart/changeProductQuantity";
 import { Button } from "@/ui/atoms/Button";
 
 type ProductCounterProps = {

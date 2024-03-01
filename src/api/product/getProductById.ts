@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { executeGraphQl } from "./graphqlApi";
+import { executeGraphQl } from "../graphqlApi";
 import {
 	ProductGetByIdDocument,
 	type Product,
@@ -13,6 +13,10 @@ export const getProductById = async (
 		query: ProductGetByIdDocument,
 		variables: {
 			id,
+		},
+		cache: "no-store",
+		next: {
+			tags: ["product"],
 		},
 	});
 

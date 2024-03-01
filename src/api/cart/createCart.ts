@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { executeGraphQl } from "./graphqlApi";
+import { executeGraphQl } from "../graphqlApi";
 import {
 	CartCreateDocument,
 	type CartCreateMutation,

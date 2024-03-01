@@ -4,7 +4,7 @@ import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { Button } from "@/ui/atoms/Button";
-import { removeProductFromCard } from "@/api/removeProductFromCard";
+import { removeProductFromCard } from "@/api/cart/removeProductFromCard";
 
 type RemoveProductFromCartProps = {
 	cartId: string;
