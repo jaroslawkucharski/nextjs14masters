@@ -8,6 +8,8 @@ export type ProductsPageType = {
 	};
 };
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
 	const { numOfProducts } = await getProductList({});
 

@@ -16,6 +16,7 @@ export const removeProductFromCard = async ({
 			productId,
 			id,
 		},
+		cache: "no-store",
 		next: {
 			tags: ["cart"],
 		},

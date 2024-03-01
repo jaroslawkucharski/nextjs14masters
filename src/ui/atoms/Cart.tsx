@@ -1,21 +1,20 @@
-// TODO - error with 'DYNAMIC_SERVER_USAGE'
 import { ShoppingCart } from "lucide-react";
-// import { cookies } from "next/headers";
+import { cookies } from "next/headers";
 import Link from "next/link";
-// import { getCartById } from "@/api/getCartById";
+import { getCartById } from "@/api/getCartById";
 
 export const Cart = async () => {
-	// const cartId = cookies().get("cartId")?.value;
+	const cartId = cookies().get("cartId")?.value;
 
-	// const cart = cartId ? await getCartById(cartId) : null;
+	const cart = cartId ? await getCartById(cartId) : null;
 
-	const productsQuantity = 0;
+	let productsQuantity = 0;
 
-	// if (cart) {
-	// 	cart.items.forEach(({ quantity }) => {
-	// 		productsQuantity += quantity;
-	// 	});
-	// }
+	if (cart) {
+		cart.items.forEach(({ quantity }) => {
+			productsQuantity += quantity;
+		});
+	}
 
 	return (
 		<div className="relative self-center">

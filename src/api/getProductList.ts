@@ -35,6 +35,9 @@ export const getProductList = async ({
 			order,
 			search,
 		},
+		next: {
+			revalidate: 30,
+		},
 	});
 
 	const numOfProducts = graphqlResponse.products.meta.total;
