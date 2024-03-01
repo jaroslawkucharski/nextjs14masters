@@ -1,4 +1,4 @@
-import { getProductList } from "@/api/getProductList";
+import { getProductList } from "@/api/products/getProductList";
 import { ProductsList } from "@/ui/organisms/ProductList";
 import { AMOUNT_OF_PRODUCTS } from "@/constants";
 

@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 import { PageHeading } from "@/ui/atoms/PageHeading";
-import { getProductsByCollection } from "@/api/getProductsByCollection";
+import { getProductsByCollection } from "@/api/products/getProductsByCollection";
 
 type CollectionsLayoutType = {
 	children: ReactNode;

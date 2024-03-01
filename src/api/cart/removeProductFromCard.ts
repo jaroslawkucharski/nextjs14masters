@@ -1,6 +1,6 @@
 "use server";
 
-import { executeGraphQl } from "./graphqlApi";
+import { executeGraphQl } from "../graphqlApi";
 import {
 	CartRemoveItemDocument,
 	type CartRemoveItemMutationVariables,

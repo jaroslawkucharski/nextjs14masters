@@ -1,4 +1,4 @@
-import { executeGraphQl } from "./graphqlApi";
+import { executeGraphQl } from "../graphqlApi";
 import {
 	CartCompleteDocument,
 	type CartCompleteMutation,

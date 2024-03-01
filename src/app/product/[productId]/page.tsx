@@ -3,13 +3,13 @@ import { type Metadata } from "next";
 import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
 import { AddProductToCart } from "@/ui/molecules/AddProductToCart";
-import { getProductById } from "@/api/getProductById";
+import { getProductById } from "@/api/product/getProductById";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductDescription } from "@/ui/atoms/ProductDescription";
 import { ProductsList } from "@/ui/organisms/ProductList";
-import { getProductList } from "@/api/getProductList";
-import { createCart } from "@/api/createCart";
-import { addProductToCart } from "@/api/addProductToCard";
+import { getProductList } from "@/api/products/getProductList";
+import { createCart } from "@/api/cart/createCart";
+import { addProductToCart } from "@/api/cart/addProductToCard";
 
 export type ProductPageType = {
 	params: {

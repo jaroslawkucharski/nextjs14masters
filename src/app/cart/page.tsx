@@ -6,7 +6,7 @@ import Link from "next/link";
 // import { redirect } from "next/navigation";
 import { redirect } from "next/navigation";
 import PaymentPage from "./payment";
-import { getCartById } from "@/api/getCartById";
+import { getCartById } from "@/api/cart/getCartById";
 import { formatMoney } from "@/utils";
 import { PageHeading } from "@/ui/atoms/PageHeading";
 import { Button } from "@/ui/atoms/Button";

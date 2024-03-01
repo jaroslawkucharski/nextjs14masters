@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { executeGraphQl } from "./graphqlApi";
+import { executeGraphQl } from "../graphqlApi";
 import {
 	ProductGetByIdDocument,
 	type Product,

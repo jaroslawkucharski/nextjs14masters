@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidateTag } from "next/cache";
-import { executeGraphQl } from "./graphqlApi";
+import { executeGraphQl } from "../graphqlApi";
 import {
 	CartChangeItemQuantityDocument,
 	type CartChangeItemQuantityMutationVariables,
