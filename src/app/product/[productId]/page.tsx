@@ -2,7 +2,7 @@
 import { type Metadata } from "next";
 import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
-import { AddProductToCart } from "@/ui/molecules/AddProductToCart";
+import { StatusButton } from "@/ui/molecules/StatusButton";
 import { getProductById } from "@/api/product/getProductById";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductDescription } from "@/ui/atoms/ProductDescription";
@@ -93,7 +93,7 @@ export default async function ProductPage({ params }: ProductPageType) {
 						<ProductDescription product={product} />
 
 						<form action={addToCartAction}>
-							<AddProductToCart />
+							<StatusButton>Add to cart</StatusButton>
 						</form>
 					</div>
 				</article>
