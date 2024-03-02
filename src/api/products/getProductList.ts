@@ -19,6 +19,9 @@ type ProductListResponse = {
 	numOfProducts: number;
 };
 
+const validOrderValues: SortDirection[] = ["ASC", "DESC"];
+const validOrderByValues: ProductSortBy[] = ["DEFAULT", "NAME", "PRICE"];
+
 export const getProductList = async ({
 	take = 8,
 	skip = 0,
@@ -31,8 +34,8 @@ export const getProductList = async ({
 		variables: {
 			take,
 			skip,
-			orderBy,
-			order,
+			orderBy: validOrderByValues.includes(orderBy) ? orderBy : "DEFAULT",
+			order: validOrderValues.includes(order) ? order : "ASC",
 			search,
 		},
 		next: {
@@ -41,7 +44,24 @@ export const getProductList = async ({
 	});
 
 	const numOfProducts = graphqlResponse.products.meta.total;
-	const products = graphqlResponse.products.data;
+	const products =
+		orderBy === ("RATING" as ProductSortBy)
+			? graphqlResponse.products.data.sort((a, b) => {
+					if (!(a?.rating && b?.rating)) {
+						return 0;
+					}
+
+					if (order === "ASC") {
+						return (a.rating || 0) - (b.rating || 0);
+					}
+
+					if (order === "DESC") {
+						return (b.rating || 0) - (a.rating || 0);
+					}
+
+					return 0;
+				})
+			: graphqlResponse.products.data;
 
 	return { products, numOfProducts };
 };
