@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { revalidateTag } from "next/cache";
 import { executeGraphQl } from "../graphqlApi";
 import {
 	CartCreateDocument,
@@ -30,6 +31,8 @@ export const createCart = async ({
 		httpOnly: true,
 		sameSite: "strict",
 	});
+
+	revalidateTag("cart");
 
 	return newCart;
 };

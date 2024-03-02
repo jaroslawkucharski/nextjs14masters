@@ -1,3 +1,4 @@
+import { revalidateTag } from "next/cache";
 import { executeGraphQl } from "../graphqlApi";
 import {
 	CartAddItemDocument,
@@ -21,6 +22,8 @@ export const addProductToCart = async ({
 			tags: ["cart"],
 		},
 	});
+
+	revalidateTag("cart");
 
 	return addProduct;
 };
