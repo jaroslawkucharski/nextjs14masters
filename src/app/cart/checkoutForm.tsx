@@ -64,8 +64,7 @@ export function CheckoutForm() {
 		const { error } = await stripe.confirmPayment({
 			elements,
 			confirmParams: {
-				// Make sure to change this to your payment completion page
-				return_url: "http://localhost:3000/cart?intent=success",
+				return_url: `${location.protocol}//${location.host}/cart?intent=success`,
 			},
 		});
 
