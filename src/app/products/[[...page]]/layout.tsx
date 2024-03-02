@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Pagination } from "@/ui/molecules/Pagination";
 import { getProductList } from "@/api/products/getProductList";
 import { AMOUNT_OF_PRODUCTS } from "@/constants";
-import { PageHeading } from "@/ui/atoms/PageHeading";
+import { PageHeading } from "@/ui/molecules/PageHeading";
 
 type ProductsLayoutType = {
 	children: ReactNode;

@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import PaymentPage from "./payment";
 import { getCartById } from "@/api/cart/getCartById";
 import { formatMoney } from "@/utils";
-import { PageHeading } from "@/ui/atoms/PageHeading";
+import { PageHeading } from "@/ui/molecules/PageHeading";
 import { Button } from "@/ui/atoms/Button";
 import { CartList } from "@/ui/organisms/CartList";
 import { type CartItem } from "@/gql/graphql";

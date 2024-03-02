@@ -1,5 +1,5 @@
 import { type ReactNode } from "react";
-import { PageHeading } from "@/ui/atoms/PageHeading";
+import { PageHeading } from "@/ui/molecules/PageHeading";
 import { getProductsByCollection } from "@/api/products/getProductsByCollection";
 
 type CollectionsLayoutType = {

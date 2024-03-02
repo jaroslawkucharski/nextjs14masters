@@ -1,6 +1,6 @@
 import { getCollectionsList } from "@/api/collections/getCollectionList";
 import { getProductList } from "@/api/products/getProductList";
-import { PageHeading } from "@/ui/atoms/PageHeading";
+import { PageHeading } from "@/ui/molecules/PageHeading";
 import { CollectionList } from "@/ui/organisms/CollectionList";
 import { ProductsList } from "@/ui/organisms/ProductList";
 

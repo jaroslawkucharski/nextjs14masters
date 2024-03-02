@@ -1,7 +1,7 @@
 // TODO -pagination
 import { type Metadata } from "next";
 import { Suspense } from "react";
-import { PageHeading } from "@/ui/atoms/PageHeading";
+import { PageHeading } from "@/ui/molecules/PageHeading";
 import { getProductList } from "@/api/products/getProductList";
 import { ProductsList } from "@/ui/organisms/ProductList";
 import { Loader } from "@/ui/atoms/Loader";

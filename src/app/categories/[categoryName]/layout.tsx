@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
 import { getProductsByCategory } from "@/api/products/getProductsByCategory";
-import { PageHeading } from "@/ui/atoms/PageHeading";
+import { PageHeading } from "@/ui/molecules/PageHeading";
 
 type ProductsLayoutType = {
 	children: ReactNode;
