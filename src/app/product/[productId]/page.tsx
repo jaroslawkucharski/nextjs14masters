@@ -52,15 +52,13 @@ export default async function ProductPage({ params }: ProductPageType) {
 		const cartId = cookies().get("cartId")?.value;
 
 		if (cartId) {
-			const add = await addProductToCart({
+			const addToCart = await addProductToCart({
 				id: cartId,
 				productId,
 				quantity: 1,
 			});
 
-			revalidateTag("cart");
-
-			return add;
+			return addToCart;
 		} else {
 			const newCart = await createCart({ productId, quantity: 1 });
 
