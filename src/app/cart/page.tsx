@@ -2,9 +2,9 @@ import { type Metadata } from "next";
 import { cookies } from "next/headers";
 import { CornerDownLeft, Store } from "lucide-react";
 import Link from "next/link";
-// import { redirect } from "next/navigation";
 import { redirect } from "next/navigation";
-import PaymentPage from "./payment";
+import Stripe from "stripe";
+import { StripeForm } from "./stripeForm";
 import { getCartById } from "@/api/cart/getCartById";
 import { formatMoney } from "@/utils";
 import { PageHeading } from "@/ui/molecules/PageHeading";
@@ -19,7 +19,8 @@ export const metadata: Metadata = {
 
 export type CartPageType = {
 	searchParams: {
-		payment: string;
+		intent: string;
+		payment_intent: string;
 	};
 };
 
@@ -28,14 +29,73 @@ export default async function CartPage({ searchParams }: CartPageType) {
 
 	const cart = cartId ? await getCartById(cartId) : null;
 
+	if (!cart) {
+		return;
+	}
+
 	const total = cart?.items.reduce(
 		(acc, { product, quantity }) => acc + product.price * quantity,
 		0,
 	);
 
+	// if (!searchParams.intent) {
+	// 	if (!process.env.STRIPE_SECRET_KEY) {
+	// 		throw new Error("Stripe secret key is missing");
+	// 	}
+
+	// 	const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+	// 		apiVersion: "2023-10-16",
+	// 		typescript: true,
+	// 	});
+
+	// 	const paymentIntent = await stripe.paymentIntents.create({
+	// 		amount: total,
+	// 		currency: "usd",
+	// 		automatic_payment_methods: {
+	// 			enabled: true,
+	// 		},
+	// 		metadata: {
+	// 			orderId: cart.id,
+	// 		},
+	// 	});
+
+	// 	if (!paymentIntent.client_secret) {
+	// 		throw new Error("Missing client_secret");
+	// 	}
+
+	// 	console.log("paymentIntent: ", paymentIntent.client_secret);
+
+	// 	paymentIntentSecret = paymentIntent.client_secret;
+	// }
+
 	const handlePayment = async () => {
 		"use server";
-		redirect("/cart?payment=waiting");
+
+		if (!process.env.STRIPE_SECRET_KEY) {
+			throw new Error("Stripe secret key is missing");
+		}
+
+		const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+			apiVersion: "2023-10-16",
+			typescript: true,
+		});
+
+		const paymentIntent = await stripe.paymentIntents.create({
+			amount: total,
+			currency: "usd",
+			automatic_payment_methods: {
+				enabled: true,
+			},
+			metadata: {
+				orderId: cart.id,
+			},
+		});
+
+		if (!paymentIntent.client_secret) {
+			throw new Error("Missing client_secret");
+		}
+
+		redirect(`/cart?intent=${paymentIntent.client_secret}`);
 	};
 
 	// const handlePayment = async () => {
@@ -97,7 +157,8 @@ export default async function CartPage({ searchParams }: CartPageType) {
 		);
 	}
 
-	if (searchParams.payment === "success") {
+	// TODO
+	if (searchParams.intent === "success") {
 		return (
 			<section className="flex h-[calc(100vh-4rem)] w-full flex-col items-center justify-center text-center">
 				<h1 className="text-6xl">Success!</h1>
@@ -138,14 +199,13 @@ export default async function CartPage({ searchParams }: CartPageType) {
 						</p>
 					</div>
 
-					{searchParams.payment === "waiting" ? (
-						<PaymentPage />
+					{searchParams.intent ? (
+						<StripeForm clientSecret={searchParams.intent} />
 					) : (
 						<form action={handlePayment}>
 							<Button type="submit">Order it</Button>
 						</form>
 					)}
-
 					<div className="mt-8 flex flex-col gap-2">
 						<p className="flex items-center gap-2 text-sm text-slate-500">
 							<Store className="h-4 w-4" />

@@ -1,3 +1,6 @@
+"use client";
+
+// TODO
 import {
 	PaymentElement,
 	useStripe,
@@ -62,7 +65,7 @@ export function CheckoutForm() {
 			elements,
 			confirmParams: {
 				// Make sure to change this to your payment completion page
-				return_url: "http://localhost:3000/cart?payment=success",
+				return_url: "http://localhost:3000/cart?intent=success",
 			},
 		});
 
@@ -80,7 +83,6 @@ export function CheckoutForm() {
 	} as const;
 
 	return (
-		// <div className="stripe">
 		<form onSubmit={handleSubmit}>
 			<PaymentElement
 				className="mb-6"
@@ -98,6 +100,5 @@ export function CheckoutForm() {
 
 			{message && <div id="payment-message">{message}</div>}
 		</form>
-		// </div>
 	);
 }
