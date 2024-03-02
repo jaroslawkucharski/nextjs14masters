@@ -28,16 +28,21 @@ export const Sort = () => {
 				<option>-- sort by --</option>
 
 				<option value="name-asc">Name A-Z</option>
+
 				<option value="name-desc">Name Z-A</option>
+
 				<option value="price-asc" data-testid="sort-by-price">
 					Price ascending
 				</option>
+
 				<option value="price-desc" data-testid="sort-by-price">
 					Price descending
 				</option>
+
 				<option value="rating-asc" data-testid="sort-by-rating">
 					Rating ascending
 				</option>
+
 				<option value="rating-desc" data-testid="sort-by-rating">
 					Rating descending
 				</option>
