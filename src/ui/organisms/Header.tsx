@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Searcher } from "../atoms/Searcher";
 import { Cart } from "../atoms/Cart";
 import { Logo } from "@/ui/atoms/Logo";
@@ -27,6 +28,13 @@ export const Header = ({ navigation }: HeaderProps) => (
 			</Suspense>
 
 			<Cart />
+
+			<SignedIn>
+				<UserButton userProfileMode="navigation" />
+			</SignedIn>
+			<SignedOut>
+				<SignInButton />
+			</SignedOut>
 		</div>
 	</header>
 );
