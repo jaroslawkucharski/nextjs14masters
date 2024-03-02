@@ -1,4 +1,5 @@
 // TODO - not found page
+// TODO - AI search
 import { type Metadata } from "next";
 import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";

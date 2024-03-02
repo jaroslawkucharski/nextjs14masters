@@ -206,6 +206,7 @@ export default async function CartPage({ searchParams }: CartPageType) {
 							<Button type="submit">Order it</Button>
 						</form>
 					)}
+
 					<div className="mt-8 flex flex-col gap-2">
 						<p className="flex items-center gap-2 text-sm text-slate-500">
 							<Store className="h-4 w-4" />
