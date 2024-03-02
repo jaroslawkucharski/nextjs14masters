@@ -12,6 +12,8 @@ import { createCart } from "@/api/cart/createCart";
 import { addProductToCart } from "@/api/cart/addProductToCard";
 import { ReviewList } from "@/ui/organisms/ReviewList";
 import { type Review } from "@/gql/graphql";
+import { getCartById } from "@/api/cart/getCartById";
+import { changeProductQuantity } from "@/api/cart/changeProductQuantity";
 
 export type ProductPageType = {
 	params: {
@@ -52,13 +54,27 @@ export default async function ProductPage({ params }: ProductPageType) {
 		const cartId = cookies().get("cartId")?.value;
 
 		if (cartId) {
-			const addToCart = await addProductToCart({
+			const cart = await getCartById(cartId);
+
+			const itemExist = cart?.items.find(
+				(item) => item.product.id === productId,
+			);
+
+			if (!itemExist) {
+				const addToCart = await addProductToCart({
+					id: cartId,
+					productId,
+					quantity: 1,
+				});
+
+				return addToCart;
+			}
+
+			return changeProductQuantity({
 				id: cartId,
 				productId,
-				quantity: 1,
+				quantity: itemExist.quantity + 1,
 			});
-
-			return addToCart;
 		} else {
 			const newCart = await createCart({ productId, quantity: 1 });
 
