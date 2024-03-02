@@ -5,32 +5,10 @@ import { Star } from "lucide-react";
 import clsx from "clsx";
 import { StatusButton } from "./StatusButton";
 import { addReviewToProduct } from "@/api/product/addReviewToProduct";
-import { FormInput } from "@/ui/atoms/FormInput";
 
 type AddReviewFormProps = {
 	productId: string;
 };
-
-const inputs = [
-	{
-		label: "Name",
-		type: "text",
-		name: "name",
-		placeholder: "Name",
-	},
-	{
-		label: "Email",
-		type: "email",
-		name: "email",
-		placeholder: "Email",
-	},
-	{
-		label: "Title",
-		type: "text",
-		name: "headline",
-		placeholder: "Title",
-	},
-];
 
 export const AddReviewForm = ({ productId }: AddReviewFormProps) => {
 	// TODO - useOptimistic
@@ -69,14 +47,19 @@ export const AddReviewForm = ({ productId }: AddReviewFormProps) => {
 	const handleSubmit = async () => {
 		const { name, email, headline, content, rating } = formData;
 
+		// TODO - validation
 		setErrors({
 			name: name ? "" : "Name is required",
-			email: email ? "" : "Email is required",
+			email: email
+				? !/\S+@\S+\.\S+/.test(email)
+					? "Please enter a valid email address"
+					: ""
+				: "Email is required",
 			headline: headline ? "" : "Title is required",
 			content: content ? "" : "Description is required",
 		});
 
-		if (name && email && headline && content) {
+		if (name && /\S+@\S+\.\S+/.test(email) && headline && content) {
 			await addReviewToProduct({
 				author: name,
 				description: content,
@@ -103,6 +86,37 @@ export const AddReviewForm = ({ productId }: AddReviewFormProps) => {
 			action={handleSubmit}
 			noValidate
 		>
+			<label>
+				<span className="text-sm font-bold text-gray-900">Title</span>
+
+				<input
+					className="w-full appearance-none self-start rounded-md border-0 bg-white px-4 py-2 text-sm text-gray-950 ring-1 ring-inset ring-gray-400 placeholder:text-slate-400 focus:border-gray-900 focus:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-900 lg:min-w-4"
+					placeholder="Review title"
+					type="text"
+					name="headline"
+					value={formData.headline}
+					onChange={handleChange}
+					required
+				/>
+
+				<div className="min-h-4 text-xs text-red-500">{errors.headline}</div>
+			</label>
+
+			<label>
+				<span className="text-sm font-bold text-gray-900">Description</span>
+
+				<textarea
+					className="max-h-48 min-h-28 w-full appearance-none self-start rounded-md border-0 bg-white px-4 py-2 text-sm text-slate-400 ring-1 ring-inset ring-gray-400 placeholder:text-slate-400 focus:border-gray-900 focus:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-900 lg:min-w-4"
+					placeholder="Write your review here"
+					name="content"
+					value={formData.content}
+					onChange={handleChange}
+					required
+				/>
+
+				<div className="min-h-4 text-xs text-red-500">{errors.content}</div>
+			</label>
+
 			<div className="mb-4 flex items-center justify-between">
 				<span className="text-sm font-bold text-gray-900">Rating</span>
 
@@ -134,22 +148,37 @@ export const AddReviewForm = ({ productId }: AddReviewFormProps) => {
 				</div>
 			</div>
 
-			{inputs.map((input) => (
-				<FormInput key={input.name} {...input} />
-			))}
-
 			<label>
-				<span className="text-sm font-bold text-gray-900">Description</span>
-				<textarea
-					className="max-h-48 min-h-28 w-full appearance-none self-start rounded-md border-0 bg-white px-4 py-2 text-sm text-slate-400 ring-1 ring-inset ring-gray-400 placeholder:text-slate-400 focus:border-gray-900 focus:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-900 lg:min-w-4"
-					placeholder="Description"
-					name="content"
-					value={formData.content}
+				<span className="text-sm font-bold text-gray-900">Name</span>
+
+				<input
+					className="w-full appearance-none self-start rounded-md border-0 bg-white px-4 py-2 text-sm text-gray-950 ring-1 ring-inset ring-gray-400 placeholder:text-slate-400 focus:border-gray-900 focus:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-900 lg:min-w-4"
+					placeholder="Enter your name"
+					name="name"
+					type="text"
+					value={formData.name}
 					onChange={handleChange}
 					required
 				/>
 
-				<div className="min-h-4 text-xs text-red-500">{errors.content}</div>
+				<div className="min-h-4 text-xs text-red-500">{errors.name}</div>
+			</label>
+
+			<label>
+				<span className="text-sm font-bold text-gray-900">Email</span>
+
+				<input
+					className="w-full appearance-none self-start rounded-md border-0 bg-white px-4 py-2 text-sm text-gray-950 ring-1 ring-inset ring-gray-400 placeholder:text-slate-400 focus:border-gray-900 focus:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-900 lg:min-w-4"
+					placeholder="Your email address"
+					name="email"
+					type="email"
+					pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+					value={formData.email}
+					onChange={handleChange}
+					required
+				/>
+
+				<div className="min-h-4 text-xs text-red-500">{errors.email}</div>
 			</label>
 
 			<StatusButton>Add a review</StatusButton>
