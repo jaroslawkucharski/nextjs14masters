@@ -17,8 +17,6 @@ export default async function OrderPage() {
 
 	const orders = await getOrdersList({ email, take: 10, skip: 10 });
 
-	console.log(orders);
-
 	return (
 		<div className="pt-36">
 			<h1>{user.firstName}&rsquo;s Orders</h1>
