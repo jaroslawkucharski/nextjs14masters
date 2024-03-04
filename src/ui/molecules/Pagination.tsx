@@ -1,5 +1,6 @@
 import { PaginationButton } from "../atoms/PaginationButton";
-import { AMOUNT_OF_PRODUCTS } from "@/constants";
+import { getNumOfPages } from "@/helpers";
+import { DEFAULT_AMOUNT_OF_PRODUCTS } from "@/constants";
 
 type PaginationType = {
 	totalItems: number;
@@ -12,9 +13,10 @@ export const Pagination = ({
 	totalItems,
 	currentPage,
 	path,
-	limit = AMOUNT_OF_PRODUCTS,
+	limit = DEFAULT_AMOUNT_OF_PRODUCTS,
 }: PaginationType) => {
-	const numOfPages = Math.ceil(totalItems / limit);
+	const numOfPages = getNumOfPages(totalItems, limit);
+
 	const pages = Array.from({ length: numOfPages }, (_, index) => index + 1);
 	const prevIsDisabled = currentPage <= 1;
 	const nextIsDisabled = currentPage >= numOfPages;

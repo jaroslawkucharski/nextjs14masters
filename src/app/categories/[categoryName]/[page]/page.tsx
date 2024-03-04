@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { ProductsList } from "@/ui/organisms/ProductList";
 import { getProductsByCategory } from "@/api/products/getProductsByCategory";
 import { Pagination } from "@/ui/molecules/Pagination";
+import { getNumOfPages } from "@/helpers";
+import { CATEGORY_AMOUNT_OF_PRODUCTS } from "@/constants";
 // import { getProductList } from "@/api/products/getProductList";
 // import { AMOUNT_OF_PRODUCTS } from "@/constants";
 
@@ -42,7 +44,10 @@ export async function generateMetadata({
 export default async function CategoryPage({ params }: CategoryPageType) {
 	const { products } = await getProductsByCategory(params.categoryName);
 
-	const numOfPages = Math.ceil(products.length / 4);
+	const numOfPages = getNumOfPages(
+		products.length,
+		CATEGORY_AMOUNT_OF_PRODUCTS,
+	);
 
 	if (
 		Number(params.page) < 1 ||

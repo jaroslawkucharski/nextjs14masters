@@ -1,1 +1,2 @@
-export const AMOUNT_OF_PRODUCTS = 8;
+export const DEFAULT_AMOUNT_OF_PRODUCTS = 8;
+export const CATEGORY_AMOUNT_OF_PRODUCTS = 4;
