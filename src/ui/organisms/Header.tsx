@@ -15,7 +15,7 @@ type HeaderProps = {
 };
 
 export const Header = ({ navigation }: HeaderProps) => (
-	<header className="static z-10 flex h-fit w-full flex-col justify-center gap-12 border-b bg-white px-12 py-4 max-lg:justify-between lg:fixed lg:flex-row">
+	<header className="static top-0 z-10 flex h-fit w-full flex-col justify-center gap-12 border-b bg-white px-12 py-4 max-lg:justify-between lg:fixed lg:flex-row">
 		<Link href="/" className="self-center">
 			<Logo />
 		</Link>
@@ -32,6 +32,7 @@ export const Header = ({ navigation }: HeaderProps) => (
 			<SignedIn>
 				<UserButton userProfileMode="navigation" />
 			</SignedIn>
+
 			<SignedOut>
 				<SignInButton />
 			</SignedOut>
