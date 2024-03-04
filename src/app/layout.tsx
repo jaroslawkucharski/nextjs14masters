@@ -20,6 +20,7 @@ export const metadata: Metadata = {
 	description: "Home page.",
 };
 
+// TODO
 const navigationLinks = [
 	{
 		label: "Home",
