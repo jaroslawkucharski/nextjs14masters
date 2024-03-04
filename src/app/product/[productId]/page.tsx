@@ -1,8 +1,8 @@
-// TODO - not found page
 // TODO - AI search
 import { type Metadata } from "next";
 import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
+import { notFound } from "next/navigation";
 import { StatusButton } from "@/ui/molecules/StatusButton";
 import { getProductById } from "@/api/product/getProductById";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
@@ -15,6 +15,7 @@ import { ReviewList } from "@/ui/organisms/ReviewList";
 import { type Review } from "@/gql/graphql";
 import { getCartById } from "@/api/cart/getCartById";
 import { changeProductQuantity } from "@/api/cart/changeProductQuantity";
+import { CATEGORY_AMOUNT_OF_PRODUCTS } from "@/constants";
 
 export type ProductPageType = {
 	params: {
@@ -26,6 +27,10 @@ export async function generateMetadata({
 	params,
 }: ProductPageType): Promise<Metadata> {
 	const productId = params.productId.split("-").pop() as string;
+
+	if (isNaN(Number(productId))) {
+		return notFound();
+	}
 
 	const { name, description, images } = await getProductById(productId);
 
@@ -42,10 +47,17 @@ export async function generateMetadata({
 
 export default async function ProductPage({ params }: ProductPageType) {
 	const productId = params.productId.split("-").pop() as string;
+
+	console.log("productId", productId);
+
 	const product = await getProductById(productId);
 
+	if (!product && !productId) {
+		return notFound();
+	}
+
 	const { products } = await getProductList({
-		take: 4,
+		take: CATEGORY_AMOUNT_OF_PRODUCTS,
 		orderBy: "PRICE",
 	});
 
@@ -95,7 +107,7 @@ export default async function ProductPage({ params }: ProductPageType) {
 
 	return (
 		<>
-			<section className="mx-auto max-w-md p-12 pt-10 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl lg:pt-28">
+			<section className="mx-auto max-w-md p-12 pt-10 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl lg:pt-10">
 				<article className="mb-12 grid w-full grid-cols-1 gap-14 sm:grid sm:grid-cols-2">
 					{product.images[0]?.url && (
 						<ProductCoverImage
