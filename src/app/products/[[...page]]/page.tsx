@@ -13,6 +13,7 @@ export type ProductsPageType = {
 	};
 };
 
+// TODO
 export const dynamic = "force-dynamic";
 
 export async function generateStaticParams() {
@@ -32,10 +33,26 @@ export default async function ProductsPage({
 }: ProductsPageType) {
 	const skip = Number(params.page) * AMOUNT_OF_PRODUCTS - AMOUNT_OF_PRODUCTS;
 
+	const isValidProductSortName = (value: string): value is ProductSortBy => {
+		return ["DEFAULT", "NAME", "PRICE", "RATING"].includes(value);
+	};
+
+	const isValidProductSortBy = (value: string): value is ProductSortBy => {
+		return ["ASC", "DESC"].includes(value);
+	};
+
+	const sort = {
+		...(searchParams.sort &&
+			isValidProductSortName(searchParams.sort) && {
+				orderBy: searchParams.sort,
+			}),
+		...(searchParams.by &&
+			isValidProductSortBy(searchParams.by) && { order: searchParams.by }),
+	};
+
 	const { products } = await getProductList({
 		skip,
-		order: searchParams.by,
-		orderBy: searchParams.sort,
+		...sort,
 	});
 
 	return <ProductsList products={products} />;

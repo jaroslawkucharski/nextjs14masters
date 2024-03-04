@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { Lato } from "next/font/google";
 import "./globals.css";
 import { type ReactNode } from "react";
+import { ClerkProvider } from "@clerk/nextjs";
 import { Header } from "@/ui/organisms/Header";
 
 type RootLayoutType = {
 	children: ReactNode;
+	modal: ReactNode;
 };
 
 const lato = Lato({
@@ -42,14 +44,21 @@ const navigationLinks = [
 	},
 ];
 
-export default function RootLayout({ children }: Readonly<RootLayoutType>) {
+export default function RootLayout({
+	children,
+	modal,
+}: Readonly<RootLayoutType>) {
 	return (
-		<html lang="en">
-			<body className={lato.className}>
-				<Header navigation={navigationLinks} />
+		<ClerkProvider>
+			<html lang="en">
+				<body className={lato.className}>
+					<Header navigation={navigationLinks} />
 
-				{children}
-			</body>
-		</html>
+					<main className="lg:mt-20">{children}</main>
+
+					{modal}
+				</body>
+			</html>
+		</ClerkProvider>
 	);
 }

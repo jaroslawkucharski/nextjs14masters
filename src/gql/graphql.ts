@@ -179,7 +179,8 @@ export type ProductList = {
 export type ProductSortBy =
   | 'DEFAULT'
   | 'NAME'
-  | 'PRICE';
+  | 'PRICE'
+  | 'RATING';
 
 export type Query = {
   cart?: Maybe<Cart>;
@@ -335,6 +336,17 @@ export type CollectionGetListQueryVariables = Exact<{
 
 
 export type CollectionGetListQuery = { collections: { data: Array<{ id: string, name: string, description: string, slug: string }> } };
+
+export type OrdersGetListQueryVariables = Exact<{
+  take: Scalars['Int']['input'];
+  skip: Scalars['Int']['input'];
+  orderBy?: InputMaybe<OrderSortBy>;
+  order?: InputMaybe<SortDirection>;
+  email: Scalars['String']['input'];
+}>;
+
+
+export type OrdersGetListQuery = { orders: { data: Array<{ createdAt: unknown, id: string, lines: unknown, status: OrderStatus, totalAmount: number, updatedAt: unknown }> } };
 
 export type ProductAddReviewMutationVariables = Exact<{
   author: Scalars['String']['input'];
@@ -547,6 +559,26 @@ export const CollectionGetListDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<CollectionGetListQuery, CollectionGetListQueryVariables>;
+export const OrdersGetListDocument = new TypedDocumentString(`
+    query OrdersGetList($take: Int!, $skip: Int!, $orderBy: OrderSortBy, $order: SortDirection, $email: String!) {
+  orders(
+    email: $email
+    order: $order
+    orderBy: $orderBy
+    skip: $skip
+    take: $take
+  ) {
+    data {
+      createdAt
+      id
+      lines
+      status
+      totalAmount
+      updatedAt
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<OrdersGetListQuery, OrdersGetListQueryVariables>;
 export const ProductAddReviewDocument = new TypedDocumentString(`
     mutation ProductAddReview($author: String!, $description: String!, $email: String!, $productId: ID!, $rating: Int!, $title: String!) {
   reviewCreate(
