@@ -4,6 +4,7 @@ import { CornerDownLeft, Store } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import Stripe from "stripe";
+import { currentUser } from "@clerk/nextjs";
 import { StripeForm } from "./stripeForm";
 import { getCartById } from "@/api/cart/getCartById";
 import { formatMoney } from "@/utils";
@@ -11,6 +12,7 @@ import { PageHeading } from "@/ui/molecules/PageHeading";
 import { Button } from "@/ui/atoms/Button";
 import { CartList } from "@/ui/organisms/CartList";
 import { type CartItem } from "@/gql/graphql";
+import { cartComplete } from "@/api/cart/cartComplete";
 
 export const metadata: Metadata = {
 	title: "Cart",
@@ -71,6 +73,15 @@ export default async function CartPage({ searchParams }: CartPageType) {
 	const handlePayment = async () => {
 		"use server";
 
+		// TODO
+		const user = await currentUser();
+
+		if (!user) {
+			redirect("/sign-in");
+		}
+
+		const email = user.emailAddresses[0]?.emailAddress;
+
 		if (!process.env.STRIPE_SECRET_KEY) {
 			throw new Error("Stripe secret key is missing");
 		}
@@ -83,6 +94,7 @@ export default async function CartPage({ searchParams }: CartPageType) {
 		const paymentIntent = await stripe.paymentIntents.create({
 			amount: total,
 			currency: "usd",
+			receipt_email: email,
 			automatic_payment_methods: {
 				enabled: true,
 			},
@@ -94,6 +106,8 @@ export default async function CartPage({ searchParams }: CartPageType) {
 		if (!paymentIntent.client_secret) {
 			throw new Error("Missing client_secret");
 		}
+
+		await cartComplete(cartId);
 
 		redirect(`/cart?intent=${paymentIntent.client_secret}`);
 	};

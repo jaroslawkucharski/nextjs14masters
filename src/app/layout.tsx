@@ -54,7 +54,7 @@ export default function RootLayout({
 				<body className={lato.className}>
 					<Header navigation={navigationLinks} />
 
-					{children}
+					<main className="lg:mt-20">{children}</main>
 
 					{modal}
 				</body>
