@@ -1,0 +1,24 @@
+query OrdersGetList(
+	$take: Int!
+	$skip: Int!
+	$orderBy: OrderSortBy
+	$order: SortDirection
+	$email: String!
+) {
+	orders(
+		email: $email
+		order: $order
+		orderBy: $orderBy
+		skip: $skip
+		take: $take
+	) {
+		data {
+			createdAt
+			id
+			lines
+			status
+			totalAmount
+			updatedAt
+		}
+	}
+}
