@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { ProductsList } from "@/ui/organisms/ProductList";
 import { getProductsByCategory } from "@/api/products/getProductsByCategory";
 import { Pagination } from "@/ui/molecules/Pagination";
-import { getNumOfPages } from "@/helpers";
+import { getNumOfPages, returnProductsNotFound } from "@/helpers";
 import { CATEGORY_AMOUNT_OF_PRODUCTS } from "@/constants";
 
 export type CategoryPageType = {
@@ -32,11 +32,7 @@ export default async function CategoryPage({ params }: CategoryPageType) {
 		CATEGORY_AMOUNT_OF_PRODUCTS,
 	);
 
-	if (
-		Number(params.page) < 1 ||
-		Number(params.page) > numOfPages ||
-		isNaN(Number(params.page))
-	) {
+	if (returnProductsNotFound(params.page, numOfPages)) {
 		return notFound();
 	}
 

@@ -48,8 +48,6 @@ export async function generateMetadata({
 export default async function ProductPage({ params }: ProductPageType) {
 	const productId = params.productId.split("-").pop() as string;
 
-	console.log("productId", productId);
-
 	const product = await getProductById(productId);
 
 	if (!product && !productId) {

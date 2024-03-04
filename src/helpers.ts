@@ -7,3 +7,6 @@ export const getNumOfPages = (
 
 export const getSkip = (page: string) =>
 	Number(page) * DEFAULT_AMOUNT_OF_PRODUCTS - DEFAULT_AMOUNT_OF_PRODUCTS;
+
+export const returnProductsNotFound = (page: string, numOfPages: number) =>
+	Number(page) < 1 || Number(page) > numOfPages || isNaN(Number(page));
