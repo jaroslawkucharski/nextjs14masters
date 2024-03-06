@@ -65,13 +65,13 @@ export default async function OrderPage() {
 							<div className="flex flex-col gap-4">
 								<div className="flex w-full flex-wrap justify-between gap-4 sm:flex-nowrap">
 									<div className="min-w-[500px] sm:px-4">
-										<p className="text-sm">Numer zamówienia:</p>
+										<p className="text-sm">Order number:</p>
 
 										<p className="font-bold">{order.id}</p>
 									</div>
 
 									<div className="w-full">
-										<p className="text-sm">Artykuły:</p>
+										<p className="text-sm">Articles:</p>
 
 										<p>
 											{order.lines
@@ -98,13 +98,13 @@ export default async function OrderPage() {
 
 								<div className="mb-8 flex w-full flex-wrap justify-between gap-4 border-b pb-8 sm:flex-nowrap">
 									<div className="min-w-[500px] sm:px-4">
-										<p className="text-sm">Data zamówienia:</p>
+										<p className="text-sm">Date of order:</p>
 
 										<p className="font-bold">{formatDate(order.createdAt)}</p>
 									</div>
 
 									<div className="w-full">
-										<p className="text-sm">Suma:</p>
+										<p className="text-sm">Total:</p>
 
 										<p className="font-bold">
 											{formatMoney(order.totalAmount)}
