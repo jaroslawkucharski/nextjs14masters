@@ -7,8 +7,8 @@ import {
 } from "@/gql/graphql";
 
 type GetOrdersListRequest = {
-	take: number;
-	skip: number;
+	take?: number;
+	skip?: number;
 	orderBy?: OrderSortBy;
 	order?: SortDirection;
 	email: string;
