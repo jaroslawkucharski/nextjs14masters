@@ -1,5 +1,5 @@
-mutation CartComplete($id: ID!) {
-	cartComplete(cartId: $id) {
+mutation CartComplete($id: ID!, $email: String!) {
+	cartComplete(cartId: $id, userEmail: $email) {
 		id
 		createdAt
 		lines

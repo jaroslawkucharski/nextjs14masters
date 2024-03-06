@@ -93,6 +93,7 @@ export type MutationCartChangeItemQuantityArgs = {
 
 export type MutationCartCompleteArgs = {
   cartId: Scalars['ID']['input'];
+  userEmail: Scalars['String']['input'];
 };
 
 
@@ -293,6 +294,7 @@ export type CartChangeItemQuantityMutation = { cartChangeItemQuantity: { id: str
 
 export type CartCompleteMutationVariables = Exact<{
   id: Scalars['ID']['input'];
+  email: Scalars['String']['input'];
 }>;
 
 
@@ -490,8 +492,8 @@ export const CartChangeItemQuantityDocument = new TypedDocumentString(`
 }
     `) as unknown as TypedDocumentString<CartChangeItemQuantityMutation, CartChangeItemQuantityMutationVariables>;
 export const CartCompleteDocument = new TypedDocumentString(`
-    mutation CartComplete($id: ID!) {
-  cartComplete(cartId: $id) {
+    mutation CartComplete($id: ID!, $email: String!) {
+  cartComplete(cartId: $id, userEmail: $email) {
     id
     createdAt
     lines
