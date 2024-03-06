@@ -44,7 +44,7 @@ export const Header = async () => {
 				<Cart />
 
 				<SignedIn>
-					<UserButton userProfileMode="navigation" />
+					<UserButton userProfileMode="navigation" afterSignOutUrl="/" />
 				</SignedIn>
 
 				<SignedOut>
