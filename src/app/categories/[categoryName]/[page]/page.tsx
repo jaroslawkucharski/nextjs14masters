@@ -1,11 +1,10 @@
-// TODO - fake pagination
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductsList } from "@/ui/organisms/ProductList";
 import { getProductsByCategory } from "@/api/products/getProductsByCategory";
 import { Pagination } from "@/ui/molecules/Pagination";
-// import { getProductList } from "@/api/products/getProductList";
-// import { AMOUNT_OF_PRODUCTS } from "@/constants";
+import { getNumOfPages, returnProductsNotFound } from "@/helpers";
+import { CATEGORY_AMOUNT_OF_PRODUCTS } from "@/constants";
 
 export type CategoryPageType = {
 	params: {
@@ -13,8 +12,6 @@ export type CategoryPageType = {
 		page: string;
 	};
 };
-
-// export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
 	params,
@@ -27,31 +24,19 @@ export async function generateMetadata({
 	};
 }
 
-// TODO - generateStaticParams
-// export async function generateStaticParams() {
-// 	const { numOfProducts } = await getProductList({});
-
-// 	const numOfPages = Math.ceil(numOfProducts / AMOUNT_OF_PRODUCTS);
-// 	const pages = Array.from({ length: numOfPages }, (_, index) => index + 1);
-
-// 	return pages.map((page) => ({
-// 		params: { page: String(page) },
-// 	}));
-// }
-
 export default async function CategoryPage({ params }: CategoryPageType) {
 	const { products } = await getProductsByCategory(params.categoryName);
 
-	const numOfPages = Math.ceil(products.length / 4);
+	const numOfPages = getNumOfPages(
+		products.length,
+		CATEGORY_AMOUNT_OF_PRODUCTS,
+	);
 
-	if (
-		Number(params.page) < 1 ||
-		Number(params.page) > numOfPages ||
-		isNaN(Number(params.page))
-	) {
+	if (returnProductsNotFound(params.page, numOfPages)) {
 		return notFound();
 	}
 
+	// Fake pagination - API problem
 	const fakePagination =
 		params.page === "1" ? products.slice(0, 4) : products.slice(4);
 

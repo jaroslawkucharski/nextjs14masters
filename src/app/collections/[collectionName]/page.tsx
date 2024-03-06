@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
 import { ProductsList } from "@/ui/organisms/ProductList";
 import { getProductsByCollection } from "@/api/products/getProductsByCollection";
-import { getCollectionsList } from "@/api/collections/getCollectionList";
 
 export type CollectionPageType = {
 	params: {
 		collectionName: string;
 	};
 };
-
-export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
 	params,
@@ -20,16 +17,6 @@ export async function generateMetadata({
 		title: collection.name.toLocaleUpperCase(),
 		description: collection.description,
 	};
-}
-
-export async function generateStaticParams() {
-	const collections = await getCollectionsList({});
-
-	return collections.map((collection) => ({
-		params: {
-			collectionName: collection.name,
-		},
-	}));
 }
 
 export default async function CollectionPage({ params }: CollectionPageType) {

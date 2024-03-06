@@ -4,9 +4,11 @@ import { CartListItem } from "@/ui/molecules/CartListItem";
 export const CartList = ({
 	items,
 	cartId,
+	isCheckout,
 }: {
 	items: CartItem[];
 	cartId: string;
+	isCheckout?: boolean;
 }) => (
 	<table className="table h-fit w-full">
 		<thead>
@@ -20,7 +22,12 @@ export const CartList = ({
 		<tbody>
 			{items &&
 				items.map((item) => (
-					<CartListItem key={item.product.id} cartId={cartId} item={item} />
+					<CartListItem
+						key={item.product.id}
+						cartId={cartId}
+						item={item}
+						isCheckout={isCheckout}
+					/>
 				))}
 		</tbody>
 	</table>

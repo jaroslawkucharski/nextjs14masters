@@ -1,38 +1,49 @@
 import { type Metadata } from "next";
 import { cookies } from "next/headers";
-import { CornerDownLeft, Store } from "lucide-react";
+import { CornerDownLeft, Shirt, Store } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import Stripe from "stripe";
 import { currentUser } from "@clerk/nextjs";
-import { StripeForm } from "./stripeForm";
+import Success from "./success";
 import { getCartById } from "@/api/cart/getCartById";
 import { formatMoney } from "@/utils";
 import { PageHeading } from "@/ui/molecules/PageHeading";
-import { Button } from "@/ui/atoms/Button";
 import { CartList } from "@/ui/organisms/CartList";
 import { type CartItem } from "@/gql/graphql";
 import { cartComplete } from "@/api/cart/cartComplete";
+import { StatusButton } from "@/ui/molecules/StatusButton";
 
 export const metadata: Metadata = {
 	title: "Cart",
 	description: "Your cart.",
 };
 
-export type CartPageType = {
-	searchParams: {
-		intent: string;
-		payment_intent: string;
-	};
-};
-
-export default async function CartPage({ searchParams }: CartPageType) {
+export default async function CartPage({
+	searchParams,
+}: {
+	searchParams: { intent: string; payment_intent: string };
+}) {
 	const cartId = cookies().get("cartId")?.value || "";
 
 	const cart = cartId ? await getCartById(cartId) : null;
 
+	if (searchParams.intent === "success") {
+		return <Success intent={searchParams.payment_intent} />;
+	}
+
 	if (!cart) {
-		return;
+		return (
+			<div className="flex w-full flex-col items-center justify-center pt-20 text-center">
+				<Shirt className="h-28 w-28 text-slate-500" />
+
+				<p className="my-2 text-2xl">Your cart is empty.</p>
+
+				<Link href="/" className="text-sm uppercase hover:underline">
+					Continue shopping
+				</Link>
+			</div>
+		);
 	}
 
 	const total = cart?.items.reduce(
@@ -40,40 +51,9 @@ export default async function CartPage({ searchParams }: CartPageType) {
 		0,
 	);
 
-	// if (!searchParams.intent) {
-	// 	if (!process.env.STRIPE_SECRET_KEY) {
-	// 		throw new Error("Stripe secret key is missing");
-	// 	}
-
-	// 	const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-	// 		apiVersion: "2023-10-16",
-	// 		typescript: true,
-	// 	});
-
-	// 	const paymentIntent = await stripe.paymentIntents.create({
-	// 		amount: total,
-	// 		currency: "usd",
-	// 		automatic_payment_methods: {
-	// 			enabled: true,
-	// 		},
-	// 		metadata: {
-	// 			orderId: cart.id,
-	// 		},
-	// 	});
-
-	// 	if (!paymentIntent.client_secret) {
-	// 		throw new Error("Missing client_secret");
-	// 	}
-
-	// 	console.log("paymentIntent: ", paymentIntent.client_secret);
-
-	// 	paymentIntentSecret = paymentIntent.client_secret;
-	// }
-
 	const handlePayment = async () => {
 		"use server";
 
-		// TODO
 		const user = await currentUser();
 
 		if (!user) {
@@ -107,81 +87,16 @@ export default async function CartPage({ searchParams }: CartPageType) {
 			throw new Error("Missing client_secret");
 		}
 
-		await cartComplete(cartId);
+		if (!email) {
+			return;
+		}
 
-		redirect(`/cart?intent=${paymentIntent.client_secret}`);
+		await cartComplete(cartId, email);
+
+		cookies().set("cartId", "");
+
+		redirect(`/checkout?intent=${paymentIntent.client_secret}`);
 	};
-
-	// const handlePayment = async () => {
-	// 	"use server";
-
-	// 	if (!process.env.STRIPE_SECRET_KEY) {
-	// 		throw new Error("Stripe secret key is missing");
-	// 	}
-
-	// 	const cart = cartId ? await getCartById(cartId) : null;
-
-	// 	if (!cart) {
-	// 		return;
-	// 	}
-
-	// 	const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-	// 		apiVersion: "2023-10-16",
-	// 		typescript: true,
-	// 	});
-
-	// 	const checkoutSession = await stripe.checkout.sessions.create({
-	// 		// payment_method_types: ["card", "blik", "p24", "paynow"],
-	// 		payment_method_types: ["card"],
-	// 		metadata: {
-	// 			cartId: cart.id,
-	// 		},
-	// 		line_items: cart.items.map((item) => ({
-	// 			price_data: {
-	// 				currency: "usd",
-	// 				product_data: {
-	// 					name: item.product.name,
-	// 					images: [item.product.images?.[0]?.url || ""],
-	// 				},
-	// 				unit_amount: item.product.price,
-	// 			},
-	// 			quantity: item.quantity,
-	// 		})),
-	// 		mode: "payment",
-	// 		success_url:
-	// 			"https://example.com/success?sessionId={CHECKOUT_SESSION_ID}",
-	// 		cancel_url: "https://example.com/cancel",
-	// 	});
-
-	// 	if (!checkoutSession.url) {
-	// 		throw new Error("Checkout session URL is missing");
-	// 	}
-
-	// 	redirect(checkoutSession.url);
-	// };
-
-	if (!cart || !cart.items.length) {
-		return (
-			<section className="flex h-[calc(100vh-4rem)] w-full flex-col items-center justify-center text-center">
-				<h1 className="text-6xl">Your cart is empty.</h1>
-				<p className="mt-8 text-xl">
-					<Link href="/"> Continue shopping</Link>
-				</p>
-			</section>
-		);
-	}
-
-	// TODO
-	if (searchParams.intent === "success") {
-		return (
-			<section className="flex h-[calc(100vh-4rem)] w-full flex-col items-center justify-center text-center">
-				<h1 className="text-6xl">Success!</h1>
-				<p className="mt-8 text-xl">
-					<Link href="/"> Continue shopping</Link>
-				</p>
-			</section>
-		);
-	}
 
 	return (
 		<>
@@ -213,13 +128,9 @@ export default async function CartPage({ searchParams }: CartPageType) {
 						</p>
 					</div>
 
-					{searchParams.intent ? (
-						<StripeForm clientSecret={searchParams.intent} />
-					) : (
-						<form action={handlePayment}>
-							<Button type="submit">Order it</Button>
-						</form>
-					)}
+					<form action={handlePayment}>
+						<StatusButton>Order it</StatusButton>
+					</form>
 
 					<div className="mt-8 flex flex-col gap-2">
 						<p className="flex items-center gap-2 text-sm text-slate-500">

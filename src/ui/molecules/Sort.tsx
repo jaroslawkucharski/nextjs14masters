@@ -11,9 +11,9 @@ export const Sort = () => {
 	const handleSort = (event: FormEvent<HTMLSelectElement>) => {
 		const sortBy = (event.target as HTMLSelectElement).value.toUpperCase();
 
-		const [sort, by] = sortBy.split("-");
+		const [order, dir] = sortBy.split("-");
 
-		router.push(`?sort=${sort}&by=${by}`);
+		router.push(`?order=${order}&dir=${dir}`);
 	};
 
 	return (
@@ -23,7 +23,7 @@ export const Sort = () => {
 				id="sort"
 				className="w-56 appearance-none self-start rounded-md border-0 bg-white px-4 py-2 text-sm text-slate-400 ring-1 ring-inset ring-gray-400 placeholder:text-slate-400 focus:border-gray-900 focus:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-900 lg:min-w-4"
 				onChange={handleSort}
-				value={`${searchParams.get("sort")}-${searchParams.get("by")}`.toLocaleLowerCase()}
+				value={`${searchParams.get("order")}-${searchParams.get("dir")}`.toLocaleLowerCase()}
 			>
 				<option>-- sort by --</option>
 

@@ -1,10 +1,10 @@
-// TODO -pagination
 import { type Metadata } from "next";
-import { Suspense } from "react";
+
+import { SearchX } from "lucide-react";
+import Link from "next/link";
 import { PageHeading } from "@/ui/molecules/PageHeading";
 import { getProductList } from "@/api/products/getProductList";
 import { ProductsList } from "@/ui/organisms/ProductList";
-import { Loader } from "@/ui/atoms/Loader";
 
 export const metadata: Metadata = {
 	title: "Search",
@@ -20,7 +20,6 @@ export type SearchPageType = {
 export default async function SearchPage({ searchParams }: SearchPageType) {
 	const data = searchParams.query
 		? await getProductList({
-				take: 4,
 				search: searchParams.query,
 			})
 		: null;
@@ -35,10 +34,20 @@ export default async function SearchPage({ searchParams }: SearchPageType) {
 			/>
 
 			<section className="mx-auto max-w-md p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
-				{products && (
-					<Suspense fallback={<Loader />}>
-						<ProductsList products={products} />
-					</Suspense>
+				{products?.length ? (
+					<ProductsList products={products} />
+				) : (
+					<div className="flex w-full flex-col items-center justify-center pt-20 text-center">
+						<SearchX className="h-28 w-28 text-slate-500" />
+
+						<p className="my-2 text-2xl">
+							We could not find what you were looking for
+						</p>
+
+						<Link href="/" className="text-sm uppercase hover:underline">
+							Back to shopping
+						</Link>
+					</div>
 				)}
 			</section>
 		</>

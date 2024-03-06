@@ -7,11 +7,13 @@ import {
 
 export const cartComplete = async (
 	id: CartCompleteMutationVariables["id"],
+	email: CartCompleteMutationVariables["email"],
 ): Promise<CartCompleteMutation["cartComplete"]> => {
 	const graphqlResponse = await executeGraphQl({
 		query: CartCompleteDocument,
 		variables: {
 			id,
+			email,
 		},
 	});
 

@@ -55,7 +55,7 @@ export const ProductCounter = ({
 				</Button>
 
 				<p
-					className="h-8 w-12  text-center text-lg text-gray-950"
+					className="h-8 w-12 text-center text-lg text-gray-950"
 					data-testid="quantity"
 				>
 					{optimisticQuantity}

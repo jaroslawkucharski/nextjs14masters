@@ -19,6 +19,14 @@ type ProductListResponse = {
 	numOfProducts: number;
 };
 
+const isValidProductSortName = (value: string): value is ProductSortBy => {
+	return ["DEFAULT", "NAME", "PRICE", "RATING"].includes(value);
+};
+
+const isValidProductSortBy = (value: string): value is ProductSortBy => {
+	return ["ASC", "DESC"].includes(value);
+};
+
 export const getProductList = async ({
 	take = 8,
 	skip = 0,
@@ -26,14 +34,21 @@ export const getProductList = async ({
 	order = "ASC",
 	search,
 }: ProductListRequest): Promise<ProductListResponse> => {
+	const sort = {
+		...(orderBy &&
+			isValidProductSortName(orderBy) && {
+				orderBy,
+			}),
+		...(order && isValidProductSortBy(order) && { order }),
+	};
+
 	const graphqlResponse = await executeGraphQl({
 		query: ProductsGetListDocument,
 		variables: {
 			take,
 			skip,
-			orderBy,
-			order,
 			search,
+			...sort,
 		},
 		next: {
 			revalidate: 30,

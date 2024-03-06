@@ -20,30 +20,6 @@ export const metadata: Metadata = {
 	description: "Home page.",
 };
 
-const navigationLinks = [
-	{
-		label: "Home",
-		href: "/",
-		exact: true,
-	},
-	{
-		label: "All",
-		href: "/products",
-	},
-	{
-		label: "T-Shirts",
-		href: "/categories/t-shirts",
-	},
-	{
-		label: "Hoodies",
-		href: "/categories/hoodies",
-	},
-	{
-		label: "Accessories",
-		href: "/categories/accessories",
-	},
-];
-
 export default function RootLayout({
 	children,
 	modal,
@@ -52,7 +28,7 @@ export default function RootLayout({
 		<ClerkProvider>
 			<html lang="en">
 				<body className={lato.className}>
-					<Header navigation={navigationLinks} />
+					<Header />
 
 					<main className="lg:mt-20">{children}</main>
 

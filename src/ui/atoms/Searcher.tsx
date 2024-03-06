@@ -16,13 +16,17 @@ export const Searcher = () => {
 
 			const params = new URLSearchParams(searchParams);
 
+			if (!value) {
+				return router.replace("/");
+			}
+
 			if (value && value.length > 1) {
 				params.set("query", value);
 
 				router.replace(`/search?${params.toString()}`);
-			} else {
-				params.delete("query");
 			}
+
+			return params.delete("query");
 		},
 		500,
 	);

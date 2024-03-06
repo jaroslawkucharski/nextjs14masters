@@ -8,9 +8,11 @@ import { formatMoney } from "@/utils";
 export const CartListItem = ({
 	item,
 	cartId,
+	isCheckout,
 }: {
 	item: Cart["items"][0];
 	cartId: string;
+	isCheckout?: boolean;
 }) => (
 	<tr key={item.product.id} className="h-fit border-b">
 		<td className="invisible py-4 sm:visible sm:min-w-48 sm:px-4">
@@ -41,16 +43,22 @@ export const CartListItem = ({
 			</p>
 
 			<div className="pr-8 text-sm text-gray-600">
-				<ProductCounter
-					id={cartId}
-					quantity={item.quantity}
-					productId={item.product.id}
-				/>
+				{isCheckout ? (
+					<p className="text-lg">Quantity: {item.quantity}</p>
+				) : (
+					<ProductCounter
+						id={cartId}
+						quantity={item.quantity}
+						productId={item.product.id}
+					/>
+				)}
 			</div>
 		</td>
 
 		<td className="self-end px-4 py-8">
-			<RemoveProductFromCart cartId={cartId} productId={item.product.id} />
+			{!isCheckout && (
+				<RemoveProductFromCart cartId={cartId} productId={item.product.id} />
+			)}
 
 			<p>{formatMoney(item.product.price * item.quantity)}</p>
 		</td>
