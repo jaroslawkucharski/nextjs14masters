@@ -1,13 +1,11 @@
+// TODO
 import { type Metadata } from "next";
 import { cookies } from "next/headers";
 import { CornerDownLeft, Store } from "lucide-react";
-import Link from "next/link";
 import { StripeForm } from "./stripeForm";
 import { getCartById } from "@/api/cart/getCartById";
 import { formatMoney } from "@/utils";
 import { PageHeading } from "@/ui/molecules/PageHeading";
-import { CartList } from "@/ui/organisms/CartList";
-import { type CartItem } from "@/gql/graphql";
 
 export const metadata: Metadata = {
 	title: "Checkout",
@@ -26,51 +24,16 @@ export default async function CartPage({ searchParams }: CartPageType) {
 
 	const cart = cartId ? await getCartById(cartId) : null;
 
-	if (!cart) {
-		return;
-	}
-
 	const total = cart?.items.reduce(
 		(acc, { product, quantity }) => acc + product.price * quantity,
 		0,
 	);
-
-	if (!cart || !cart.items.length) {
-		return (
-			<section className="flex h-[calc(100vh-4rem)] w-full flex-col items-center justify-center text-center">
-				<h1 className="text-6xl">Your cart is empty.</h1>
-				<p className="mt-8 text-xl">
-					<Link href="/"> Continue shopping</Link>
-				</p>
-			</section>
-		);
-	}
-
-	// TODO
-	if (searchParams.intent === "success") {
-		return (
-			<section className="flex h-[calc(100vh-4rem)] w-full flex-col items-center justify-center text-center">
-				<h1 className="text-6xl">Success!</h1>
-				<p className="mt-8 text-xl">
-					<Link href="/"> Continue shopping</Link>
-				</p>
-			</section>
-		);
-	}
 
 	return (
 		<>
 			<PageHeading title="Your cart" />
 
 			<section className="mx-auto flex max-w-md flex-col gap-4 overflow-x-auto p-4 sm:max-w-2xl sm:p-12 sm:py-8 md:max-w-4xl lg:max-w-7xl lg:flex-row">
-				{cart?.items && (
-					<CartList
-						items={cart.items as CartItem[]}
-						cartId={cartId}
-						isCheckout
-					/>
-				)}
-
 				<div className="min-w-full p-4 sm:min-w-[450px] sm:p-10">
 					<div className="mb-6">
 						<p className="flex w-full justify-between py-2 text-lg text-gray-500">
