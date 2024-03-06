@@ -5,6 +5,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import Stripe from "stripe";
 import { currentUser } from "@clerk/nextjs";
+import Success from "./success";
 import { getCartById } from "@/api/cart/getCartById";
 import { formatMoney } from "@/utils";
 import { PageHeading } from "@/ui/molecules/PageHeading";
@@ -18,13 +19,31 @@ export const metadata: Metadata = {
 	description: "Your cart.",
 };
 
-export default async function CartPage() {
+export default async function CartPage({
+	searchParams,
+}: {
+	searchParams: { intent: string; payment_intent: string };
+}) {
 	const cartId = cookies().get("cartId")?.value || "";
 
 	const cart = cartId ? await getCartById(cartId) : null;
 
+	if (searchParams.intent === "success") {
+		return <Success intent={searchParams.payment_intent} />;
+	}
+
 	if (!cart) {
-		return;
+		return (
+			<div className="flex w-full flex-col items-center justify-center pt-20 text-center">
+				<Shirt className="h-28 w-28 text-slate-500" />
+
+				<p className="my-2 text-2xl">Your cart is empty.</p>
+
+				<Link href="/" className="text-sm uppercase hover:underline">
+					Continue shopping
+				</Link>
+			</div>
+		);
 	}
 
 	const total = cart?.items.reduce(
@@ -68,7 +87,13 @@ export default async function CartPage() {
 			throw new Error("Missing client_secret");
 		}
 
-		await cartComplete(cartId);
+		if (!email) {
+			return;
+		}
+
+		await cartComplete(cartId, email);
+
+		cookies().set("cartId", "");
 
 		redirect(`/checkout?intent=${paymentIntent.client_secret}`);
 	};
@@ -77,63 +102,51 @@ export default async function CartPage() {
 		<>
 			<PageHeading title="Your cart" />
 
-			{!cart || !cart.items.length ? (
-				<div className="flex w-full flex-col items-center justify-center pt-20 text-center">
-					<Shirt className="h-28 w-28 text-slate-500" />
+			<section className="mx-auto flex max-w-md flex-col gap-4 overflow-x-auto p-4 sm:max-w-2xl sm:p-12 sm:py-8 md:max-w-4xl lg:max-w-7xl lg:flex-row">
+				{cart?.items && (
+					<CartList items={cart.items as CartItem[]} cartId={cartId} />
+				)}
 
-					<p className="my-2 text-2xl">Your cart is empty.</p>
+				<div className="min-w-full p-4 sm:min-w-[450px] sm:p-10">
+					<div className="mb-6">
+						<p className="flex w-full justify-between py-2 text-lg text-gray-500">
+							<span>Product price:</span>
 
-					<Link href="/" className="text-sm uppercase hover:underline">
-						Continue shopping
-					</Link>
-				</div>
-			) : (
-				<section className="mx-auto flex max-w-md flex-col gap-4 overflow-x-auto p-4 sm:max-w-2xl sm:p-12 sm:py-8 md:max-w-4xl lg:max-w-7xl lg:flex-row">
-					{cart?.items && (
-						<CartList items={cart.items as CartItem[]} cartId={cartId} />
-					)}
+							<span>{formatMoney(Number(total))}</span>
+						</p>
 
-					<div className="min-w-full p-4 sm:min-w-[450px] sm:p-10">
-						<div className="mb-6">
-							<p className="flex w-full justify-between py-2 text-lg text-gray-500">
-								<span>Product price:</span>
+						<p className="flex w-full justify-between py-2 text-lg text-gray-500">
+							<span>Delivery:</span>
 
-								<span>{formatMoney(Number(total))}</span>
-							</p>
+							<span>{formatMoney(Number(0))}</span>
+						</p>
 
-							<p className="flex w-full justify-between py-2 text-lg text-gray-500">
-								<span>Delivery:</span>
+						<p className="mt-4 flex w-full justify-between border-t py-2 text-lg">
+							<span>Total amount:</span>
 
-								<span>{formatMoney(Number(0))}</span>
-							</p>
-
-							<p className="mt-4 flex w-full justify-between border-t py-2 text-lg">
-								<span>Total amount:</span>
-
-								<span>{formatMoney(Number(total))}</span>
-							</p>
-						</div>
-
-						<form action={handlePayment}>
-							<StatusButton>Order it</StatusButton>
-						</form>
-
-						<div className="mt-8 flex flex-col gap-2">
-							<p className="flex items-center gap-2 text-sm text-slate-500">
-								<Store className="h-4 w-4" />
-
-								<span>Free returns always</span>
-							</p>
-
-							<p className="flex items-center gap-2 text-sm text-slate-500">
-								<CornerDownLeft className="h-4 w-4" />
-
-								<span>Free returns within 30 days</span>
-							</p>
-						</div>
+							<span>{formatMoney(Number(total))}</span>
+						</p>
 					</div>
-				</section>
-			)}
+
+					<form action={handlePayment}>
+						<StatusButton>Order it</StatusButton>
+					</form>
+
+					<div className="mt-8 flex flex-col gap-2">
+						<p className="flex items-center gap-2 text-sm text-slate-500">
+							<Store className="h-4 w-4" />
+
+							<span>Free returns always</span>
+						</p>
+
+						<p className="flex items-center gap-2 text-sm text-slate-500">
+							<CornerDownLeft className="h-4 w-4" />
+
+							<span>Free returns within 30 days</span>
+						</p>
+					</div>
+				</div>
+			</section>
 		</>
 	);
 }
