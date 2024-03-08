@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ProductCounter } from "./ProductCounter";
 import { RemoveProductFromCart } from "./RemoveProductFromCart";
 import { type Cart } from "@/gql/graphql";
-import { formatMoney } from "@/utils";
+import { formatMoney } from "@/utils/intl";
 
 export const CartListItem = ({
 	item,
