@@ -339,6 +339,15 @@ export type CollectionGetListQueryVariables = Exact<{
 
 export type CollectionGetListQuery = { collections: { data: Array<{ id: string, name: string, description: string, slug: string }> } };
 
+export type OrderGetByIdQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type OrderGetByIdQuery = { order?: { createdAt: unknown, id: string, lines: unknown, status: OrderStatus, totalAmount: number, updatedAt: unknown } | null };
+
+export type OrderListItemFragment = { createdAt: unknown, id: string, lines: unknown, status: OrderStatus, totalAmount: number, updatedAt: unknown };
+
 export type OrdersGetListQueryVariables = Exact<{
   take: Scalars['Int']['input'];
   skip: Scalars['Int']['input'];
@@ -348,7 +357,7 @@ export type OrdersGetListQueryVariables = Exact<{
 }>;
 
 
-export type OrdersGetListQuery = { orders: { data: Array<{ createdAt: unknown, id: string, lines: unknown, status: OrderStatus, totalAmount: number, updatedAt: unknown }> } };
+export type OrdersGetListQuery = { orders: { data: Array<{ createdAt: unknown, id: string, lines: unknown, status: OrderStatus, totalAmount: number, updatedAt: unknown }>, meta: { count: number, total: number } } };
 
 export type ProductAddReviewMutationVariables = Exact<{
   author: Scalars['String']['input'];
@@ -412,6 +421,16 @@ export class TypedDocumentString<TResult, TVariables>
     return this.value;
   }
 }
+export const OrderListItemFragmentDoc = new TypedDocumentString(`
+    fragment OrderListItem on Order {
+  createdAt
+  id
+  lines
+  status
+  totalAmount
+  updatedAt
+}
+    `, {"fragmentName":"OrderListItem"}) as unknown as TypedDocumentString<OrderListItemFragment, unknown>;
 export const ProductListItemFragmentDoc = new TypedDocumentString(`
     fragment ProductListItem on Product {
   id
@@ -561,6 +580,20 @@ export const CollectionGetListDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<CollectionGetListQuery, CollectionGetListQueryVariables>;
+export const OrderGetByIdDocument = new TypedDocumentString(`
+    query OrderGetById($id: ID!) {
+  order(id: $id) {
+    ...OrderListItem
+  }
+}
+    fragment OrderListItem on Order {
+  createdAt
+  id
+  lines
+  status
+  totalAmount
+  updatedAt
+}`) as unknown as TypedDocumentString<OrderGetByIdQuery, OrderGetByIdQueryVariables>;
 export const OrdersGetListDocument = new TypedDocumentString(`
     query OrdersGetList($take: Int!, $skip: Int!, $orderBy: OrderSortBy, $order: SortDirection, $email: String!) {
   orders(
@@ -571,16 +604,22 @@ export const OrdersGetListDocument = new TypedDocumentString(`
     take: $take
   ) {
     data {
-      createdAt
-      id
-      lines
-      status
-      totalAmount
-      updatedAt
+      ...OrderListItem
+    }
+    meta {
+      count
+      total
     }
   }
 }
-    `) as unknown as TypedDocumentString<OrdersGetListQuery, OrdersGetListQueryVariables>;
+    fragment OrderListItem on Order {
+  createdAt
+  id
+  lines
+  status
+  totalAmount
+  updatedAt
+}`) as unknown as TypedDocumentString<OrdersGetListQuery, OrdersGetListQueryVariables>;
 export const ProductAddReviewDocument = new TypedDocumentString(`
     mutation ProductAddReview($author: String!, $description: String!, $email: String!, $productId: ID!, $rating: Int!, $title: String!) {
   reviewCreate(

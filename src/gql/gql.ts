@@ -22,7 +22,9 @@ const documents = {
     "mutation CartRemoveItem($productId: ID!, $id: ID!) {\n  cartRemoveItem(productId: $productId, id: $id) {\n    id\n  }\n}": types.CartRemoveItemDocument,
     "query CategoryGetList($take: Int, $skip: Int) {\n  categories(take: $take, skip: $skip) {\n    data {\n      id\n      name\n      slug\n    }\n  }\n}": types.CategoryGetListDocument,
     "query CollectionGetList($take: Int, $skip: Int) {\n  collections(take: $take, skip: $skip) {\n    data {\n      id\n      name\n      description\n      slug\n    }\n  }\n}": types.CollectionGetListDocument,
-    "query OrdersGetList($take: Int!, $skip: Int!, $orderBy: OrderSortBy, $order: SortDirection, $email: String!) {\n  orders(\n    email: $email\n    order: $order\n    orderBy: $orderBy\n    skip: $skip\n    take: $take\n  ) {\n    data {\n      createdAt\n      id\n      lines\n      status\n      totalAmount\n      updatedAt\n    }\n  }\n}": types.OrdersGetListDocument,
+    "query OrderGetById($id: ID!) {\n  order(id: $id) {\n    ...OrderListItem\n  }\n}": types.OrderGetByIdDocument,
+    "fragment OrderListItem on Order {\n  createdAt\n  id\n  lines\n  status\n  totalAmount\n  updatedAt\n}": types.OrderListItemFragmentDoc,
+    "query OrdersGetList($take: Int!, $skip: Int!, $orderBy: OrderSortBy, $order: SortDirection, $email: String!) {\n  orders(\n    email: $email\n    order: $order\n    orderBy: $orderBy\n    skip: $skip\n    take: $take\n  ) {\n    data {\n      ...OrderListItem\n    }\n    meta {\n      count\n      total\n    }\n  }\n}": types.OrdersGetListDocument,
     "mutation ProductAddReview($author: String!, $description: String!, $email: String!, $productId: ID!, $rating: Int!, $title: String!) {\n  reviewCreate(\n    author: $author\n    description: $description\n    email: $email\n    productId: $productId\n    rating: $rating\n    title: $title\n  ) {\n    id\n  }\n}": types.ProductAddReviewDocument,
     "query ProductGetById($id: ID!) {\n  product(id: $id) {\n    ...ProductListItem\n  }\n}": types.ProductGetByIdDocument,
     "fragment ProductList on Query {\n  products(take: $take, skip: $skip) {\n    data {\n      ...ProductListItem\n    }\n    meta {\n      total\n      count\n    }\n  }\n}": types.ProductListFragmentDoc,
@@ -67,7 +69,15 @@ export function graphql(source: "query CollectionGetList($take: Int, $skip: Int)
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query OrdersGetList($take: Int!, $skip: Int!, $orderBy: OrderSortBy, $order: SortDirection, $email: String!) {\n  orders(\n    email: $email\n    order: $order\n    orderBy: $orderBy\n    skip: $skip\n    take: $take\n  ) {\n    data {\n      createdAt\n      id\n      lines\n      status\n      totalAmount\n      updatedAt\n    }\n  }\n}"): typeof import('./graphql').OrdersGetListDocument;
+export function graphql(source: "query OrderGetById($id: ID!) {\n  order(id: $id) {\n    ...OrderListItem\n  }\n}"): typeof import('./graphql').OrderGetByIdDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "fragment OrderListItem on Order {\n  createdAt\n  id\n  lines\n  status\n  totalAmount\n  updatedAt\n}"): typeof import('./graphql').OrderListItemFragmentDoc;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query OrdersGetList($take: Int!, $skip: Int!, $orderBy: OrderSortBy, $order: SortDirection, $email: String!) {\n  orders(\n    email: $email\n    order: $order\n    orderBy: $orderBy\n    skip: $skip\n    take: $take\n  ) {\n    data {\n      ...OrderListItem\n    }\n    meta {\n      count\n      total\n    }\n  }\n}"): typeof import('./graphql').OrdersGetListDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
