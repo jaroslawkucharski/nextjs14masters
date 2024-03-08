@@ -4,7 +4,7 @@ import { type ChangeEvent, useState } from "react";
 import { Star } from "lucide-react";
 import clsx from "clsx";
 import { StatusButton } from "./StatusButton";
-import { addReviewToProduct } from "@/api/product/addReviewToProduct";
+import { addReviewToProduct } from "@/api/products/addReviewToProduct";
 
 type AddReviewFormProps = {
 	productId: string;

@@ -3,7 +3,7 @@ import { type Metadata } from "next";
 import { revalidateTag } from "next/cache";
 import { notFound } from "next/navigation";
 import { StatusButton } from "@/ui/molecules/StatusButton";
-import { getProductById } from "@/api/product/getProductById";
+import { getProductById } from "@/api/products/getProductById";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductDescription } from "@/ui/atoms/ProductDescription";
 import { ProductsList } from "@/ui/organisms/ProductList";
