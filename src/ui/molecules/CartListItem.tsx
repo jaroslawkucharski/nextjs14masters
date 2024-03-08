@@ -9,10 +9,12 @@ export const CartListItem = ({
 	item,
 	cartId,
 	isCheckout,
+	itemsLength,
 }: {
 	item: Cart["items"][0];
 	cartId: string;
 	isCheckout?: boolean;
+	itemsLength: number;
 }) => (
 	<tr key={item.product.id} className="h-fit border-b">
 		<td className="invisible py-4 sm:visible sm:min-w-48 sm:px-4">
@@ -57,7 +59,11 @@ export const CartListItem = ({
 
 		<td className="self-end px-4 py-8">
 			{!isCheckout && (
-				<RemoveProductFromCart cartId={cartId} productId={item.product.id} />
+				<RemoveProductFromCart
+					cartId={cartId}
+					productId={item.product.id}
+					itemsLength={itemsLength}
+				/>
 			)}
 
 			<p>{formatMoney(item.product.price * item.quantity)}</p>
