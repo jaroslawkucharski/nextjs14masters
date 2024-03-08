@@ -2,7 +2,7 @@ import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import Stripe from "stripe";
 import { getOrdersList } from "@/api/orders/getOrdersList";
-import { formatDate, formatMoney } from "@/utils";
+import { formatDate, formatMoney } from "@/utils/intl";
 import { Button } from "@/ui/atoms/Button";
 import { PageHeading } from "@/ui/molecules/PageHeading";
 
