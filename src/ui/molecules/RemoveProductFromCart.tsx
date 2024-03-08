@@ -20,8 +20,6 @@ export const RemoveProductFromCart = ({
 	const router = useRouter();
 	const [isPending, startTransition] = useTransition();
 
-	console.log(itemsLength);
-
 	const handleremoveProductFromCard = () => {
 		startTransition(async () => {
 			await removeProductFromCard(productId);

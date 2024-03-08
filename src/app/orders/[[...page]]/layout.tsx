@@ -39,8 +39,6 @@ export default async function ProductsLayout({
 	const { numOfProducts } = await getOrdersList({ email });
 	const numOfPages = getNumOfPages(numOfProducts, DEFAULT_AMOUNT_OF_PRODUCTS);
 
-	console.log(numOfPages);
-
 	if (returnProductsNotFound(params.page, numOfPages)) {
 		return notFound();
 	}
