@@ -12,7 +12,6 @@ type RemoveProductFromCartProps = {
 };
 
 export const RemoveProductFromCart = ({
-	cartId,
 	productId,
 }: RemoveProductFromCartProps) => {
 	const router = useRouter();
@@ -20,10 +19,7 @@ export const RemoveProductFromCart = ({
 
 	const handleremoveProductFromCard = () => {
 		startTransition(async () => {
-			await removeProductFromCard({
-				id: cartId,
-				productId,
-			});
+			await removeProductFromCard(productId);
 
 			router.refresh();
 		});

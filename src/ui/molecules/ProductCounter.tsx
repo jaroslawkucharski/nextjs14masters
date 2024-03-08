@@ -11,7 +11,6 @@ type ProductCounterProps = {
 };
 
 export const ProductCounter = ({
-	id,
 	productId,
 	quantity,
 }: ProductCounterProps) => {
@@ -25,7 +24,6 @@ export const ProductCounter = ({
 			setOptimisticQuantity(optimisticQuantity - 1);
 
 			await changeProductQuantity({
-				id,
 				productId,
 				quantity: optimisticQuantity - 1,
 			});
@@ -36,7 +34,6 @@ export const ProductCounter = ({
 		setOptimisticQuantity(optimisticQuantity + 1);
 
 		await changeProductQuantity({
-			id,
 			productId,
 			quantity: optimisticQuantity + 1,
 		});
