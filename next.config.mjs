@@ -20,6 +20,11 @@ const nextConfig = {
         destination: '/categories/:slug/1',
         permanent: false,
       },
+      {
+        source: '/orders',
+        destination: '/orders/1',
+        permanent: false,
+      },
     ]
   },
   images: {
