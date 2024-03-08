@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
 import { executeGraphQl } from "../graphqlApi";
 import {
@@ -6,6 +5,7 @@ import {
 	type CartCreateMutation,
 	type CartCreateMutationVariables,
 } from "@/gql/graphql";
+import { setCookie } from "@/utils/cookies";
 
 export const createCart = async ({
 	productId,
@@ -27,10 +27,7 @@ export const createCart = async ({
 		throw new Error("Failed to create cart");
 	}
 
-	cookies().set("cartId", newCart.cartFindOrCreate.id, {
-		httpOnly: true,
-		sameSite: "strict",
-	});
+	await setCookie("cartId", newCart.cartFindOrCreate.id);
 
 	revalidateTag("cart");
 

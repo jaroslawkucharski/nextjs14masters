@@ -1,17 +1,18 @@
 import { executeGraphQl } from "../graphqlApi";
-import {
-	CartGetByIdDocument,
-	type Cart,
-	type CartGetByIdQuery,
-} from "@/gql/graphql";
+import { getCookie } from "@/utils/cookies";
+import { CartGetByIdDocument, type CartGetByIdQuery } from "@/gql/graphql";
 
-export const getCartById = async (
-	id: Cart["id"],
-): Promise<CartGetByIdQuery["cart"]> => {
+export const getCartById = async (): Promise<CartGetByIdQuery["cart"]> => {
+	const cartId = await getCookie("cartId");
+
+	if (!cartId) {
+		return null;
+	}
+
 	const graphqlResponse = await executeGraphQl({
 		query: CartGetByIdDocument,
 		variables: {
-			id,
+			id: cartId,
 		},
 		cache: "no-store",
 		next: {

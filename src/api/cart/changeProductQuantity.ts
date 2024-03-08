@@ -4,19 +4,31 @@ import { revalidateTag } from "next/cache";
 import { executeGraphQl } from "../graphqlApi";
 import {
 	CartChangeItemQuantityDocument,
+	type CartChangeItemQuantityMutation,
 	type CartChangeItemQuantityMutationVariables,
 } from "@/gql/graphql";
+import { getCookie } from "@/utils/cookies";
+
+type ChangeProductQuantityRequest = {
+	productId: CartChangeItemQuantityMutationVariables["productId"];
+	quantity: CartChangeItemQuantityMutationVariables["quantity"];
+};
 
 export const changeProductQuantity = async ({
-	id,
 	productId,
 	quantity,
-}: CartChangeItemQuantityMutationVariables) => {
+}: ChangeProductQuantityRequest): Promise<CartChangeItemQuantityMutation | null> => {
+	const cartId = await getCookie("cartId");
+
+	if (!cartId) {
+		return null;
+	}
+
 	const changeQuantity = await executeGraphQl({
 		query: CartChangeItemQuantityDocument,
 		variables: {
 			productId,
-			id,
+			id: cartId,
 			quantity,
 		},
 		cache: "no-store",
