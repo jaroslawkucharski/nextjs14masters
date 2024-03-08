@@ -11,9 +11,4 @@ export const setCookie = async (key: string, value: string) =>
 		maxAge: 60 * 60 * 24 * 7,
 	});
 
-export const removeCookie = async (key: string) =>
-	cookies().set(key, "", {
-		httpOnly: true,
-		sameSite: "strict",
-		expires: new Date(0),
-	});
+export const removeCookie = async (key: string) => cookies().delete(key);
