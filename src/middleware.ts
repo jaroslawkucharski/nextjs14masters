@@ -1,10 +1,17 @@
 import { authMiddleware } from "@clerk/nextjs";
+import createMiddleware from "next-intl/middleware";
+import { locales } from "./navigation";
 
-export const config = {
-	matcher: ["/((?!.*\\..*|_next).*)", "/", "/(api|trpc)(.*)"],
-};
+const intlMiddleware = createMiddleware({
+	locales,
+	defaultLocale: "en",
+});
 
 export default authMiddleware({
+	beforeAuth: (req) => {
+		return intlMiddleware(req);
+	},
+
 	publicRoutes: [
 		"/",
 		"/search",
@@ -13,5 +20,26 @@ export default authMiddleware({
 		"/collections/(.*)",
 		"/product/(.*)",
 		"/products/(.*)",
+
+		"/:locale",
+		"/:locale/search",
+		"/:locale/cart",
+		"/:locale/categories/(.*)",
+		"/:locale/collections/(.*)",
+		"/:locale/product/(.*)",
+		"/:locale/products/(.*)",
+
+		"/sign-in",
+		"/sign-up",
+		// "/sign-in/(.*)",
+		// "/sign-up/(.*)",
+		"/:locale/sign-in",
+		"/:locale/sign-up",
+		// "/:locale/sign-in/(.*)",
+		// "/:locale/sign-up/(.*)",
 	],
 });
+
+export const config = {
+	matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+};
