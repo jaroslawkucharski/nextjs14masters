@@ -1,10 +1,9 @@
 // TODO
 import { type Metadata } from "next";
-import { cookies } from "next/headers";
 import { CornerDownLeft, Store } from "lucide-react";
 import { StripeForm } from "./stripeForm";
 import { getCartById } from "@/api/cart/getCartById";
-import { formatMoney } from "@/utils";
+import { formatMoney } from "@/utils/intl";
 import { PageHeading } from "@/ui/molecules/PageHeading";
 
 export const metadata: Metadata = {
@@ -20,9 +19,7 @@ export type CartPageType = {
 };
 
 export default async function CartPage({ searchParams }: CartPageType) {
-	const cartId = cookies().get("cartId")?.value || "";
-
-	const cart = cartId ? await getCartById(cartId) : null;
+	const cart = await getCartById();
 
 	const total = cart?.items.reduce(
 		(acc, { product, quantity }) => acc + product.price * quantity,

@@ -26,6 +26,7 @@ export const CartList = ({
 						key={item.product.id}
 						cartId={cartId}
 						item={item}
+						itemsLength={items.length}
 						isCheckout={isCheckout}
 					/>
 				))}

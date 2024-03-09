@@ -1,5 +1,5 @@
 import { Rating } from "./Rating";
-import { formatMoney } from "@/utils";
+import { formatMoney } from "@/utils/intl";
 import { type ProductListItemFragment } from "@/gql/graphql";
 
 type ProductListItemDescriptionProps = {

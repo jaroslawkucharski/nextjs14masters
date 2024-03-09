@@ -1,0 +1,8 @@
+fragment OrderListItem on Order {
+	createdAt
+	id
+	lines
+	status
+	totalAmount
+	updatedAt
+}

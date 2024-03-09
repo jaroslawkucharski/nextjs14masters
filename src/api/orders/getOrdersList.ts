@@ -15,20 +15,23 @@ type GetOrdersListRequest = {
 };
 
 type GetOrdersListResponse = {
-	createdAt: string;
-	id: string;
-	lines: {
-		cartId: string;
-		productQuantity: number;
-		productId: number;
-		productName: string;
-		productSlug: string;
-		productPrice: number;
+	orders: {
+		createdAt: string;
+		id: string;
+		lines: {
+			cartId: string;
+			productQuantity: number;
+			productId: number;
+			productName: string;
+			productSlug: string;
+			productPrice: number;
+		}[];
+		status: OrderStatus;
+		totalAmount: number;
+		updatedAt: string;
 	}[];
-	status: OrderStatus;
-	totalAmount: number;
-	updatedAt: string;
-}[];
+	numOfProducts: number;
+};
 
 export const getOrdersList = async ({
 	take = 8,
@@ -51,7 +54,8 @@ export const getOrdersList = async ({
 		},
 	});
 
-	const orders = graphqlResponse.orders.data as GetOrdersListResponse;
+	const numOfProducts = graphqlResponse.orders.meta.total;
+	const orders = graphqlResponse.orders.data as GetOrdersListResponse["orders"];
 
-	return orders;
+	return { orders, numOfProducts };
 };

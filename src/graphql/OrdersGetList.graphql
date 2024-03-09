@@ -13,12 +13,11 @@ query OrdersGetList(
 		take: $take
 	) {
 		data {
-			createdAt
-			id
-			lines
-			status
-			totalAmount
-			updatedAt
+			...OrderListItem
+		}
+		meta {
+			count
+			total
 		}
 	}
 }

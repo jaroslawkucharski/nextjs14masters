@@ -1,10 +1,9 @@
 // TODO - AI search
 import { type Metadata } from "next";
-import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
 import { notFound } from "next/navigation";
 import { StatusButton } from "@/ui/molecules/StatusButton";
-import { getProductById } from "@/api/product/getProductById";
+import { getProductById } from "@/api/products/getProductById";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductDescription } from "@/ui/atoms/ProductDescription";
 import { ProductsList } from "@/ui/organisms/ProductList";
@@ -16,6 +15,7 @@ import { type Review } from "@/gql/graphql";
 import { getCartById } from "@/api/cart/getCartById";
 import { changeProductQuantity } from "@/api/cart/changeProductQuantity";
 import { CATEGORY_AMOUNT_OF_PRODUCTS } from "@/constants";
+import { Rating } from "@/ui/atoms/Rating";
 
 export type ProductPageType = {
 	params: {
@@ -62,18 +62,15 @@ export default async function ProductPage({ params }: ProductPageType) {
 	const getOrCreateCart = async () => {
 		"use server";
 
-		const cartId = cookies().get("cartId")?.value;
+		const cart = await getCartById();
 
-		if (cartId) {
-			const cart = await getCartById(cartId);
-
+		if (cart) {
 			const itemExist = cart?.items.find(
 				(item) => item.product.id === productId,
 			);
 
 			if (!itemExist) {
 				const addToCart = await addProductToCart({
-					id: cartId,
 					productId,
 					quantity: 1,
 				});
@@ -82,7 +79,6 @@ export default async function ProductPage({ params }: ProductPageType) {
 			}
 
 			return changeProductQuantity({
-				id: cartId,
 				productId,
 				quantity: itemExist.quantity + 1,
 			});
@@ -116,6 +112,8 @@ export default async function ProductPage({ params }: ProductPageType) {
 
 					<div>
 						<ProductDescription product={product} />
+
+						<Rating rating={product.rating} />
 
 						<form action={addToCartAction}>
 							<StatusButton data-testid="add-to-cart-button">

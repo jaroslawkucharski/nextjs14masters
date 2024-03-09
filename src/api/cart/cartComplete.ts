@@ -1,4 +1,5 @@
 import { executeGraphQl } from "../graphqlApi";
+import { getCookie, removeCookie } from "@/utils/cookies";
 import {
 	CartCompleteDocument,
 	type CartCompleteMutation,
@@ -6,16 +7,27 @@ import {
 } from "@/gql/graphql";
 
 export const cartComplete = async (
-	id: CartCompleteMutationVariables["id"],
 	email: CartCompleteMutationVariables["email"],
-): Promise<CartCompleteMutation["cartComplete"]> => {
+): Promise<CartCompleteMutation["cartComplete"] | null> => {
+	const cartId = await getCookie("cartId");
+
+	if (!cartId) {
+		return null;
+	}
+
 	const graphqlResponse = await executeGraphQl({
 		query: CartCompleteDocument,
 		variables: {
-			id,
+			id: cartId,
 			email,
 		},
+		cache: "no-store",
+		next: {
+			tags: ["cart"],
+		},
 	});
+
+	await removeCookie("cartId");
 
 	return graphqlResponse.cartComplete;
 };

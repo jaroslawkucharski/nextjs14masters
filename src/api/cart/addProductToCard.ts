@@ -2,18 +2,30 @@ import { revalidateTag } from "next/cache";
 import { executeGraphQl } from "../graphqlApi";
 import {
 	CartAddItemDocument,
+	type CartAddItemMutation,
 	type CartAddItemMutationVariables,
 } from "@/gql/graphql";
+import { getCookie } from "@/utils/cookies";
+
+type AddProductToCartRequest = {
+	productId: CartAddItemMutationVariables["productId"];
+	quantity: CartAddItemMutationVariables["quantity"];
+};
 
 export const addProductToCart = async ({
-	id,
 	productId,
 	quantity,
-}: CartAddItemMutationVariables) => {
+}: AddProductToCartRequest): Promise<CartAddItemMutation | null> => {
+	const cartId = await getCookie("cartId");
+
+	if (!cartId) {
+		return null;
+	}
+
 	const addProduct = await executeGraphQl({
 		query: CartAddItemDocument,
 		variables: {
-			id,
+			id: cartId,
 			productId,
 			quantity,
 		},

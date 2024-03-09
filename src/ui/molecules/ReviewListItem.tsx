@@ -1,6 +1,6 @@
 import { Rating } from "../atoms/Rating";
 import { type Review } from "@/gql/graphql";
-import { formatDate } from "@/utils";
+import { formatDate } from "@/utils/intl";
 
 type ReviewListItemProps = {
 	review: Review;

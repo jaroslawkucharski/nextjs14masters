@@ -1,13 +1,17 @@
-import { cookies } from "next/headers";
 import { Overlay } from "@/ui/atoms/Overlay";
 import { getCartById } from "@/api/cart/getCartById";
 import { CartList } from "@/ui/organisms/CartList";
 import { type CartItem } from "@/gql/graphql";
+import { getCookie } from "@/utils/cookies";
 
 export default async function ModalCart() {
-	const cartId = cookies().get("cartId")?.value || "";
+	const cartId = await getCookie("cartId");
 
-	const cart = await getCartById(cartId);
+	if (!cartId) {
+		return null;
+	}
+
+	const cart = await getCartById();
 
 	return (
 		<>

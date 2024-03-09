@@ -1,5 +1,4 @@
 import { type Metadata } from "next";
-import { cookies } from "next/headers";
 import { CornerDownLeft, Shirt, Store } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -7,7 +6,7 @@ import Stripe from "stripe";
 import { currentUser } from "@clerk/nextjs";
 import Success from "./success";
 import { getCartById } from "@/api/cart/getCartById";
-import { formatMoney } from "@/utils";
+import { formatMoney } from "@/utils/intl";
 import { PageHeading } from "@/ui/molecules/PageHeading";
 import { CartList } from "@/ui/organisms/CartList";
 import { type CartItem } from "@/gql/graphql";
@@ -24,9 +23,7 @@ export default async function CartPage({
 }: {
 	searchParams: { intent: string; payment_intent: string };
 }) {
-	const cartId = cookies().get("cartId")?.value || "";
-
-	const cart = cartId ? await getCartById(cartId) : null;
+	const cart = await getCartById();
 
 	if (searchParams.intent === "success") {
 		return <Success intent={searchParams.payment_intent} />;
@@ -91,9 +88,7 @@ export default async function CartPage({
 			return;
 		}
 
-		await cartComplete(cartId, email);
-
-		cookies().set("cartId", "");
+		await cartComplete(email);
 
 		redirect(`/checkout?intent=${paymentIntent.client_secret}`);
 	};
@@ -104,7 +99,7 @@ export default async function CartPage({
 
 			<section className="mx-auto flex max-w-md flex-col gap-4 overflow-x-auto p-4 sm:max-w-2xl sm:p-12 sm:py-8 md:max-w-4xl lg:max-w-7xl lg:flex-row">
 				{cart?.items && (
-					<CartList items={cart.items as CartItem[]} cartId={cartId} />
+					<CartList items={cart.items as CartItem[]} cartId={cart.id} />
 				)}
 
 				<div className="min-w-full p-4 sm:min-w-[450px] sm:p-10">
