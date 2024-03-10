@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { ProductsList } from "@/ui/organisms/ProductList";
 import { getProductsByCollection } from "@/api/products/getProductsByCollection";
 
@@ -11,11 +12,13 @@ export type CollectionPageType = {
 export async function generateMetadata({
 	params,
 }: CollectionPageType): Promise<Metadata> {
+	const t = await getTranslations("Collection");
+
 	const { collection } = await getProductsByCollection(params.collectionName);
 
 	return {
-		title: collection.name.toLocaleUpperCase(),
-		description: collection.description,
+		title: t(collection.slug).toLocaleUpperCase(),
+		description: t(`${collection?.slug}-description`),
 	};
 }
 

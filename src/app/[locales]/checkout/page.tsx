@@ -1,6 +1,7 @@
 // TODO
 import { type Metadata } from "next";
 import { CornerDownLeft, Store } from "lucide-react";
+import { getLocale } from "next-intl/server";
 import { StripeForm } from "./stripeForm";
 import { getCartById } from "@/api/cart/getCartById";
 import { formatMoney } from "@/utils/intl";
@@ -19,6 +20,8 @@ export type CartPageType = {
 };
 
 export default async function CartPage({ searchParams }: CartPageType) {
+	const lang = await getLocale();
+
 	const cart = await getCartById();
 
 	const total = cart?.items.reduce(
@@ -36,19 +39,19 @@ export default async function CartPage({ searchParams }: CartPageType) {
 						<p className="flex w-full justify-between py-2 text-lg text-gray-500">
 							<span>Product price:</span>
 
-							<span>{formatMoney(Number(total))}</span>
+							<span>{formatMoney(Number(total), lang)}</span>
 						</p>
 
 						<p className="flex w-full justify-between py-2 text-lg text-gray-500">
 							<span>Delivery:</span>
 
-							<span>{formatMoney(Number(0))}</span>
+							<span>{formatMoney(Number(0), lang)}</span>
 						</p>
 
 						<p className="mt-4 flex w-full justify-between border-t py-2 text-lg">
 							<span>Total amount:</span>
 
-							<span>{formatMoney(Number(total))}</span>
+							<span>{formatMoney(Number(total), lang)}</span>
 						</p>
 					</div>
 

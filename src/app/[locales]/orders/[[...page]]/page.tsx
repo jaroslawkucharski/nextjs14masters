@@ -2,6 +2,7 @@ import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import Stripe from "stripe";
 import Link from "next/link";
+import { getLocale } from "next-intl/server";
 import { getOrdersList } from "@/api/orders/getOrdersList";
 import { formatDate, formatMoney } from "@/utils/intl";
 import { Button } from "@/ui/atoms/Button";
@@ -14,6 +15,8 @@ export type OrderPageType = {
 };
 
 export default async function OrderPage({ params }: OrderPageType) {
+	const lang = await getLocale();
+
 	const user = await currentUser();
 
 	if (!user) {
@@ -105,13 +108,15 @@ export default async function OrderPage({ params }: OrderPageType) {
 							<div className="min-w-[500px] sm:px-4">
 								<p className="text-sm">Date of order:</p>
 
-								<p className="font-bold">{formatDate(order.createdAt)}</p>
+								<p className="font-bold">{formatDate(order.createdAt, lang)}</p>
 							</div>
 
 							<div className="w-full">
 								<p className="text-sm">Total:</p>
 
-								<p className="font-bold">{formatMoney(order.totalAmount)}</p>
+								<p className="font-bold">
+									{formatMoney(order.totalAmount, lang)}
+								</p>
 							</div>
 
 							<div className="min-w-60">

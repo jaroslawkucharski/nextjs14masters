@@ -1,3 +1,4 @@
+import { getLocale, getTranslations } from "next-intl/server";
 import { Rating } from "./Rating";
 import { formatMoney } from "@/utils/intl";
 import { type ProductListItemFragment } from "@/gql/graphql";
@@ -6,28 +7,32 @@ type ProductListItemDescriptionProps = {
 	product: ProductListItemFragment;
 };
 
-export const ProductListItemDescription = ({
+export const ProductListItemDescription = async ({
 	product: { name, categories, price, rating },
-}: ProductListItemDescriptionProps) => (
-	<div className="flex flex-col p-4">
-		<h3 className="truncate text-sm font-semibold text-gray-950">
-			{name.toLocaleUpperCase()}
-		</h3>
+}: ProductListItemDescriptionProps) => {
+	const t = await getTranslations("Product");
+	const lang = await getLocale();
 
-		<p className="text-sm text-gray-500">
-			<span className="sr-only">Category:</span>
+	return (
+		<div className="flex flex-col p-4">
+			<h3 className="truncate text-sm font-semibold text-gray-950">
+				{name.toLocaleUpperCase()}
+			</h3>
 
-			{categories[0]?.name || ""}
-		</p>
+			<p className="text-sm text-gray-500">
+				<span className="sr-only">Category:</span>
+				{t(categories[0]?.name.toLocaleLowerCase()) || ""}
+			</p>
 
-		<p className="text-md flex w-full justify-between self-end pt-1 font-medium text-gray-900">
-			<span className="sr-only">Rating:</span>
+			<p className="text-md flex w-full justify-between self-end pt-1 font-medium text-gray-900">
+				<span className="sr-only">Rating:</span>
 
-			<Rating rating={rating} />
+				<Rating rating={rating} />
 
-			<span className="sr-only">Price:</span>
+				<span className="sr-only">Price:</span>
 
-			<span data-testid="product-price">{formatMoney(price)}</span>
-		</p>
-	</div>
-);
+				<span data-testid="product-price">{formatMoney(price, lang)}</span>
+			</p>
+		</div>
+	);
+};

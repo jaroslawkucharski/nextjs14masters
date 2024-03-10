@@ -2,6 +2,7 @@
 import { type Metadata } from "next";
 import { revalidateTag } from "next/cache";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { StatusButton } from "@/ui/molecules/StatusButton";
 import { getProductById } from "@/api/products/getProductById";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
@@ -15,7 +16,6 @@ import { type Review } from "@/gql/graphql";
 import { getCartById } from "@/api/cart/getCartById";
 import { changeProductQuantity } from "@/api/cart/changeProductQuantity";
 import { CATEGORY_AMOUNT_OF_PRODUCTS } from "@/constants";
-import { Rating } from "@/ui/atoms/Rating";
 
 export type ProductPageType = {
 	params: {
@@ -46,6 +46,8 @@ export async function generateMetadata({
 }
 
 export default async function ProductPage({ params }: ProductPageType) {
+	const t = await getTranslations("Product");
+
 	const productId = params.productId.split("-").pop() as string;
 
 	const product = await getProductById(productId);
@@ -113,11 +115,9 @@ export default async function ProductPage({ params }: ProductPageType) {
 					<div>
 						<ProductDescription product={product} />
 
-						<Rating rating={product.rating} />
-
 						<form action={addToCartAction}>
 							<StatusButton data-testid="add-to-cart-button">
-								Add to cart
+								{t("button-add-to-cart")}
 							</StatusButton>
 						</form>
 					</div>
@@ -128,7 +128,7 @@ export default async function ProductPage({ params }: ProductPageType) {
 					data-testid="related-products"
 				>
 					<h2 className="mb-6 text-center text-xl font-semibold sm:text-left md:text-left lg:text-left">
-						Related products
+						{t("related-products")}
 					</h2>
 
 					<ProductsList products={products} />

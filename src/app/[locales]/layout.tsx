@@ -3,6 +3,7 @@ import { Lato } from "next/font/google";
 import "./globals.css";
 import { type ReactNode } from "react";
 import { ClerkProvider } from "@clerk/nextjs";
+import { getTranslations } from "next-intl/server";
 import { Header } from "@/ui/organisms/Header";
 
 type RootLayoutType = {
@@ -16,9 +17,13 @@ const lato = Lato({
 	weight: ["100", "300", "400", "700", "900"],
 });
 
-export const metadata: Metadata = {
-	title: "Home",
-	description: "Home page.",
+export const metadata = async (): Promise<Metadata> => {
+	const t = await getTranslations("Home");
+
+	return {
+		title: t("title"),
+		description: t("description"),
+	};
 };
 
 export default function RootLayout({
@@ -27,7 +32,7 @@ export default function RootLayout({
 	params,
 }: Readonly<RootLayoutType>) {
 	return (
-		<ClerkProvider localization="pl-PL">
+		<ClerkProvider>
 			<html lang={params.locales}>
 				<body className={lato.className}>
 					<Header />

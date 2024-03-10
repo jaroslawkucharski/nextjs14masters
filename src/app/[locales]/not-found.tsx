@@ -8,7 +8,10 @@ export default async function NotFound() {
 
 			<p className="my-2 text-2xl">This page could not be found.</p>
 
-			<Link href="/" className="text-sm uppercase hover:underline">
+			<Link
+				href={{ pathname: "/" }}
+				className="text-sm uppercase hover:underline"
+			>
 				Return to the home page
 			</Link>
 		</div>

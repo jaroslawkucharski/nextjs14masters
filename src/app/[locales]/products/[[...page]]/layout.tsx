@@ -15,10 +15,14 @@ type ProductsLayoutType = {
 	};
 };
 
-export const metadata: Metadata = {
-	title: "All products",
-	description: "Products page.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+	const t = await getTranslations("Collection");
+
+	return {
+		title: t("title"),
+		description: t("description"),
+	};
+}
 
 export default async function ProductsLayout({
 	children,
@@ -35,7 +39,7 @@ export default async function ProductsLayout({
 
 	return (
 		<>
-			<PageHeading title={t("page")} sort />
+			<PageHeading title={t("title")} sort />
 
 			<section className="mx-auto max-w-md p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
 				{children}

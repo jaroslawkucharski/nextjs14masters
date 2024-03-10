@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { ProductsList } from "@/ui/organisms/ProductList";
 import { getProductsByCategory } from "@/api/products/getProductsByCategory";
 import { Pagination } from "@/ui/molecules/Pagination";
@@ -16,11 +17,13 @@ export type CategoryPageType = {
 export async function generateMetadata({
 	params,
 }: CategoryPageType): Promise<Metadata> {
+	const t = await getTranslations("Category");
+
 	const { category } = await getProductsByCategory(params.categoryName);
 
 	return {
-		title: category.name,
-		description: category.description,
+		title: t(category.slug),
+		description: t(`${category?.slug}-description`),
 	};
 }
 

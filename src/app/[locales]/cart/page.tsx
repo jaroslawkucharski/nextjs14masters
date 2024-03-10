@@ -4,6 +4,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import Stripe from "stripe";
 import { currentUser } from "@clerk/nextjs";
+import { getLocale } from "next-intl/server";
 import Success from "./success";
 import { getCartById } from "@/api/cart/getCartById";
 import { formatMoney } from "@/utils/intl";
@@ -23,6 +24,8 @@ export default async function CartPage({
 }: {
 	searchParams: { intent: string; payment_intent: string };
 }) {
+	const lang = await getLocale();
+
 	const cart = await getCartById();
 
 	if (searchParams.intent === "success") {
@@ -36,7 +39,10 @@ export default async function CartPage({
 
 				<p className="my-2 text-2xl">Your cart is empty.</p>
 
-				<Link href="/" className="text-sm uppercase hover:underline">
+				<Link
+					href={{ pathname: "/" }}
+					className="text-sm uppercase hover:underline"
+				>
 					Continue shopping
 				</Link>
 			</div>
@@ -107,19 +113,19 @@ export default async function CartPage({
 						<p className="flex w-full justify-between py-2 text-lg text-gray-500">
 							<span>Product price:</span>
 
-							<span>{formatMoney(Number(total))}</span>
+							<span>{formatMoney(Number(total), lang)}</span>
 						</p>
 
 						<p className="flex w-full justify-between py-2 text-lg text-gray-500">
 							<span>Delivery:</span>
 
-							<span>{formatMoney(Number(0))}</span>
+							<span>{formatMoney(Number(0), lang)}</span>
 						</p>
 
 						<p className="mt-4 flex w-full justify-between border-t py-2 text-lg">
 							<span>Total amount:</span>
 
-							<span>{formatMoney(Number(total))}</span>
+							<span>{formatMoney(Number(total), lang)}</span>
 						</p>
 					</div>
 
