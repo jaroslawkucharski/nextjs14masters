@@ -25,6 +25,9 @@
 	"word-category": "Category",
 	"word-quantity": "Quantity: {quantity}",
 	"word-remove": "Remove",
+	"word-orders": "Orders",
+	"word-settings": "Settings",
+	"word-log-out": "Log out",
 	"Home": {
 		"title": "Home",
 		"description": "Welcome to the NextShop online store."

@@ -25,6 +25,9 @@
 	"word-category": "Kategoria",
 	"word-quantity": "Ilość: {quantity}",
 	"word-remove": "Usuń",
+	"word-orders": "Zamówienia",
+	"word-settings": "Ustawienia",
+	"word-log-out": "Wyloguj",
 	"Home": {
 		"title": "Strona główna",
 		"description": "Witaj w sklepie internetowym NextShop."
