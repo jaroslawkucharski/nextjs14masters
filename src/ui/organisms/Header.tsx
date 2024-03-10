@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { SignInButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import { getLocale, getTranslations } from "next-intl/server";
-import { Globe } from "lucide-react";
+import { UserMenu } from "../molecules/UserMenu";
+import { LanguageSwitcher } from "../atoms/LanguageSwitcher";
 import { Searcher } from "@/ui/atoms/Searcher";
 import { Cart } from "@/ui/atoms/Cart";
 import { Logo } from "@/ui/atoms/Logo";
@@ -42,22 +43,23 @@ export const Header = async () => {
 
 			<Navigation navigation={navigation} />
 
-			<div className="flex flex-1 flex-col justify-end gap-8 lg:flex-row">
+			<div className="flex flex-1 flex-col items-center justify-end gap-8 lg:flex-row">
 				<Suspense>
 					<Searcher i18n={{ placecholder: t("word-search") }} />
 				</Suspense>
 
-				<Link
-					href={`/${lang === "pl" ? "en" : "pl"}`}
-					className="flex items-center gap-1 self-center font-bold"
-				>
-					{lang.toLocaleUpperCase()} <Globe className="h-5 w-5" />
-				</Link>
+				<LanguageSwitcher lang={lang} />
 
 				<Cart />
 
 				<SignedIn>
-					<UserButton userProfileMode="navigation" afterSignOutUrl="/" />
+					<UserMenu
+						i18n={{
+							orders: t("word-orders"),
+							settings: t("word-settings"),
+							logOut: t("word-log-out"),
+						}}
+					/>
 				</SignedIn>
 
 				<SignedOut>
