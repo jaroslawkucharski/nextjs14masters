@@ -16,7 +16,7 @@ type ProductsLayoutType = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-	const t = await getTranslations("Collection");
+	const t = await getTranslations("Products");
 
 	return {
 		title: t("title"),
