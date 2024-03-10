@@ -1,8 +1,8 @@
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getLocale } from "next-intl/server";
+// import { getLocale } from "next-intl/server";
 import { getOrderById } from "@/api/orders/getOrderById";
-import { formatDate, formatMoney } from "@/utils/intl";
+// import { formatDate, formatMoney } from "@/utils/intl";
 
 export type OrderPageType = {
 	params: {
@@ -17,7 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function OrderPage({ params }: OrderPageType) {
-	const lang = await getLocale();
+	// const lang = await getLocale();
 
 	const orderId = params.orderId;
 
@@ -82,7 +82,7 @@ export default async function OrderPage({ params }: OrderPageType) {
 								<p className="text-sm">Date of order:</p>
 
 								<p className="font-bold">
-									{formatDate(order?.createdAt, lang)}
+									{/* {formatDate(order?.createdAt, lang)} */}
 								</p>
 							</div>
 
@@ -90,7 +90,7 @@ export default async function OrderPage({ params }: OrderPageType) {
 								<p className="text-sm">Total:</p>
 
 								<p className="font-bold">
-									{formatMoney(order?.totalAmount, lang)}
+									{/* {formatMoney(order?.totalAmount, lang)} */}
 								</p>
 							</div>
 						</div>
@@ -103,7 +103,7 @@ export default async function OrderPage({ params }: OrderPageType) {
 
 				{order?.id}
 
-				{order?.lines.map((line) => <p>{line.productName}</p>)}
+				{/* {order?.lines.map((line) => <p>{line.productName}</p>)} */}
 			</section>
 		</>
 	);
