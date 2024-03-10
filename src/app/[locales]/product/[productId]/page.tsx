@@ -169,7 +169,6 @@ export default async function ProductPage({ params }: ProductPageType) {
 						<ReviewList
 							reviews={product.reviews as Review[]}
 							productId={productId}
-							email={email}
 						/>
 					</div>
 				</section>

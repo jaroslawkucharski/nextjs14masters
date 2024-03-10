@@ -4,15 +4,12 @@ import { ReviewListItem } from "@/ui/molecules/ReviewListItem";
 type ReviewListProps = {
 	reviews: Review[];
 	productId: string;
-	email?: string;
 };
 
-export const ReviewList = async ({ reviews, email }: ReviewListProps) => (
+export const ReviewList = async ({ reviews }: ReviewListProps) => (
 	<div>
 		{reviews
-			.map((review) => (
-				<ReviewListItem key={review.id} review={review} email={email} />
-			))
+			.map((review) => <ReviewListItem key={review.id} review={review} />)
 			.reverse()}
 	</div>
 );
