@@ -22,18 +22,17 @@
 		"button-add-to-cart": "Add to cart",
 		"related-products": "Related products",
 		"reviews": "Reviews",
-		"review-form": {
-			"name": "Name",
-			"name-placeholder": "Enter your name",
-			"email": "Email",
-			"email-placeholder": "Your email adress",
-			"headline": "Title",
-			"headline-placeholder": "Review title",
-			"content": "Description",
-			"content-placeholder": "Write your review here",
-			"rating": "Rating",
-			"button": "Submit review"
-		}
+		"name": "Name",
+		"name-placeholder": "Enter your name",
+		"email": "Email",
+		"email-placeholder": "Your email adress",
+		"headline": "Title",
+		"headline-placeholder": "Review title",
+		"content": "Description",
+		"content-placeholder": "Write your review here",
+		"rating": "Rating",
+		"button": "Submit review",
+		"account-verified": "Account verified"
 	},
 	"Products": {
 		"title": "All products",
