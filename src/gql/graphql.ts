@@ -387,14 +387,14 @@ export type ProductsGetByCategorySlugQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetByCategorySlugQuery = { category?: { name: string, description: string, products: Array<{ id: string, name: string, description: string, price: number, rating?: number | null, slug: string, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ createdAt: unknown, updatedAt: unknown, id: string, author: string, title: string, description: string, email: string, rating: number }> }> } | null };
+export type ProductsGetByCategorySlugQuery = { category?: { name: string, description: string, slug: string, products: Array<{ id: string, name: string, description: string, price: number, rating?: number | null, slug: string, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ createdAt: unknown, updatedAt: unknown, id: string, author: string, title: string, description: string, email: string, rating: number }> }> } | null };
 
 export type ProductsGetByCollectionSlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
 
 
-export type ProductsGetByCollectionSlugQuery = { collection?: { name: string, description: string, products: Array<{ id: string, name: string, description: string, price: number, rating?: number | null, slug: string, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ createdAt: unknown, updatedAt: unknown, id: string, author: string, title: string, description: string, email: string, rating: number }> }> } | null };
+export type ProductsGetByCollectionSlugQuery = { collection?: { name: string, description: string, slug: string, products: Array<{ id: string, name: string, description: string, price: number, rating?: number | null, slug: string, categories: Array<{ name: string }>, images: Array<{ url: string }>, reviews: Array<{ createdAt: unknown, updatedAt: unknown, id: string, author: string, title: string, description: string, email: string, rating: number }> }> } | null };
 
 export type ProductsGetListQueryVariables = Exact<{
   take: Scalars['Int']['input'];
@@ -669,6 +669,7 @@ export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
   category(slug: $slug) {
     name
     description
+    slug
     products {
       ...ProductListItem
     }
@@ -703,6 +704,7 @@ export const ProductsGetByCollectionSlugDocument = new TypedDocumentString(`
   collection(slug: $slug) {
     name
     description
+    slug
     products {
       ...ProductListItem
     }

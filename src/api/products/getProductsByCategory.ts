@@ -10,6 +10,7 @@ type ProductCategoryResponse = {
 	category: {
 		name: string;
 		description: string;
+		slug: string;
 	};
 };
 
@@ -27,6 +28,7 @@ export const getProductsByCategory = async (
 	const category = {
 		name: graphqlResponse.category?.name || "",
 		description: graphqlResponse.category?.description || "",
+		slug: graphqlResponse.category?.slug || "",
 	};
 
 	if (!products) {
