@@ -1,36 +1,33 @@
 {
-	"Header": {
-		"home": "Strona główna",
-		"all": "Wszystkie",
-		"t-shirts": "Koszulki",
-		"hoodies": "Bluzy",
-		"accessories": "Akcesoria",
-		"cart": "Koszyk",
-		"search": "Szukaj",
-		"signin": "Zaloguj się"
-	},
+	"word-home": "Strona główna",
+	"word-all-products": "Wszystkie",
+	"word-t-shirts": "Koszulki",
+	"word-hoodies": "Bluzy",
+	"word-accessories": "Akcesoria",
+	"word-cart": "Koszyk",
+	"word-search": "Szukaj",
+	"word-add-to-cart": "Dodaj do koszyka",
+	"word-related-products": "Podobne produkty",
+	"word-reviews": "Opinie o produkcie",
+	"word-reviews-quantity": "Liczba recenzji: {quantity}",
+	"word-name": "Imię",
+	"word-name-placeholder": "Wprowadź swoje imię",
+	"word-email": "Email",
+	"word-email-placeholder": "Twój adres email",
+	"word-headline": "Tytuł",
+	"word-headline-placeholder": "Tytuł recenzji",
+	"word-content": "Opis",
+	"word-content-placeholder": "Napisz tutaj swoją recenzję",
+	"word-rating": "Ocena",
+	"word-button": "Dodaj recenzję",
+	"word-price": "Cena",
+	"word-description": "Opis",
+	"word-category": "Kategoria",
+	"word-quantity": "Ilość: {quantity}",
+	"word-remove": "Usuń",
 	"Home": {
 		"title": "Strona główna",
 		"description": "Witaj w sklepie internetowym NextShop."
-	},
-	"Product": {
-		"t-shirts": "Koszulki",
-		"hoodies": "Bluzy",
-		"accessories": "Akcesoria",
-		"button-add-to-cart": "Dodaj do koszyka",
-		"related-products": "Podobne produkty",
-		"reviews": "Opinie",
-		"name": "Imię",
-		"name-placeholder": "Wprowadź swoje imię",
-		"email": "Email",
-		"email-placeholder": "Twój adres email",
-		"headline": "Tytuł",
-		"headline-placeholder": "Tytuł recenzji",
-		"content": "Opis",
-		"content-placeholder": "Napisz tutaj swoją recenzję",
-		"rating": "Ocena",
-		"button": "Dodaj recenzję",
-		"account-verified": "Konto zweryfikowane"
 	},
 	"Products": {
 		"title": "Wszyskie produkty",
@@ -60,5 +57,37 @@
 		"price-desc": "Cena: od najwyższej do najniższej",
 		"rating-asc": "Ocena: od najniższej do najwyższej",
 		"rating-desc": "Ocena: od najwyższej do najniższej"
+	},
+	"NotFound": {
+		"title": "Strona, której szukasz nie istnieje.",
+		"back": "Wróć na stronę główną"
+	},
+	"EmptyCart": {
+		"title": "Twój koszyk jest pusty.",
+		"back": "Kontynuuj zakupy"
+	},
+	"SuccessCart": {
+		"title": "Dziękujemy za zakupy w naszym sklepie. Twoje zamówienie zostało opłacone i jest w trakcie przygotowania do wysyłki.",
+		"order": "Numer Twojego zamówienia:",
+		"back": "Zobacz swoje zamówienia"
+	},
+	"Cart": {
+		"title": "Twój koszyk",
+		"description": "Sprawdź, co masz w swoim koszyku.",
+		"product-price": "Cena produktów:",
+		"delivery": "Dostawa:",
+		"total": "Razem:",
+		"checkout": "Zamów",
+		"free-returns": "Darmowy zwrot",
+		"free-returns-30-days": "Darmowy zwrot w ciągu 30 dni",
+		"pay-now": "Zapłać teraz"
+	},
+	"Checkout": {
+		"title": "Zamówienie",
+		"description": "Opłać swoje zamówienie."
+	},
+	"Orders": {
+		"title": "Twoje zamówienia",
+		"description": "Sprawdź status swoich zamówień."
 	}
 }

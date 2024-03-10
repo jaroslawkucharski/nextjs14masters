@@ -1,38 +1,33 @@
 {
-	"Header": {
-		"home": "Home",
-		"all": "All",
-		"t-shirts": "T-Shirts",
-		"hoodies": "Hoodies",
-		"accessories": "Accessories",
-		"cart": "Cart",
-		"search": "Search",
-		"signin": "Sign In"
-	},
+	"word-home": "Home",
+	"word-all-products": "All",
+	"word-t-shirts": "T-Shirts",
+	"word-hoodies": "Hoodies",
+	"word-accessories": "Accessories",
+	"word-cart": "Cart",
+	"word-search": "Search",
+	"word-add-to-cart": "Add to cart",
+	"word-related-products": "Related products",
+	"word-reviews": "Product reviews",
+	"word-reviews-quantity": "Reviews quantity: {quantity}",
+	"word-name": "Name",
+	"word-name-placeholder": "Enter your name",
+	"word-email": "Email",
+	"word-email-placeholder": "Your email adress",
+	"word-headline": "Title",
+	"word-headline-placeholder": "Review title",
+	"word-content": "Description",
+	"word-content-placeholder": "Write your review here",
+	"word-rating": "Rating",
+	"word-button": "Submit review",
+	"word-price": "Price",
+	"word-description": "Description",
+	"word-category": "Category",
+	"word-quantity": "Quantity: {quantity}",
+	"word-remove": "Remove",
 	"Home": {
 		"title": "Home",
 		"description": "Welcome to the NextShop online store."
-	},
-	"Product": {
-		"title": "Product",
-		"description": "Welcome to the product page",
-		"t-shirts": "T-Shirts",
-		"hoodies": "Hoodies",
-		"accessories": "Accessories",
-		"button-add-to-cart": "Add to cart",
-		"related-products": "Related products",
-		"reviews": "Reviews",
-		"name": "Name",
-		"name-placeholder": "Enter your name",
-		"email": "Email",
-		"email-placeholder": "Your email adress",
-		"headline": "Title",
-		"headline-placeholder": "Review title",
-		"content": "Description",
-		"content-placeholder": "Write your review here",
-		"rating": "Rating",
-		"button": "Submit review",
-		"account-verified": "Account verified"
 	},
 	"Products": {
 		"title": "All products",
@@ -62,5 +57,37 @@
 		"price-desc": "Price: High to Low",
 		"rating-asc": "Rating: Low to High",
 		"rating-desc": "Date: High to Low"
+	},
+	"NotFound": {
+		"title": "This page could not be found.",
+		"back": "Return to"
+	},
+	"EmptyCart": {
+		"title": "Your cart is empty.",
+		"back": "Continue shopping"
+	},
+	"SuccessCart": {
+		"title": "Thank you for shopping in our store. Your order has been paid and is being prepared for shipment.",
+		"order": "Your order number:",
+		"back": "Continue shopping"
+	},
+	"Cart": {
+		"title": "Your cart",
+		"description": "Check what you have in your cart.",
+		"product-price": "Product price:",
+		"delivery": "Delivery:",
+		"total": "Total:",
+		"checkout": "Checkout",
+		"free-returns": "Free returns always",
+		"free-returns-30-days": "Free returns within 30 days",
+		"pay-now": "Pay now"
+	},
+	"Checkout": {
+		"title": "Checkout",
+		"description": "Pay for your order."
+	},
+	"Orders": {
+		"title": "Your orders",
+		"description": "Check your orders."
 	}
 }
