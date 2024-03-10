@@ -1,10 +1,11 @@
 import { authMiddleware } from "@clerk/nextjs";
 import createMiddleware from "next-intl/middleware";
-import { defaultLocale, locales } from "@/navigation";
+import { defaultLocale, localePrefix, locales } from "@/navigation";
 
 const intlMiddleware = createMiddleware({
 	locales,
 	defaultLocale,
+	localePrefix,
 });
 
 export default authMiddleware({
@@ -31,12 +32,12 @@ export default authMiddleware({
 
 		"/sign-in",
 		"/sign-up",
-		// "/sign-in/(.*)",
-		// "/sign-up/(.*)",
+		"/sign-in/(.*)",
+		"/sign-up/(.*)",
 		"/:locale/sign-in",
 		"/:locale/sign-up",
-		// "/:locale/sign-in/(.*)",
-		// "/:locale/sign-up/(.*)",
+		"/:locale/sign-in/(.*)",
+		"/:locale/sign-up/(.*)",
 	],
 });
 
