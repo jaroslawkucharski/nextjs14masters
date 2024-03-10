@@ -3,6 +3,9 @@ import { type Metadata } from "next";
 import { revalidateTag } from "next/cache";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { Suspense } from "react";
+import { currentUser } from "@clerk/nextjs";
+import { ReviewForm } from "./ReviewForm";
 import { StatusButton } from "@/ui/molecules/StatusButton";
 import { getProductById } from "@/api/products/getProductById";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
@@ -47,6 +50,10 @@ export async function generateMetadata({
 
 export default async function ProductPage({ params }: ProductPageType) {
 	const t = await getTranslations("Product");
+
+	const user = await currentUser();
+
+	const email = user?.emailAddresses[0]?.emailAddress;
 
 	const productId = params.productId.split("-").pop() as string;
 
@@ -134,10 +141,38 @@ export default async function ProductPage({ params }: ProductPageType) {
 					<ProductsList products={products} />
 				</section>
 
-				<ReviewList
-					reviews={product.reviews as Review[]}
-					productId={productId}
-				/>
+				<section className="mx-auto max-w-md sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
+					<h2 className="text-center text-xl font-semibold sm:text-left md:text-left lg:text-left">
+						{t("reviews")}
+					</h2>
+
+					<div className="mx-auto flex max-w-md flex-col gap-12 overflow-x-auto p-4 sm:max-w-2xl sm:p-12 sm:py-8 md:max-w-4xl lg:max-w-7xl xl:flex-row">
+						<Suspense>
+							<ReviewForm
+								productId={productId}
+								i18n={{
+									name: t("name"),
+									namePlaceholder: t("name-placeholder"),
+									email: t("email"),
+									emailPlaceholder: t("email-placeholder"),
+									headline: t("headline"),
+									headlinePlaceholder: t("headline-placeholder"),
+									content: t("content"),
+									contentPlaceholder: t("content-placeholder"),
+									rating: t("rating"),
+									button: t("button"),
+								}}
+								email={email}
+							/>
+						</Suspense>
+
+						<ReviewList
+							reviews={product.reviews as Review[]}
+							productId={productId}
+							email={email}
+						/>
+					</div>
+				</section>
 			</section>
 		</>
 	);
