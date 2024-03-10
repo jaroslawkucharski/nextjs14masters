@@ -10,7 +10,7 @@ type ProductListItemDescriptionProps = {
 export const ProductListItemDescription = async ({
 	product: { name, categories, price, rating },
 }: ProductListItemDescriptionProps) => {
-	const t = await getTranslations("Product");
+	const t = await getTranslations();
 	const lang = await getLocale();
 
 	return (
@@ -21,7 +21,7 @@ export const ProductListItemDescription = async ({
 
 			<p className="text-sm text-gray-500">
 				<span className="sr-only">{t("word-category")}:</span>
-				{t(categories[0]?.name.toLocaleLowerCase()) || ""}
+				{t(`word-${categories[0]?.name.toLocaleLowerCase()}`) || ""}
 			</p>
 
 			<p className="text-md flex w-full justify-between self-end pt-1 font-medium text-gray-900">
