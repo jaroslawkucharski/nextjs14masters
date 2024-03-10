@@ -2,7 +2,7 @@
 
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { CircleUserRound } from "lucide-react";
+import { CircleUserRound, LogOut, Package, Settings } from "lucide-react";
 import Image from "next/image";
 import { useClerk, useUser } from "@clerk/nextjs";
 import Link from "next/link";
@@ -80,6 +80,8 @@ export const UserMenu = ({ i18n }: UserMenuType) => {
 								href="/orders"
 								className="flex w-full cursor-pointer items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100"
 							>
+								<Package className="h-4 w-4 text-gray-600" />
+
 								{i18n.orders}
 							</Link>
 						</Menu.Item>
@@ -89,6 +91,8 @@ export const UserMenu = ({ i18n }: UserMenuType) => {
 								href="/profile"
 								className="flex w-full cursor-pointer items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100"
 							>
+								<Settings className="h-4 w-4 text-gray-600" />
+
 								{i18n.settings}
 							</Link>
 						</Menu.Item>
@@ -100,6 +104,8 @@ export const UserMenu = ({ i18n }: UserMenuType) => {
 								onClick={handleSignOut}
 								className="flex w-full cursor-pointer items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100"
 							>
+								<LogOut className="h-4 w-4 text-gray-600" />
+
 								{i18n.logOut}
 							</button>
 						</Menu.Item>
