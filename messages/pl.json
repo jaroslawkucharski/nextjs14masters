@@ -52,5 +52,14 @@
 		"hoodies-description": "Modne bluzy na każdą okazję!",
 		"accessories": "Akcesoria",
 		"accessories-description": "Najlepsze akcesoria do każdej stylizacji."
+	},
+	"Sort": {
+		"sortby": "sortuj według",
+		"name-asc": "Nazwa A-Z",
+		"name-desc": "Nazwa Z-A",
+		"price-asc": "Cena: od najniższej do najwyższej",
+		"price-desc": "Cena: od najwyższej do najniższej",
+		"rating-asc": "Ocena: od najniższej do najwyższej",
+		"rating-desc": "Ocena: od najwyższej do najniższej"
 	}
 }

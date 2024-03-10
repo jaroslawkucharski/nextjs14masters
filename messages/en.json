@@ -54,5 +54,14 @@
 		"hoodies-description": "Fashionable sweatshirts for every occasion!",
 		"accessories": "Accessories",
 		"accessories-description": "The best accessories for every styling."
+	},
+	"Sort": {
+		"sortby": "sort by",
+		"name-asc": "Name A-Z",
+		"name-desc": "Name Z-A",
+		"price-asc": "Price: Low to High",
+		"price-desc": "Price: High to Low",
+		"rating-asc": "Rating: Low to High",
+		"rating-desc": "Date: High to Low"
 	}
 }
