@@ -8,6 +8,7 @@ import { Header } from "@/ui/organisms/Header";
 type RootLayoutType = {
 	children: ReactNode;
 	modal: ReactNode;
+	params: { locales: string };
 };
 
 const lato = Lato({
@@ -23,10 +24,11 @@ export const metadata: Metadata = {
 export default function RootLayout({
 	children,
 	modal,
+	params,
 }: Readonly<RootLayoutType>) {
 	return (
-		<ClerkProvider>
-			<html lang="en">
+		<ClerkProvider localization="pl-PL">
+			<html lang={params.locales}>
 				<body className={lato.className}>
 					<Header />
 
