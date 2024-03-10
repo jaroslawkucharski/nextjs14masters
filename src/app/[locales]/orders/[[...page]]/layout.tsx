@@ -1,11 +1,12 @@
+// TODO
 import { type Metadata } from "next";
 import { type ReactNode } from "react";
-import { notFound, redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs";
 import { Pagination } from "@/ui/molecules/Pagination";
-import { DEFAULT_AMOUNT_OF_PRODUCTS } from "@/constants";
+// import { DEFAULT_AMOUNT_OF_PRODUCTS } from "@/constants";
 import { PageHeading } from "@/ui/molecules/PageHeading";
-import { getNumOfPages, returnProductsNotFound } from "@/helpers";
+// import { getNumOfPages, returnProductsNotFound } from "@/helpers";
 import { getOrdersList } from "@/api/orders/getOrdersList";
 
 type ProductsLayoutType = {
@@ -37,11 +38,11 @@ export default async function ProductsLayout({
 	}
 
 	const { numOfProducts } = await getOrdersList({ email });
-	const numOfPages = getNumOfPages(numOfProducts, DEFAULT_AMOUNT_OF_PRODUCTS);
+	// const numOfPages = getNumOfPages(numOfProducts, DEFAULT_AMOUNT_OF_PRODUCTS);
 
-	if (returnProductsNotFound(params.page, numOfPages)) {
-		return notFound();
-	}
+	// if (returnProductsNotFound(params.page, numOfPages)) {
+	// 	return notFound();
+	// }
 
 	return (
 		<>
