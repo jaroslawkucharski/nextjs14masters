@@ -1,14 +1,17 @@
 import Link from "next/link";
 import { Suspense } from "react";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { getTranslations } from "next-intl/server";
-import { Searcher } from "../atoms/Searcher";
-import { Cart } from "../atoms/Cart";
+import { getLocale, getTranslations } from "next-intl/server";
+import { Globe } from "lucide-react";
+import { Searcher } from "@/ui/atoms/Searcher";
+import { Cart } from "@/ui/atoms/Cart";
 import { Logo } from "@/ui/atoms/Logo";
 import { Navigation } from "@/ui/molecules/Navigation";
 import { getCategoryList } from "@/api/categories/getCategoryList";
 
 export const Header = async () => {
+	const lang = await getLocale();
+
 	const t = await getTranslations("Header");
 
 	const categories = await getCategoryList({});
@@ -43,6 +46,13 @@ export const Header = async () => {
 				<Suspense>
 					<Searcher i18n={{ placecholder: t("search") }} />
 				</Suspense>
+
+				<Link
+					href={`/${lang === "pl" ? "en" : "pl"}`}
+					className="flex items-center gap-1 self-center font-bold"
+				>
+					{lang.toLocaleUpperCase()} <Globe className="h-5 w-5" />
+				</Link>
 
 				<Cart />
 
