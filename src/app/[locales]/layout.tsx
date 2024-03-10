@@ -4,6 +4,7 @@ import "./globals.css";
 import { type ReactNode } from "react";
 import { ClerkProvider } from "@clerk/nextjs";
 import { getTranslations } from "next-intl/server";
+import { plPL, enUS } from "@clerk/localizations";
 import { Header } from "@/ui/organisms/Header";
 
 type RootLayoutType = {
@@ -32,7 +33,7 @@ export default function RootLayout({
 	params,
 }: Readonly<RootLayoutType>) {
 	return (
-		<ClerkProvider>
+		<ClerkProvider localization={params.locales === "pl" ? plPL : enUS}>
 			<html lang={params.locales}>
 				<body className={lato.className}>
 					<Header />
