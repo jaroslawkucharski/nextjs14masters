@@ -89,5 +89,13 @@
 	"Orders": {
 		"title": "Twoje zamówienia",
 		"description": "Sprawdź status swoich zamówień."
+	},
+	"Search": {
+		"title": "Wyniki wyszukiwania",
+		"description": "Wyniki wyszukiwania.",
+		"results": "Wyniki wyszukiwania dla: ' {query} '",
+		"found-results": "Znaleziono {results} produktów",
+		"no-results": "Nie znaleźliśmy tego, czego szukałeś",
+		"back": "Wróć do zakupów"
 	}
 }

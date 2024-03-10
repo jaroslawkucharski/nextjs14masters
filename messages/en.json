@@ -89,5 +89,13 @@
 	"Orders": {
 		"title": "Your orders",
 		"description": "Check your orders."
+	},
+	"Search": {
+		"title": "Search",
+		"description": "Search for products in our store.",
+		"results": "Search results for ' {query} '",
+		"found-results": "Found {results} products.",
+		"no-results": "We could not find what you were looking for",
+		"back": "Back to shopping"
 	}
 }
