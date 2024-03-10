@@ -44,7 +44,10 @@ export default async function SearchPage({ searchParams }: SearchPageType) {
 							We could not find what you were looking for
 						</p>
 
-						<Link href="/" className="text-sm uppercase hover:underline">
+						<Link
+							href={{ pathname: "/" }}
+							className="text-sm uppercase hover:underline"
+						>
 							Back to shopping
 						</Link>
 					</div>

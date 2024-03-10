@@ -23,8 +23,7 @@ export const Searcher = ({ i18n }: SearcherProps) => {
 			const params = new URLSearchParams(searchParams);
 
 			if (!value) {
-				// TODO
-				return router.replace("/");
+				return router.replace("/products");
 			}
 
 			if (value && value.length > 1) {
