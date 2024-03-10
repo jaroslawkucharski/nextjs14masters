@@ -11,11 +11,15 @@ type RemoveProductFromCartProps = {
 	cartId: string;
 	productId: string;
 	itemsLength: number;
+	i18n: {
+		remove: string;
+	};
 };
 
 export const RemoveProductFromCart = ({
 	productId,
 	itemsLength,
+	i18n,
 }: RemoveProductFromCartProps) => {
 	const router = useRouter();
 	const [isPending, startTransition] = useTransition();
@@ -38,7 +42,7 @@ export const RemoveProductFromCart = ({
 			onClick={handleremoveProductFromCard}
 			disabled={isPending}
 		>
-			<Trash2 className="h-3 w-3" /> Remove
+			<Trash2 className="h-3 w-3" /> {i18n.remove}
 		</Button>
 	);
 };

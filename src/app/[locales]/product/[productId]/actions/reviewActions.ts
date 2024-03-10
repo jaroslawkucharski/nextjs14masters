@@ -1,6 +1,6 @@
 "use server";
 
-import { type FormSchemaType, formSchema } from "../formSchema";
+import { type FormSchemaType, formSchema } from "../ReviewForm/formSchema";
 import { addReviewToProduct } from "@/api/products/addReviewToProduct";
 
 export const formAction = async (formData: FormSchemaType) => {

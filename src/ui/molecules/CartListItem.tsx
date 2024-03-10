@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { ProductCounter } from "./ProductCounter";
 import { RemoveProductFromCart } from "./RemoveProductFromCart";
 import { type Cart } from "@/gql/graphql";
@@ -17,6 +17,7 @@ export const CartListItem = async ({
 	isCheckout?: boolean;
 	itemsLength: number;
 }) => {
+	const t = await getTranslations();
 	const lang = await getLocale();
 
 	return (
@@ -50,7 +51,9 @@ export const CartListItem = async ({
 
 				<div className="pr-8 text-sm text-gray-600">
 					{isCheckout ? (
-						<p className="text-lg">Quantity: {item.quantity}</p>
+						<p className="text-lg">
+							{t("word-quantity", { quantity: item.quantity })}
+						</p>
 					) : (
 						<ProductCounter
 							id={cartId}
@@ -67,6 +70,9 @@ export const CartListItem = async ({
 						cartId={cartId}
 						productId={item.product.id}
 						itemsLength={itemsLength}
+						i18n={{
+							remove: t("word-remove"),
+						}}
 					/>
 				)}
 

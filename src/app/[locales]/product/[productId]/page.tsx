@@ -19,6 +19,7 @@ import { type Review } from "@/gql/graphql";
 import { getCartById } from "@/api/cart/getCartById";
 import { changeProductQuantity } from "@/api/cart/changeProductQuantity";
 import { CATEGORY_AMOUNT_OF_PRODUCTS } from "@/constants";
+import { Rating } from "@/ui/atoms/Rating";
 
 export type ProductPageType = {
 	params: {
@@ -49,11 +50,12 @@ export async function generateMetadata({
 }
 
 export default async function ProductPage({ params }: ProductPageType) {
-	const t = await getTranslations("Product");
+	const t = await getTranslations();
 
 	const user = await currentUser();
 
-	const email = user?.emailAddresses[0]?.emailAddress;
+	const email = user?.emailAddresses[0]?.emailAddress ?? "";
+	const name = user?.firstName ?? "";
 
 	const productId = params.productId.split("-").pop() as string;
 
@@ -124,45 +126,58 @@ export default async function ProductPage({ params }: ProductPageType) {
 
 						<form action={addToCartAction}>
 							<StatusButton data-testid="add-to-cart-button">
-								{t("button-add-to-cart")}
+								{t("word-add-to-cart")}
 							</StatusButton>
 						</form>
 					</div>
 				</article>
 
+				<hr />
+
 				<section
-					className="mx-auto max-w-md sm:max-w-2xl md:max-w-4xl lg:max-w-7xl"
+					className="mx-auto max-w-md py-6 sm:max-w-2xl md:max-w-4xl lg:max-w-7xl"
 					data-testid="related-products"
 				>
 					<h2 className="mb-6 text-center text-xl font-semibold sm:text-left md:text-left lg:text-left">
-						{t("related-products")}
+						{t("word-related-products")}
 					</h2>
 
 					<ProductsList products={products} />
 				</section>
 
-				<section className="mx-auto max-w-md sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
-					<h2 className="text-center text-xl font-semibold sm:text-left md:text-left lg:text-left">
-						{t("reviews")}
+				<hr />
+
+				<section className="mx-auto max-w-md sm:max-w-2xl sm:py-6 md:max-w-4xl lg:max-w-7xl">
+					<h2 className="flex items-center gap-2 text-center text-xl font-semibold sm:text-left md:text-left lg:text-left">
+						{t("word-reviews")}
 					</h2>
+
+					<div className="mt-4 flex flex-col items-center justify-center gap-2 bg-slate-100 p-4 text-center">
+						<Rating rating={product.rating} />
+
+						<p className="flex items-center justify-center text-sm">
+							{t("word-reviews-quantity", { quantity: product.reviews.length })}
+						</p>
+					</div>
 
 					<div className="mx-auto flex max-w-md flex-col gap-12 overflow-x-auto p-4 sm:max-w-2xl sm:p-12 sm:py-8 md:max-w-4xl lg:max-w-7xl xl:flex-row">
 						<Suspense>
 							<ReviewForm
 								productId={productId}
 								i18n={{
-									name: t("name"),
-									namePlaceholder: t("name-placeholder"),
-									email: t("email"),
-									emailPlaceholder: t("email-placeholder"),
-									headline: t("headline"),
-									headlinePlaceholder: t("headline-placeholder"),
-									content: t("content"),
-									contentPlaceholder: t("content-placeholder"),
-									rating: t("rating"),
-									button: t("button"),
+									name: t("word-name"),
+									namePlaceholder: t("word-name-placeholder"),
+									email: t("word-email"),
+									emailPlaceholder: t("word-email-placeholder"),
+									headline: t("word-headline"),
+									headlinePlaceholder: t("word-headline-placeholder"),
+									content: t("word-content"),
+									contentPlaceholder: t("word-content-placeholder"),
+									rating: t("word-rating"),
+									button: t("word-button"),
 								}}
 								email={email}
+								name={name}
 							/>
 						</Suspense>
 

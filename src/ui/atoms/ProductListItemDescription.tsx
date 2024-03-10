@@ -20,16 +20,16 @@ export const ProductListItemDescription = async ({
 			</h3>
 
 			<p className="text-sm text-gray-500">
-				<span className="sr-only">Category:</span>
+				<span className="sr-only">{t("word-category")}:</span>
 				{t(categories[0]?.name.toLocaleLowerCase()) || ""}
 			</p>
 
 			<p className="text-md flex w-full justify-between self-end pt-1 font-medium text-gray-900">
-				<span className="sr-only">Rating:</span>
+				<span className="sr-only">{t("word-rating")}:</span>
 
 				<Rating rating={rating} />
 
-				<span className="sr-only">Price:</span>
+				<span className="sr-only">{t("word-price")}:</span>
 
 				<span data-testid="product-price">{formatMoney(price, lang)}</span>
 			</p>

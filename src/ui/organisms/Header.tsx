@@ -12,23 +12,23 @@ import { getCategoryList } from "@/api/categories/getCategoryList";
 export const Header = async () => {
 	const lang = await getLocale();
 
-	const t = await getTranslations("Header");
+	const t = await getTranslations();
 
 	const categories = await getCategoryList({});
 
 	const navigation = [
 		{
-			label: t("home"),
+			label: t("word-home"),
 			href: "/",
 			exact: true,
 		},
 		{
-			label: t("all"),
+			label: t("word-all-products"),
 			href: "/products",
 		},
 		...categories
 			.map(({ slug }) => ({
-				label: t(slug),
+				label: t(`word-${slug}`),
 				href: `/categories/${slug}`,
 			}))
 			.reverse(),
@@ -44,7 +44,7 @@ export const Header = async () => {
 
 			<div className="flex flex-1 flex-col justify-end gap-8 lg:flex-row">
 				<Suspense>
-					<Searcher i18n={{ placecholder: t("search") }} />
+					<Searcher i18n={{ placecholder: t("word-search") }} />
 				</Suspense>
 
 				<Link

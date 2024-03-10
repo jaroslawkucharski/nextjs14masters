@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, Suspense } from "react";
 import { Star } from "lucide-react";
 import clsx from "clsx";
-import { formAction } from "./actions/reviewActions";
+import { formAction } from "../actions/reviewActions";
 import { formSchema } from "./formSchema";
 import { useTypeSafeFormState } from "@/utils/typeSafeForm";
 import { StatusButton } from "@/ui/molecules/StatusButton";
@@ -24,9 +24,15 @@ type AddReviewFormProps = {
 		button: string;
 	};
 	email?: string;
+	name?: string;
 };
 
-export const ReviewForm = ({ productId, i18n, email }: AddReviewFormProps) => {
+export const ReviewForm = ({
+	productId,
+	i18n,
+	email,
+	name,
+}: AddReviewFormProps) => {
 	const formRef = useRef<HTMLFormElement | null>(null);
 	const [isClient, setIsClient] = useState(false);
 
@@ -131,6 +137,7 @@ export const ReviewForm = ({ productId, i18n, email }: AddReviewFormProps) => {
 						placeholder={i18n.namePlaceholder}
 						name="name"
 						type="text"
+						value={name}
 						required
 					/>
 
