@@ -1,6 +1,58 @@
 {
+	"Header": {
+		"home": "Home",
+		"all": "All",
+		"t-shirts": "T-Shirts",
+		"hoodies": "Hoodies",
+		"accessories": "Accessories",
+		"cart": "Cart",
+		"search": "Search",
+		"signin": "Sign In"
+	},
 	"Home": {
 		"title": "Home",
-		"description": "Welcome to the home page"
+		"description": "Welcome to the NextShop online store."
+	},
+	"Product": {
+		"title": "Product",
+		"description": "Welcome to the product page",
+		"t-shirts": "T-Shirts",
+		"hoodies": "Hoodies",
+		"accessories": "Accessories",
+		"button-add-to-cart": "Add to cart",
+		"related-products": "Related products",
+		"reviews": "Reviews",
+		"review-form": {
+			"name": "Name",
+			"name-placeholder": "Enter your name",
+			"email": "Email",
+			"email-placeholder": "Your email adress",
+			"headline": "Title",
+			"headline-placeholder": "Review title",
+			"content": "Description",
+			"content-placeholder": "Write your review here",
+			"rating": "Rating",
+			"button": "Submit review"
+		}
+	},
+	"Products": {
+		"title": "All products",
+		"description": "See all our products."
+	},
+	"Collection": {
+		"summer-vibes": "Summer Vibes",
+		"summer-vibes-description": "Newest products available to nextjsmasters plan!",
+		"new-arrivals": "New Arrivals",
+		"new-arrivals-description": "Collection of vintage throwback nextjsmasters.pl SWAG.",
+		"elegant-extras": "Elegant Extras",
+		"elegant-extras-description": "Elegant and essential extras from our store."
+	},
+	"Category": {
+		"t-shirts": "T-Shirts",
+		"t-shirts-description": "These are awesome t-shirts!",
+		"hoodies": "Hoodies",
+		"hoodies-description": "Fashionable sweatshirts for every occasion!",
+		"accessories": "Accessories",
+		"accessories-description": "The best accessories for every styling."
 	}
 }
