@@ -1,0 +1,65 @@
+{
+	"Header": {
+		"home": "Strona główna",
+		"all": "Wszystkie",
+		"t-shirts": "Koszulki",
+		"hoodies": "Bluzy",
+		"accessories": "Akcesoria",
+		"cart": "Koszyk",
+		"search": "Szukaj",
+		"signin": "Zaloguj się"
+	},
+	"Home": {
+		"title": "Strona główna",
+		"description": "Witaj w sklepie internetowym NextShop."
+	},
+	"Product": {
+		"t-shirts": "Koszulki",
+		"hoodies": "Bluzy",
+		"accessories": "Akcesoria",
+		"button-add-to-cart": "Dodaj do koszyka",
+		"related-products": "Podobne produkty",
+		"reviews": "Opinie",
+		"review-form": {
+			"name": "Imię",
+			"name-placeholder": "Wprowadź swoje imię",
+			"email": "Email",
+			"email-placeholder": "Twój adres email",
+			"headline": "Tytuł",
+			"headline-placeholder": "Tytuł recenzji",
+			"content": "Opis",
+			"content-placeholder": "Napisz tutaj swoją recenzję",
+			"rating": "Ocena",
+			"button": "Dodaj recenzję"
+		}
+	},
+	"Products": {
+		"title": "Wszyskie produkty",
+		"description": "Zobacz wszystkie nasze produkty."
+	},
+	"Collection": {
+		"summer-vibes": "Letnie klimaty",
+		"summer-vibes-description": "Najnowsze produkty dostępne w planie nextjsmasters!",
+		"new-arrivals": "Nowości",
+		"new-arrivals-description": "Zbiór klasycznych gadżetów.",
+		"elegant-extras": "Eleganckie dodatki",
+		"elegant-extras-description": "Eleganckie i niezbędne dodatki z naszego sklepu."
+	},
+	"Category": {
+		"t-shirts": "Koszulki",
+		"t-shirts-description": "Tutaj znajdziesz świetne koszulki!",
+		"hoodies": "Bluzy",
+		"hoodies-description": "Modne bluzy na każdą okazję!",
+		"accessories": "Akcesoria",
+		"accessories-description": "Najlepsze akcesoria do każdej stylizacji."
+	},
+	"Sort": {
+		"sortby": "sortuj według",
+		"name-asc": "Nazwa A-Z",
+		"name-desc": "Nazwa Z-A",
+		"price-asc": "Cena: od najniższej do najwyższej",
+		"price-desc": "Cena: od najwyższej do najniższej",
+		"rating-asc": "Ocena: od najniższej do najwyższej",
+		"rating-desc": "Ocena: od najwyższej do najniższej"
+	}
+}

@@ -2,6 +2,7 @@ query ProductsGetByCollectionSlug($slug: String!) {
 	collection(slug: $slug) {
 		name
 		description
+		slug
 		products {
 			...ProductListItem
 		}

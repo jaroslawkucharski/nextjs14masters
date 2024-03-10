@@ -1,10 +1,14 @@
-export const formatMoney = (amount: number) =>
-	new Intl.NumberFormat("en-US", {
+export const formatMoney = (amount: number, lang: string) =>
+	new Intl.NumberFormat(lang, {
 		style: "currency",
-		currency: "USD",
-	}).format(amount / 100);
+		currency: lang === "pl" ? "PLN" : "USD",
+	}).format((lang === "pl" ? amount * 3.91 : amount) / 100);
 
-export const formatDate = (date: string) =>
-	new Intl.DateTimeFormat("en-US", {
-		dateStyle: "medium",
+export const formatDate = (
+	date: string,
+	lang: string,
+	style?: "long" | "short",
+) =>
+	new Intl.DateTimeFormat(lang, {
+		dateStyle: style || "long",
 	}).format(new Date(date));

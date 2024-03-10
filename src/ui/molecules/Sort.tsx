@@ -4,7 +4,19 @@ import { ChevronDown } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { type FormEvent } from "react";
 
-export const Sort = () => {
+type SortProps = {
+	i18n: {
+		sortBy: string;
+		nameAsc: string;
+		nameDesc: string;
+		priceAsc: string;
+		priceDesc: string;
+		ratingAsc: string;
+		ratingDesc: string;
+	};
+};
+
+export const Sort = ({ i18n }: SortProps) => {
 	const searchParams = useSearchParams();
 	const router = useRouter();
 
@@ -25,26 +37,26 @@ export const Sort = () => {
 				onChange={handleSort}
 				value={`${searchParams.get("order")}-${searchParams.get("dir")}`.toLocaleLowerCase()}
 			>
-				<option>-- sort by --</option>
+				<option>-- {i18n.sortBy} --</option>
 
-				<option value="name-asc">Name A-Z</option>
+				<option value="name-asc">{i18n.nameAsc}</option>
 
-				<option value="name-desc">Name Z-A</option>
+				<option value="name-desc">{i18n.nameDesc}</option>
 
 				<option value="price-asc" data-testid="sort-by-price">
-					Price ascending
+					{i18n.priceAsc}
 				</option>
 
 				<option value="price-desc" data-testid="sort-by-price">
-					Price descending
+					{i18n.priceDesc}
 				</option>
 
 				<option value="rating-asc" data-testid="sort-by-rating">
-					Rating ascending
+					{i18n.ratingAsc}
 				</option>
 
 				<option value="rating-desc" data-testid="sort-by-rating">
-					Rating descending
+					{i18n.ratingDesc}
 				</option>
 			</select>
 

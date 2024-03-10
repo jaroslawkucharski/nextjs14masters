@@ -10,6 +10,7 @@ type ProductCollectionResponse = {
 	collection: {
 		name: string;
 		description: string;
+		slug: string;
 	};
 };
 
@@ -27,6 +28,7 @@ export const getProductsByCollection = async (
 	const collection = {
 		name: graphqlResponse.collection?.name || "",
 		description: graphqlResponse.collection?.description || "",
+		slug: graphqlResponse.collection?.slug || "",
 	};
 
 	if (!products) {

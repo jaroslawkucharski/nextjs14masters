@@ -90,11 +90,11 @@
 	},
 	"overrides": [
 		{
-			"files": ["src/app/**/*.ts?(x)", "middleware.ts"],
+			"files": ["src/app/**/*.ts?(x)", "middleware.ts", "i18n.ts"],
 			"rules": {
 				"import/no-default-export": "off"
 			}
 		}
 	],
-	"ignorePatterns": ["*.js", "*.jsx"]
+	"ignorePatterns": ["*.js", "*.jsx", "*.mjs"]
 }

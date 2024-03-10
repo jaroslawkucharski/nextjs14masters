@@ -2,6 +2,7 @@ query ProductsGetByCategorySlug($slug: String!) {
 	category(slug: $slug) {
 		name
 		description
+		slug
 		products {
 			...ProductListItem
 		}
