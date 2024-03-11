@@ -11,12 +11,12 @@ type NavigationProps = {
 
 export const Navigation = ({ navigation }: NavigationProps) => (
 	<nav className="flex w-full flex-1 flex-col items-center justify-center gap-8 self-center px-4 lg:flex-row lg:justify-between">
-		<ul className="flex min-w-fit flex-col flex-nowrap items-center gap-4 self-center lg:flex-row lg:gap-8">
+		<ul className="flex min-w-fit flex-col flex-nowrap items-center gap-4 self-center lg:flex-row lg:gap-10">
 			{navigation.map(({ label, href, exact }) => (
 				<li key={label}>
 					<ActiveLink
-						className="flex w-full items-start justify-center border-b-2 text-center hover:border-gray-900 hover:text-slate-700"
-						activeClassName="border-gray-900"
+						className="flex w-full items-start justify-center text-center text-[16px] font-light hover:text-gray-900"
+						activeClassName="text-gray-950 font-medium"
 						href={href as Route}
 						exact={exact}
 					>

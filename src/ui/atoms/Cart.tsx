@@ -17,7 +17,7 @@ export const Cart = async () => {
 	return (
 		<div className="relative self-center">
 			<Link href="/cart">
-				<ShoppingCart />
+				<ShoppingCart className="text-gray-500 hover:text-gray-950" />
 
 				<span className="absolute bottom-4 left-4 rounded-full bg-red-500 px-1 text-xs text-white">
 					{productsQuantity}
