@@ -14,12 +14,13 @@
 	"word-new-arrivals-description": "Zbiór klasycznych gadżetów.",
 	"word-elegant-extras": "Eleganckie dodatki",
 	"word-elegant-extras-description": "Eleganckie i niezbędne dodatki z naszego sklepu.",
-
 	"word-information": "Informacje",
 	"word-privacy-policy": "Polityka prywatności",
 	"word-contact": "Kontakt",
 	"word-footer-rights-reserved": "© {year} by JK. All rights reserved.",
-
+	"word-language": "Język",
+	"word-english": "Angielski",
+	"word-polish": "Polski",
 	"word-cart": "Koszyk",
 	"word-search": "Szukaj",
 	"word-add-to-cart": "Dodaj do koszyka",
