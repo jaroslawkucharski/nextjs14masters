@@ -6,6 +6,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { getTranslations } from "next-intl/server";
 import { plPL, enUS } from "@clerk/localizations";
 import { Header } from "@/ui/organisms/Header";
+import { Footer } from "@/ui/organisms/Footer";
 
 type RootLayoutType = {
 	children: ReactNode;
@@ -38,9 +39,13 @@ export default function RootLayout({
 				<body className={lato.className}>
 					<Header />
 
-					<main className="lg:mt-20">{children}</main>
+					<main className="min-h-[calc(100vh_-_278px)] lg:pt-[88px] ">
+						{children}
+					</main>
 
 					{modal}
+
+					<Footer />
 				</body>
 			</html>
 		</ClerkProvider>

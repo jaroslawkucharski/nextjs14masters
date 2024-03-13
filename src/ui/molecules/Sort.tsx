@@ -29,11 +29,11 @@ export const Sort = ({ i18n }: SortProps) => {
 	};
 
 	return (
-		<div className="relative">
+		<div className="relative w-fit">
 			<select
 				name="sort"
 				id="sort"
-				className="w-56 appearance-none self-start rounded-md border-0 bg-white px-4 py-2 text-sm text-slate-400 ring-1 ring-inset ring-gray-400 placeholder:text-slate-400 focus:border-gray-900 focus:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-900 lg:min-w-4"
+				className="w-56 appearance-none self-start rounded-md border-0 bg-gray-50 px-4 py-2 text-sm text-gray-500 ring-1 ring-inset ring-gray-200 placeholder:text-gray-500 focus:border-gray-900 focus:text-gray-900 focus:outline-none focus:ring-1 focus:ring-inset focus:ring-gray-900 lg:min-w-4"
 				onChange={handleSort}
 				value={`${searchParams.get("order")}-${searchParams.get("dir")}`.toLocaleLowerCase()}
 			>

@@ -2,7 +2,7 @@
 
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { CircleUserRound, LogOut, Package, Settings } from "lucide-react";
+import { LogOut, Package, Settings } from "lucide-react";
 import Image from "next/image";
 import { useClerk, useUser } from "@clerk/nextjs";
 import Link from "next/link";
@@ -23,7 +23,7 @@ export const UserMenu = ({ i18n }: UserMenuType) => {
 
 	const name = user?.fullName ?? "";
 	const email = user?.emailAddresses[0]?.emailAddress ?? "";
-	const image = user?.imageUrl;
+	const image = user?.imageUrl || "/images/profile.png";
 
 	const handleSignOut = async () => {
 		await signOut(() => router.push("/sign-in"));
@@ -33,17 +33,13 @@ export const UserMenu = ({ i18n }: UserMenuType) => {
 		<Menu as="div" className="relative inline-block text-left">
 			<div>
 				<Menu.Button>
-					{image ? (
-						<Image
-							className="rounded-full"
-							src={user?.imageUrl ?? ""}
-							alt={email}
-							width={32}
-							height={32}
-						/>
-					) : (
-						<CircleUserRound className="h-[32px] w-[32px]" />
-					)}
+					<Image
+						className="min-h-8 min-w-8 rounded-full"
+						src={image}
+						alt={email}
+						width={32}
+						height={32}
+					/>
 				</Menu.Button>
 			</div>
 
@@ -62,7 +58,7 @@ export const UserMenu = ({ i18n }: UserMenuType) => {
 							<div className="flex items-center gap-2 px-4 py-2 text-sm">
 								<Image
 									className="rounded-full"
-									src={user?.imageUrl ?? ""}
+									src={image}
 									alt={email}
 									width={30}
 									height={30}

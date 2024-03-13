@@ -18,9 +18,9 @@ export const PageHeading = async ({
 	const t = await getTranslations("Sort");
 
 	return (
-		<div className="bg-slate-50 px-8 py-10 text-center sm:px-36 lg:text-left">
-			<div className="flex flex-wrap items-center justify-center gap-4 sm:justify-between">
-				{title && <h2 className="text-2xl font-semibold">{title}</h2>}
+		<div className="w-full px-12 py-6 text-center sm:text-left">
+			<div className="mx-auto flex w-full flex-col items-center justify-center gap-12 sm:flex-row sm:justify-between lg:max-w-7xl">
+				{title && <h2 className="text-md">{title}</h2>}
 
 				{sort && (
 					<Sort
@@ -37,9 +37,13 @@ export const PageHeading = async ({
 				)}
 			</div>
 
-			{description && <p className="text-gray-600">{description}</p>}
+			<div className="mx-auto flex w-full flex-col items-center justify-center gap-12 sm:flex-row sm:justify-between lg:max-w-7xl">
+				{description && <p className="text-sm text-gray-500">{description}</p>}
+			</div>
 
-			{children && <div className="mt-8">{children}</div>}
+			<div className="mx-auto flex w-full flex-col items-center justify-center gap-12 sm:flex-row sm:justify-between lg:max-w-7xl">
+				{children && <div className="mt-8">{children}</div>}
+			</div>
 		</div>
 	);
 };
