@@ -51,12 +51,27 @@ export const Footer = async () => {
 				},
 			],
 		},
+		{
+			label: t("word-language"),
+			items: [
+				{
+					label: t("word-english"),
+					href: "/en",
+					img: "/images/en.png",
+				},
+				{
+					label: t("word-polish"),
+					href: "/pl",
+					img: "/images/pl.png",
+				},
+			],
+		},
 	];
 
 	return (
 		<footer className="top-0 z-10 h-fit w-full bg-gray-950 px-12 pb-4 pt-12">
 			<div className="mx-auto flex flex-col justify-center gap-4 max-lg:justify-between sm:max-w-2xl md:max-w-4xl lg:max-w-7xl">
-				<section className="flex flex-wrap items-center justify-center gap-14 sm:justify-between">
+				<section className="flex flex-wrap items-start justify-center gap-14 sm:justify-between">
 					<div className="flex flex-col items-start justify-start gap-6">
 						<div className="flex items-center justify-start gap-2">
 							<Logo color="light" />
