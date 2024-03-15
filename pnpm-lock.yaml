@@ -8,6 +8,9 @@ dependencies:
   '@algolia/recommend':
     specifier: ^4.22.1
     version: 4.22.1
+  '@algolia/recommend-react':
+    specifier: ^1.14.0
+    version: 1.14.0(@algolia/recommend@4.22.1)(react-dom@18.2.0)(react@18.2.0)
   '@clerk/localizations':
     specifier: ^1.26.16
     version: 1.26.16(react@18.2.0)
@@ -208,6 +211,33 @@ packages:
     resolution: {integrity: sha512-O99rcqpVPKN1RlpgD6H3khUWylU24OXlzkavUAMy6QZd1776QAcauE3oP8CmD43nbaTjBexZj2nGsBH9Tc0FVA==}
     dependencies:
       '@algolia/logger-common': 4.22.1
+    dev: false
+
+  /@algolia/recommend-core@1.14.0(@algolia/recommend@4.22.1):
+    resolution: {integrity: sha512-qgWvLRuvTLw9Z0J1+/047u/oJKfo52VnlIzRjSuMmepxuWDZBxs28BHMLMPhlnqiMnCXlEA7gqX86xyMtv0+Xg==}
+    peerDependencies:
+      '@algolia/recommend': ^4.22.1
+    dependencies:
+      '@algolia/recommend': 4.22.1
+    dev: false
+
+  /@algolia/recommend-react@1.14.0(@algolia/recommend@4.22.1)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-jvuP6xJ4eDFNbvb9d3OWQ68SjhYHJ7/703Ok/bzDL+2EKjnwgQEktzArWUxaLgUqMNYMCVyeUqAwVQ9ACRIPtg==}
+    peerDependencies:
+      '@algolia/recommend': ^4.22.1
+      react: '>= 16.8.0 < 19'
+      react-dom: '>= 16.8.0 < 19'
+    dependencies:
+      '@algolia/recommend': 4.22.1
+      '@algolia/recommend-core': 1.14.0(@algolia/recommend@4.22.1)
+      '@algolia/recommend-vdom': 1.14.0
+      dequal: 2.0.3
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@algolia/recommend-vdom@1.14.0:
+    resolution: {integrity: sha512-aibM/qPICCVTM9F5Xyr24vdzwGf+WaB8PQ4/QJzZPySabCsCAxZO7w77Ze0XaBVSKPHtWcEe7S26AKEjBtvQDg==}
     dev: false
 
   /@algolia/recommend@4.22.1:
