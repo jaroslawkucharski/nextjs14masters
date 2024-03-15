@@ -1,8 +1,7 @@
-// TODO - AI search
 import { type Metadata } from "next";
 import { revalidateTag } from "next/cache";
 import { notFound } from "next/navigation";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import { currentUser } from "@clerk/nextjs";
 import { ReviewForm } from "./ReviewForm";
@@ -10,16 +9,15 @@ import { StatusButton } from "@/ui/molecules/StatusButton";
 import { getProductById } from "@/api/products/getProductById";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
 import { ProductDescription } from "@/ui/atoms/ProductDescription";
-import { ProductsList } from "@/ui/organisms/ProductList";
-import { getProductList } from "@/api/products/getProductList";
 import { createCart } from "@/api/cart/createCart";
 import { addProductToCart } from "@/api/cart/addProductToCard";
 import { ReviewList } from "@/ui/organisms/ReviewList";
 import { type Review } from "@/gql/graphql";
 import { getCartById } from "@/api/cart/getCartById";
 import { changeProductQuantity } from "@/api/cart/changeProductQuantity";
-import { CATEGORY_AMOUNT_OF_PRODUCTS } from "@/constants";
 import { Rating } from "@/ui/atoms/Rating";
+import { RecommendProducts } from "@/ui/molecules/RecommendProducts";
+import { Loader } from "@/ui/atoms/Loader";
 
 export type ProductPageType = {
 	params: {
@@ -51,6 +49,7 @@ export async function generateMetadata({
 
 export default async function ProductPage({ params }: ProductPageType) {
 	const t = await getTranslations();
+	const lang = await getLocale();
 
 	const user = await currentUser();
 
@@ -64,11 +63,6 @@ export default async function ProductPage({ params }: ProductPageType) {
 	if (!product && !productId) {
 		return notFound();
 	}
-
-	const { products } = await getProductList({
-		take: CATEGORY_AMOUNT_OF_PRODUCTS,
-		orderBy: "PRICE",
-	});
 
 	const getOrCreateCart = async () => {
 		"use server";
@@ -139,10 +133,12 @@ export default async function ProductPage({ params }: ProductPageType) {
 					data-testid="related-products"
 				>
 					<h2 className="mb-6 text-center text-xl font-semibold sm:text-left md:text-left lg:text-left">
-						{t("word-related-products")}
+						{t("word-recommend-products")}
 					</h2>
 
-					<ProductsList products={products} />
+					<Suspense fallback={<Loader />}>
+						<RecommendProducts productId={productId} lang={lang} />
+					</Suspense>
 				</section>
 
 				<hr />
