@@ -3,6 +3,7 @@
 import { RelatedProducts } from "@algolia/recommend-react";
 import recommend, { type RecommendClient } from "@algolia/recommend";
 import Link from "next/link";
+import { TrendingUp } from "lucide-react";
 import { ProductListItemCoverImage } from "@/ui/atoms/ProductListItemCoverImage";
 import { Rating } from "@/ui/atoms/Rating";
 import { formatMoney } from "@/utils/intl";
@@ -30,7 +31,11 @@ type RecommendProductsProps = {
 
 const RelatedItem = ({ item }: RelatedItemProps, lang: string) => {
 	return (
-		<Link prefetch href={`/product/${item.slug}-${item.objectID}`}>
+		<Link
+			prefetch
+			href={`/product/${item.slug}-${item.objectID}`}
+			className="relative"
+		>
 			<article className="bg-white transition-transform hover:scale-105">
 				{item.images && item.images[0]?.url && (
 					<ProductListItemCoverImage
@@ -44,7 +49,9 @@ const RelatedItem = ({ item }: RelatedItemProps, lang: string) => {
 						{item.name.toLocaleUpperCase()}
 					</h3>
 
-					<p>{item._score}</p>
+					<p className="absolute right-2 top-2 flex gap-1 rounded-md bg-green-500 px-2 py-1 text-xs text-white">
+						<TrendingUp className="h-4 w-4" /> {item._score}
+					</p>
 
 					<p className="text-md flex w-full justify-between self-end pt-1 font-medium text-gray-900">
 						<Rating rating={item.rating || 0} />

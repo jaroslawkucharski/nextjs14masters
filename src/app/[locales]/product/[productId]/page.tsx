@@ -133,7 +133,7 @@ export default async function ProductPage({ params }: ProductPageType) {
 					data-testid="related-products"
 				>
 					<h2 className="mb-6 text-center text-xl font-semibold sm:text-left md:text-left lg:text-left">
-						{t("word-related-products")}
+						{t("word-recommend-products")}
 					</h2>
 
 					<Suspense fallback={<Loader />}>
