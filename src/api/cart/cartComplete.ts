@@ -1,5 +1,5 @@
 import { executeGraphQl } from "../graphqlApi";
-import { getCookie, setCookie } from "@/utils/cookies";
+import { getCookie, removeCookie } from "@/utils/cookies";
 import {
 	CartCompleteDocument,
 	type CartCompleteMutation,
@@ -27,7 +27,7 @@ export const cartComplete = async (
 		},
 	});
 
-	await setCookie("cartId", cartId, 5);
+	await removeCookie("cartId");
 
 	return graphqlResponse.cartComplete;
 };
