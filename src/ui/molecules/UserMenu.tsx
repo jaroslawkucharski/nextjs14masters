@@ -26,7 +26,7 @@ export const UserMenu = ({ i18n }: UserMenuType) => {
 	const image = user?.imageUrl || "/images/profile.png";
 
 	const handleSignOut = async () => {
-		await signOut(() => router.push("/sign-in"));
+		await signOut(() => router.replace("/sign-in"));
 	};
 
 	return (
