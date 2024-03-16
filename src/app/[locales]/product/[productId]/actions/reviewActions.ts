@@ -10,7 +10,7 @@ export const formAction = async (formData: FormSchemaType) => {
 		productId: formData.productId,
 		author: formData.name,
 		email: formData.email,
-		rating: Number(formData.rating),
+		rating: Number(formData.rating) + 1,
 		title: formData.headline,
 		description: formData.content,
 	});

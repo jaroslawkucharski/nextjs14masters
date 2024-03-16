@@ -61,12 +61,12 @@ export const ReviewForm = ({
 				ref={formRef}
 				noValidate
 			>
+				<input type="hidden" name="productId" value={productId} readOnly />
+
 				<label>
 					<span className="text-sm font-bold text-gray-900">
 						{i18n.headline}
 					</span>
-
-					<input type="hidden" name="productId" value={productId} />
 
 					<input
 						className="w-full appearance-none self-start rounded-md border-0 bg-white px-4 py-2 text-sm text-gray-950 ring-1 ring-inset ring-gray-400 placeholder:text-slate-400 focus:border-gray-900 focus:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-900 lg:min-w-4"
@@ -119,6 +119,7 @@ export const ReviewForm = ({
 									onChange={() => handleChangeRating(index + 1)}
 									className="sr-only"
 								/>
+
 								<Star
 									className={clsx("h-4 w-4 text-gray-400", {
 										["fill-current text-yellow-400"]: index < rating,
@@ -137,7 +138,7 @@ export const ReviewForm = ({
 						placeholder={i18n.namePlaceholder}
 						name="name"
 						type="text"
-						value={name}
+						defaultValue={name}
 						required
 					/>
 
@@ -154,7 +155,7 @@ export const ReviewForm = ({
 						placeholder={i18n.emailPlaceholder}
 						name="email"
 						type="email"
-						value={email}
+						defaultValue={email}
 						required
 					/>
 
