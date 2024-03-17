@@ -8,6 +8,7 @@ import { Pagination } from "@/ui/molecules/Pagination";
 import { PageHeading } from "@/ui/molecules/PageHeading";
 // import { getNumOfPages, returnProductsNotFound } from "@/helpers";
 import { getOrdersList } from "@/api/orders/getOrdersList";
+import { PATHS } from "@/constants";
 
 type ProductsLayoutType = {
 	children: ReactNode;
@@ -28,7 +29,7 @@ export default async function ProductsLayout({
 	const user = await currentUser();
 
 	if (!user) {
-		redirect("/sign-in");
+		redirect(PATHS.SIGN_IN);
 	}
 
 	const email = user.emailAddresses[0]?.emailAddress;

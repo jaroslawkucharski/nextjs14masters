@@ -7,6 +7,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { useState, useEffect, type FormEvent } from "react";
 import { Button } from "@/ui/atoms/Button";
+import { PATHS } from "@/constants";
 
 type CheckoutFormProps = {
 	i18n: {
@@ -67,7 +68,17 @@ export const CheckoutForm = ({ i18n }: CheckoutFormProps) => {
 		const { error } = await stripe.confirmPayment({
 			elements,
 			confirmParams: {
-				return_url: `${location.protocol}//${location.host}/cart?intent=success`,
+				shipping: {
+					address: {
+						city: "",
+						line1: "",
+						line2: "",
+						postal_code: "",
+						state: "",
+					},
+					name: "",
+				},
+				return_url: `${location.protocol}//${location.host}${PATHS.CART}?intent=success`,
 			},
 		});
 

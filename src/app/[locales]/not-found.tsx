@@ -1,6 +1,7 @@
 import { HeartCrack } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
+import { PATHS } from "@/constants";
 
 export default async function NotFound() {
 	const t = await getTranslations("NotFound");
@@ -12,7 +13,7 @@ export default async function NotFound() {
 			<p className="my-2 text-2xl">{t("title")}</p>
 
 			<Link
-				href={{ pathname: "/" }}
+				href={{ pathname: PATHS.HOME }}
 				className="text-sm uppercase hover:underline"
 			>
 				{t("back")}

@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useClerk, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { PATHS } from "@/constants";
 
 type UserMenuType = {
 	i18n: {
@@ -26,7 +27,7 @@ export const UserMenu = ({ i18n }: UserMenuType) => {
 	const image = user?.imageUrl || "/images/profile.png";
 
 	const handleSignOut = async () => {
-		await signOut(() => router.replace("/sign-in"));
+		await signOut(() => router.replace(PATHS.SIGN_IN));
 	};
 
 	return (

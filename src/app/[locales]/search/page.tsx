@@ -6,6 +6,7 @@ import { getTranslations } from "next-intl/server";
 import { PageHeading } from "@/ui/molecules/PageHeading";
 import { getProductList } from "@/api/products/getProductList";
 import { ProductsList } from "@/ui/organisms/ProductList";
+import { PATHS } from "@/constants";
 
 export const metadata = async (): Promise<Metadata> => {
 	const t = await getTranslations("Search");
@@ -50,7 +51,7 @@ export default async function SearchPage({ searchParams }: SearchPageType) {
 						<p className="my-2 text-2xl">{t("no-results")}</p>
 
 						<Link
-							href={{ pathname: "/" }}
+							href={{ pathname: PATHS.HOME }}
 							className="text-sm uppercase hover:underline"
 						>
 							{t("back")}

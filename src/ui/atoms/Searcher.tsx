@@ -4,6 +4,7 @@ import { Search } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { type ChangeEvent } from "react";
 import { useDebouncedCallback } from "use-debounce";
+import { PATHS } from "@/constants";
 
 type SearcherProps = {
 	i18n: {
@@ -23,13 +24,13 @@ export const Searcher = ({ i18n }: SearcherProps) => {
 			const params = new URLSearchParams(searchParams);
 
 			if (!value) {
-				return router.replace("/products");
+				return router.replace(PATHS.PRODUCTS);
 			}
 
 			if (value && value.length > 1) {
 				params.set("query", value);
 
-				router.replace(`/search?${params.toString()}`);
+				router.replace(`${PATHS.SEARCH}?${params.toString()}`);
 			}
 
 			return params.delete("query");

@@ -7,6 +7,7 @@ import { getOrdersList } from "@/api/orders/getOrdersList";
 import { formatDate, formatMoney } from "@/utils/intl";
 import { Button } from "@/ui/atoms/Button";
 import { getSkip } from "@/helpers";
+import { PATHS } from "@/constants";
 
 export type OrderPageType = {
 	params: {
@@ -20,7 +21,7 @@ export default async function OrderPage({ params }: OrderPageType) {
 	const user = await currentUser();
 
 	if (!user) {
-		redirect("/sign-in");
+		redirect(PATHS.SIGN_IN);
 	}
 
 	const email = user.emailAddresses[0]?.emailAddress;
