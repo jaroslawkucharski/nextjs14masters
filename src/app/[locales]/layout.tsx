@@ -39,7 +39,7 @@ export default function RootLayout({
 				<body className={lato.className}>
 					<Header />
 
-					<main className="min-h-[calc(100vh_-_278px)] lg:pt-[88px] ">
+					<main className="mx-auto min-h-[calc(100vh_-_278px)] lg:max-w-7xl lg:pt-[88px]">
 						{children}
 					</main>
 
