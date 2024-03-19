@@ -5,7 +5,6 @@ export const PATHS = {
 	HOME: "/",
 	SEARCH: "/search",
 	CART: "/cart",
-	SHIPPING: "/shipping",
 	CHECKOUT: "/checkout",
 	CATEGORIES: "/categories",
 	COLLECTIONS: "/collections",
@@ -27,7 +26,6 @@ export const CHECKOUT_STATUSES = {
 
 export const CHECKOUT_STEPS = {
 	CART: "cart",
-	SHIPPING: "shipping",
 	CHECKOUT: "checkout",
 } as const;
 
