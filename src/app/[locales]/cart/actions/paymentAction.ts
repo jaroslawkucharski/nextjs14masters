@@ -4,7 +4,6 @@ import { currentUser } from "@clerk/nextjs";
 import Stripe from "stripe";
 import { redirect } from "next/navigation";
 import { getLocale } from "next-intl/server";
-import { cartComplete } from "@/api/cart/cartComplete";
 import { getCartById } from "@/api/cart/getCartById";
 import { PATHS } from "@/constants";
 
@@ -58,7 +57,5 @@ export const paymentAction = async () => {
 		return;
 	}
 
-	await cartComplete(email);
-
-	redirect(`${PATHS.CHECKOUT}?intent=${paymentIntent.client_secret}`);
+	return redirect(`${PATHS.CHECKOUT}?intent=${paymentIntent.client_secret}`);
 };
