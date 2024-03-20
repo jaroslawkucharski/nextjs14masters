@@ -12,13 +12,13 @@ export type CollectionPageType = {
 export async function generateMetadata({
 	params,
 }: CollectionPageType): Promise<Metadata> {
-	const t = await getTranslations("Collection");
+	const t = await getTranslations();
 
 	const { collection } = await getProductsByCollection(params.collectionName);
 
 	return {
-		title: t(collection.slug).toLocaleUpperCase(),
-		description: t(`${collection?.slug}-description`),
+		title: t(`collection-${collection.slug}`).toLocaleUpperCase(),
+		description: t(`collection-${collection?.slug}-description`),
 	};
 }
 

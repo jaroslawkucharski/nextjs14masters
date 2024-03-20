@@ -4,6 +4,7 @@ import { FooterNavigation } from "../molecules/FooterNavigation";
 import { Logo } from "@/ui/atoms/Logo";
 import { getCategoryList } from "@/api/categories/getCategoryList";
 import { getCollectionsList } from "@/api/collections/getCollectionList";
+import { PATHS } from "@/constants";
 
 export const Footer = async () => {
 	const t = await getTranslations();
@@ -17,12 +18,12 @@ export const Footer = async () => {
 			items: [
 				{
 					label: t("word-all-products"),
-					href: "/products",
+					href: PATHS.PRODUCTS,
 				},
 				...categoriesData
 					.map(({ slug }) => ({
 						label: t(`word-${slug}`),
-						href: `/categories/${slug}`,
+						href: `${PATHS.CATEGORIES}/${slug}`,
 					}))
 					.toReversed(),
 			],
@@ -33,7 +34,7 @@ export const Footer = async () => {
 				...collectionsData
 					.map(({ slug }) => ({
 						label: t(`word-${slug}`),
-						href: `/collections/${slug}`,
+						href: `${PATHS.COLLECTIONS}/${slug}`,
 					}))
 					.toReversed(),
 			],
@@ -43,11 +44,11 @@ export const Footer = async () => {
 			items: [
 				{
 					label: t("word-privacy-policy"),
-					href: "/privacy-policy",
+					href: PATHS.PRIVACY_POLICY,
 				},
 				{
 					label: t("word-contact"),
-					href: "/contact",
+					href: PATHS.CONTACT,
 				},
 			],
 		},
@@ -56,12 +57,12 @@ export const Footer = async () => {
 			items: [
 				{
 					label: t("word-english"),
-					href: "/en",
+					href: PATHS.EN,
 					img: "/images/en.png",
 				},
 				{
 					label: t("word-polish"),
-					href: "/pl",
+					href: PATHS.PL,
 					img: "/images/pl.png",
 				},
 			],

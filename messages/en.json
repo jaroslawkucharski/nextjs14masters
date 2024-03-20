@@ -45,77 +45,67 @@
 	"word-orders": "Orders",
 	"word-settings": "Settings",
 	"word-log-out": "Log out",
-	"Home": {
-		"title": "Home",
-		"description": "Welcome to the NextShop online store."
-	},
-	"Products": {
-		"title": "All products",
-		"description": "See all our products."
-	},
-	"Collection": {
-		"summer-vibes": "Summer Vibes",
-		"summer-vibes-description": "Newest products available to nextjsmasters plan!",
-		"new-arrivals": "New Arrivals",
-		"new-arrivals-description": "Collection of vintage throwback nextjsmasters.pl SWAG.",
-		"elegant-extras": "Elegant Extras",
-		"elegant-extras-description": "Elegant and essential extras from our store."
-	},
-	"Category": {
-		"t-shirts": "T-Shirts",
-		"t-shirts-description": "These are awesome t-shirts!",
-		"hoodies": "Hoodies",
-		"hoodies-description": "Fashionable sweatshirts for every occasion!",
-		"accessories": "Accessories",
-		"accessories-description": "The best accessories for every styling."
-	},
-	"Sort": {
-		"sortby": "sort by",
-		"name-asc": "Name A-Z",
-		"name-desc": "Name Z-A",
-		"price-asc": "Price: Low to High",
-		"price-desc": "Price: High to Low",
-		"rating-asc": "Rating: Low to High",
-		"rating-desc": "Date: High to Low"
-	},
-	"NotFound": {
-		"title": "This page could not be found.",
-		"back": "Return to"
-	},
-	"EmptyCart": {
-		"title": "Your cart is empty.",
-		"back": "Continue shopping"
-	},
-	"SuccessCart": {
-		"title": "Thank you for shopping in our store. Your order has been paid and is being prepared for shipment.",
-		"order": "Your order number:",
-		"back": "Continue shopping"
-	},
-	"Cart": {
-		"title": "Your cart",
-		"description": "Check what you have in your cart.",
-		"product-price": "Product price:",
-		"delivery": "Delivery:",
-		"total": "Total:",
-		"checkout": "Checkout",
-		"free-returns": "Free returns always",
-		"free-returns-30-days": "Free returns within 30 days",
-		"pay-now": "Pay now"
-	},
-	"Checkout": {
-		"title": "Checkout",
-		"description": "Pay for your order."
-	},
-	"Orders": {
-		"title": "Your orders",
-		"description": "Check your orders."
-	},
-	"Search": {
-		"title": "Search",
-		"description": "Search for products in our store.",
-		"results": "Search results for ' {query} '",
-		"found-results": "Found {results} products.",
-		"no-results": "We could not find what you were looking for",
-		"back": "Back to shopping"
-	}
+	"empty-card-title": "Your cart is empty.",
+	"empty-card-link": "Continue shopping",
+	"checkout-success-title": "Thank you for shopping in our store. Your order has been paid and is being prepared for shipment.",
+	"checkout-success-order": "Your order number:",
+	"checkout-success-link": "See your order",
+	"cart-title": "Your cart",
+	"cart-description": "Check what you have in your cart.",
+	"cart-product-price": "Product price:",
+	"cart-delivery": "Delivery:",
+	"cart-total": "Total:",
+	"cart-checkout": "Checkout",
+	"cart-free-returns": "Free returns always",
+	"cart-free-returns-30-days": "Free returns within 30 days",
+	"cart-summary": "Cart summary",
+	"checkout-pay-now": "Pay now",
+	"checkout-title": "Payment and delivery",
+	"checkout-description": "Pay for your order.",
+	"home-title": "Home",
+	"home-description": "Welcome to the NextShop online store.",
+	"products-title": "All products",
+	"products-description": "See all our products.",
+	"collection-summer-vibes": "Summer Vibes",
+	"collection-summer-vibes-description": "Newest products available to nextjsmasters plan!",
+	"collection-new-arrivals": "New Arrivals",
+	"collection-new-arrivals-description": "Collection of vintage throwback nextjsmasters.pl SWAG.",
+	"collection-elegant-extras": "Elegant Extras",
+	"collection-elegant-extras-description": "Elegant and essential extras from our store.",
+	"category-t-shirts": "T-Shirts",
+	"category-t-shirts-description": "These are awesome t-shirts!",
+	"category-hoodies": "Hoodies",
+	"category-hoodies-description": "Fashionable sweatshirts for every occasion!",
+	"category-accessories": "Accessories",
+	"category-accessories-description": "The best accessories for every styling.",
+	"word-sortby": "sort by",
+	"word-name-asc": "Name A-Z",
+	"word-name-desc": "Name Z-A",
+	"word-price-asc": "Price: Low to High",
+	"word-price-desc": "Price: High to Low",
+	"word-rating-asc": "Rating: Low to High",
+	"word-rating-desc": "Date: High to Low",
+	"not-found-title": "This page could not be found.",
+	"not-found-link": "Return to",
+	"orders-title": "Your orders",
+	"orders-description": "Check your orders.",
+	"order-title": "Your order",
+	"order-date": "Order date:",
+	"order-lines": "Ordered items:",
+	"order-articles": "Articles:",
+	"order-number": "Order number:",
+	"order-payment": "Payment and shipping:",
+	"order-address": "Shipping address:",
+	"order-payment-method": "Payment method:",
+	"order-payment-type": "Card",
+	"order-description": "Order details.",
+	"search-title": "Search",
+	"search-description": "Search for products in our store.",
+	"search-results": "Search results for ' {query} '",
+	"search-found-results": "Found {results} products.",
+	"search-no-results": "We could not find what you were looking for",
+	"search-link": "Back to shopping",
+	"orders-empty-title": "You have no orders yet",
+	"orders-empty-link": "Go to the store",
+	"order-check": "Check order"
 }

@@ -1,8 +1,13 @@
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
-// import { getLocale } from "next-intl/server";
+import Stripe from "stripe";
+import { getLocale, getTranslations } from "next-intl/server";
+import { CreditCard } from "lucide-react";
 import { getOrderById } from "@/api/orders/getOrderById";
-// import { formatDate, formatMoney } from "@/utils/intl";
+import { formatDate } from "@/utils/intl";
+import { PageHeading } from "@/ui/molecules/PageHeading";
+import { CartSummary } from "@/ui/molecules/CartSummary";
+import { CartList } from "@/ui/organisms/CartList";
 
 export type OrderPageType = {
 	params: {
@@ -11,99 +16,115 @@ export type OrderPageType = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
+	const t = await getTranslations();
+
 	return {
-		title: "Order",
+		title: t("orders-title"),
+		description: t("orders-description"),
 	};
 }
 
 export default async function OrderPage({ params }: OrderPageType) {
-	// const lang = await getLocale();
+	const t = await getTranslations();
+	const lang = await getLocale();
 
 	const orderId = params.orderId;
 
 	const order = await getOrderById(orderId);
 
-	if (!order && !orderId) {
+	if (!process.env.STRIPE_SECRET_KEY) {
+		throw new Error("Stripe secret key is missing");
+	}
+
+	const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+		apiVersion: "2023-10-16",
+		typescript: true,
+	});
+
+	const paymentIntentsList = await stripe.paymentIntents.search({
+		query: `metadata["orderId"]:"${order?.lines[0]?.cartId}"`,
+	});
+
+	if (!order || !orderId) {
 		return notFound();
 	}
 
 	return (
 		<>
-			<section className="mx-auto max-w-md p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
+			<PageHeading title={t("order-title")} />
+
+			<section className="mx-auto flex max-w-md flex-col gap-4 overflow-x-auto sm:max-w-2xl sm:p-12 sm:py-16 md:max-w-4xl lg:max-w-7xl lg:flex-row">
 				<article className="h-fit w-full">
-					<div className="flex flex-col gap-4">
-						<div className="flex w-full flex-wrap justify-between gap-4 sm:flex-nowrap">
-							<div className="min-w-[500px] sm:px-4">
-								<p className="text-sm">Order number:</p>
+					<p className="mb-2 font-semibold">{t("order-date")}</p>
 
-								<p className="font-bold">{order?.id}</p>
-							</div>
+					<p className="mb-4">
+						{formatDate({
+							date: order?.createdAt,
+							lang,
+							time: true,
+						})}
+					</p>
 
-							<div className="w-full">
-								<p className="text-sm">Articles:</p>
+					<p className="mt-4 font-semibold sm:mt-10">{t("order-lines")}</p>
 
-								<div>
-									{order?.lines.map(
-										({
-											productName,
-											productQuantity,
-											productPrice,
-											productId,
-										}) => (
-											<div key={productId}>
-												<p>{productName}</p>
-
-												<p>{productQuantity}</p>
-
-												<p>{productPrice}</p>
-											</div>
-										),
-									)}
-								</div>
-							</div>
-
-							<div className="min-w-60 text-right">
-								<p className="text-sm">
-									Status:{" "}
-									{/* <span
-										className={`font-bold ${statuses[status(order.lines[0]?.cartId ?? "") as string]?.color}`}
-									>
-										{
-											statuses[status(order.lines[0]?.cartId ?? "") as string]
-												?.name
-										}
-									</span> */}
-								</p>
-							</div>
-						</div>
-
-						<div className="mb-8 flex w-full flex-wrap justify-between gap-4 border-b pb-8 sm:flex-nowrap">
-							<div className="min-w-[500px] sm:px-4">
-								<p className="text-sm">Date of order:</p>
-
-								<p className="font-bold">
-									{/* {formatDate(order?.createdAt, lang)} */}
-								</p>
-							</div>
-
-							<div className="w-full">
-								<p className="text-sm">Total:</p>
-
-								<p className="font-bold">
-									{/* {formatMoney(order?.totalAmount, lang)} */}
-								</p>
-							</div>
-						</div>
-					</div>
+					{order?.lines && (
+						<CartList
+							items={order.lines.map((line) => ({
+								product: {
+									id: line.productId.toString(),
+									price: line.productPrice,
+									name: line.productName,
+									categories: [],
+									collections: [],
+									description: "",
+									images: [],
+									reviews: [],
+									slug: line.productSlug,
+								},
+								quantity: line.productQuantity,
+							}))}
+							cartId={order.id}
+							isCheckout
+						/>
+					)}
 				</article>
-			</section>
 
-			<section className="mx-auto max-w-md p-12 pt-10 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl lg:pt-10">
-				{JSON.stringify(order)}
+				<div>
+					<p className="mb-2 px-4 font-semibold sm:px-10">
+						{t("order-number")}
+					</p>
 
-				{order?.id}
+					<p className="px-4 sm:px-10">{order?.id}</p>
 
-				{/* {order?.lines.map((line) => <p>{line.productName}</p>)} */}
+					<CartSummary total={order?.totalAmount} isFooter={false}>
+						<p className="mb-2 font-semibold">{t("order-payment")}</p>
+
+						<div className="flex w-full justify-between gap-12 rounded-md border border-gray-200 p-4">
+							<div>
+								<p className="text-sm text-gray-500">{t("order-address")}</p>
+
+								<p>{paymentIntentsList.data[0]?.shipping?.name}</p>
+								<p>{paymentIntentsList.data[0]?.shipping?.address?.line1}</p>
+								<p>{paymentIntentsList.data[0]?.shipping?.address?.line2}</p>
+								<p>
+									{paymentIntentsList.data[0]?.shipping?.address?.postal_code}
+								</p>
+								<p>{paymentIntentsList.data[0]?.shipping?.address?.city}</p>
+								<p>{paymentIntentsList.data[0]?.shipping?.address?.country}</p>
+							</div>
+
+							<div>
+								<p className="text-sm text-gray-500">
+									{t("order-payment-method")}
+								</p>
+
+								<p className="flex items-center gap-1">
+									<CreditCard className="h-4 w-4" /> {t("order-payment-type")}
+								</p>
+							</div>
+						</div>
+					</CartSummary>
+				</div>
 			</section>
 		</>
 	);

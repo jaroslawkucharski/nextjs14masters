@@ -26,7 +26,11 @@ export const ReviewListItem = async ({ review }: ReviewListItemProps) => {
 				<Rating rating={review.rating} />
 
 				<p className="text-sm font-light">
-					{formatDate(review.createdAt as string, lang, "short")}
+					{formatDate({
+						date: review.createdAt as string,
+						lang,
+						style: "short",
+					})}
 				</p>
 			</div>
 

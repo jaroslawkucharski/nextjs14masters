@@ -8,6 +8,8 @@ import { formSchema } from "./formSchema";
 import { useTypeSafeFormState } from "@/utils/typeSafeForm";
 import { StatusButton } from "@/ui/molecules/StatusButton";
 import { Loader } from "@/ui/atoms/Loader";
+import { FormInput } from "@/ui/atoms/FormInput";
+import { FormTextArea } from "@/ui/atoms/FormTextArea";
 
 type AddReviewFormProps = {
 	productId: string;
@@ -61,42 +63,24 @@ export const ReviewForm = ({
 				ref={formRef}
 				noValidate
 			>
-				<label>
-					<span className="text-sm font-bold text-gray-900">
-						{i18n.headline}
-					</span>
+				<input type="hidden" name="productId" value={productId} readOnly />
 
-					<input type="hidden" name="productId" value={productId} />
+				<FormInput
+					label={i18n.headline}
+					error={state?.errors.headline}
+					placeholder={i18n.headlinePlaceholder}
+					type="text"
+					name="headline"
+					required
+				/>
 
-					<input
-						className="w-full appearance-none self-start rounded-md border-0 bg-white px-4 py-2 text-sm text-gray-950 ring-1 ring-inset ring-gray-400 placeholder:text-slate-400 focus:border-gray-900 focus:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-900 lg:min-w-4"
-						placeholder={i18n.headlinePlaceholder}
-						type="text"
-						name="headline"
-						required
-					/>
-
-					<div className="min-h-4 text-xs text-red-500">
-						{state?.errors.headline}
-					</div>
-				</label>
-
-				<label>
-					<span className="text-sm font-bold text-gray-900">
-						{i18n.content}
-					</span>
-
-					<textarea
-						className="max-h-48 min-h-28 w-full appearance-none self-start rounded-md border-0 bg-white px-4 py-2 text-sm text-gray-950 ring-1 ring-inset ring-gray-400 placeholder:text-slate-400 focus:border-gray-900 focus:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-900 lg:min-w-4"
-						placeholder={i18n.contentPlaceholder}
-						name="content"
-						required
-					/>
-
-					<div className="min-h-4 text-xs text-red-500">
-						{state?.errors.content}
-					</div>
-				</label>
+				<FormTextArea
+					label={i18n.content}
+					error={state?.errors.content}
+					placeholder={i18n.contentPlaceholder}
+					name="content"
+					required
+				/>
 
 				<div className="mb-4 flex items-center justify-between">
 					<span className="text-sm font-bold text-gray-900">{i18n.rating}</span>
@@ -119,6 +103,7 @@ export const ReviewForm = ({
 									onChange={() => handleChangeRating(index + 1)}
 									className="sr-only"
 								/>
+
 								<Star
 									className={clsx("h-4 w-4 text-gray-400", {
 										["fill-current text-yellow-400"]: index < rating,
@@ -129,39 +114,25 @@ export const ReviewForm = ({
 					</div>
 				</div>
 
-				<label>
-					<span className="text-sm font-bold text-gray-900">{i18n.name}</span>
+				<FormInput
+					label={i18n.name}
+					error={state?.errors.name}
+					placeholder={i18n.namePlaceholder}
+					name="name"
+					type="text"
+					defaultValue={name}
+					required
+				/>
 
-					<input
-						className="w-full appearance-none self-start rounded-md border-0 bg-white px-4 py-2 text-sm text-gray-950 ring-1 ring-inset ring-gray-400 placeholder:text-slate-400 focus:border-gray-900 focus:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-900 lg:min-w-4"
-						placeholder={i18n.namePlaceholder}
-						name="name"
-						type="text"
-						value={name}
-						required
-					/>
-
-					<div className="min-h-4 text-xs text-red-500">
-						{state?.errors.name}
-					</div>
-				</label>
-
-				<label>
-					<span className="text-sm font-bold text-gray-900">{i18n.email}</span>
-
-					<input
-						className="w-full appearance-none self-start rounded-md border-0 bg-white px-4 py-2 text-sm text-gray-950 ring-1 ring-inset ring-gray-400 placeholder:text-slate-400 focus:border-gray-900 focus:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-900 disabled:bg-slate-200 lg:min-w-4"
-						placeholder={i18n.emailPlaceholder}
-						name="email"
-						type="email"
-						value={email}
-						required
-					/>
-
-					<div className="min-h-4 text-xs text-red-500">
-						{state?.errors.email}
-					</div>
-				</label>
+				<FormInput
+					label={i18n.email}
+					error={state?.errors.email}
+					placeholder={i18n.emailPlaceholder}
+					name="email"
+					type="email"
+					defaultValue={email}
+					required
+				/>
 
 				<StatusButton>{i18n.button}</StatusButton>
 			</form>

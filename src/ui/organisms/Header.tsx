@@ -9,6 +9,7 @@ import { Cart } from "@/ui/atoms/Cart";
 import { Logo } from "@/ui/atoms/Logo";
 import { Navigation } from "@/ui/molecules/Navigation";
 import { getCategoryList } from "@/api/categories/getCategoryList";
+import { PATHS } from "@/constants";
 
 export const Header = async () => {
 	const t = await getTranslations();
@@ -18,17 +19,17 @@ export const Header = async () => {
 	const navigation = [
 		{
 			label: t("word-home"),
-			href: "/",
+			href: PATHS.HOME,
 			exact: true,
 		},
 		{
 			label: t("word-all-products"),
-			href: "/products",
+			href: PATHS.PRODUCTS,
 		},
 		...categories
 			.map(({ slug }) => ({
 				label: t(`word-${slug}`),
-				href: `/categories/${slug}`,
+				href: `${PATHS.CATEGORIES}/${slug}`,
 			}))
 			.toReversed(),
 	];
@@ -44,7 +45,7 @@ export const Header = async () => {
 	return (
 		<header className="fixed top-0 z-10 h-fit w-full flex-col bg-white px-12 py-6 max-lg:static">
 			<div className="mx-auto flex justify-center gap-12 max-lg:justify-between lg:max-w-7xl">
-				<Link href={{ pathname: "/" }} className="self-center">
+				<Link href={{ pathname: PATHS.HOME }} className="self-center">
 					<Logo />
 				</Link>
 

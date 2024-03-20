@@ -22,8 +22,8 @@ export const CartListItem = async ({
 
 	return (
 		<tr key={item.product.id} className="h-fit border-b">
-			<td className="invisible py-4 sm:visible sm:min-w-48 sm:px-4">
-				{item.product.images?.[0] && (
+			{item.product.images?.[0] && (
+				<td className="invisible py-4 sm:visible sm:min-w-48 sm:px-4">
 					<Link
 						prefetch
 						href={`/product/${item.product.slug}-${item.product.id}`}
@@ -35,8 +35,8 @@ export const CartListItem = async ({
 							height={150}
 						/>
 					</Link>
-				)}
-			</td>
+				</td>
+			)}
 
 			<td className="w-full px-4 py-8">
 				<p className="mb-10 text-xl">

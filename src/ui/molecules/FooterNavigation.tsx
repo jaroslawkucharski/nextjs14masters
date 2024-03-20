@@ -24,12 +24,14 @@ export const FooterNavigation = ({ navigation }: NavigationProps) => (
 					{items.map(({ label, href, exact, img }) => (
 						<li key={label}>
 							<ActiveLink
-								className="flex w-full items-center justify-center gap-1 text-sm font-light text-gray-300 hover:text-gray-200"
-								activeClassName="font-regular text-gray-300"
+								className="flex w-full items-center justify-center gap-1 text-sm font-light text-gray-300 hover:!text-gray-200"
+								activeClassName="font-regular !text-gray-300"
 								href={href as Route}
 								exact={exact}
 							>
-								{img && <Image src={img} alt={label} width={20} height={20} />}
+								{img && (
+									<Image src={img} alt={label} width={20} height={12.5} />
+								)}
 
 								{label}
 							</ActiveLink>

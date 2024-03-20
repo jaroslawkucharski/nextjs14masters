@@ -16,11 +16,11 @@ type ProductsLayoutType = {
 };
 
 export async function generateMetadata(): Promise<Metadata> {
-	const t = await getTranslations("Products");
+	const t = await getTranslations();
 
 	return {
-		title: t("title"),
-		description: t("description"),
+		title: t("products-title"),
+		description: t("products-description"),
 	};
 }
 
@@ -28,7 +28,7 @@ export default async function ProductsLayout({
 	children,
 	params,
 }: ProductsLayoutType) {
-	const t = await getTranslations("Products");
+	const t = await getTranslations();
 
 	const { numOfProducts } = await getProductList({});
 	const numOfPages = getNumOfPages(numOfProducts, DEFAULT_AMOUNT_OF_PRODUCTS);
@@ -39,7 +39,7 @@ export default async function ProductsLayout({
 
 	return (
 		<>
-			<PageHeading title={t("title")} sort />
+			<PageHeading title={t("products-title")} sort />
 
 			<section className="mx-auto max-w-md p-12 sm:max-w-2xl sm:py-16 md:max-w-4xl lg:max-w-7xl">
 				{children}

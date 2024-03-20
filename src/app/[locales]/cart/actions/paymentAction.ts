@@ -4,8 +4,8 @@ import { currentUser } from "@clerk/nextjs";
 import Stripe from "stripe";
 import { redirect } from "next/navigation";
 import { getLocale } from "next-intl/server";
-import { cartComplete } from "@/api/cart/cartComplete";
 import { getCartById } from "@/api/cart/getCartById";
+import { PATHS } from "@/constants";
 
 export const paymentAction = async () => {
 	const user = await currentUser();
@@ -14,7 +14,7 @@ export const paymentAction = async () => {
 	const cart = await getCartById();
 
 	if (!cart) {
-		return redirect("/cart");
+		return redirect(PATHS.CART);
 	}
 
 	const amount = cart?.items.reduce(
@@ -23,7 +23,7 @@ export const paymentAction = async () => {
 	);
 
 	if (!user) {
-		return redirect("/sign-in");
+		return redirect(PATHS.SIGN_IN);
 	}
 
 	const email = user.emailAddresses[0]?.emailAddress;
@@ -57,7 +57,5 @@ export const paymentAction = async () => {
 		return;
 	}
 
-	await cartComplete(email);
-
-	redirect(`/checkout?intent=${paymentIntent.client_secret}&cartId=${cart.id}`);
+	return redirect(`${PATHS.CHECKOUT}?intent=${paymentIntent.client_secret}`);
 };
