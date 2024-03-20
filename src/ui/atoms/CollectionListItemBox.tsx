@@ -16,7 +16,7 @@ export const CollectionListItemBox = async ({
 			<Image
 				className="h-full w-full object-cover object-top"
 				src={`/collections/${slug}.avif`}
-				alt={t(slug)}
+				alt={`collection-${slug}`}
 				width={400}
 				height={400}
 			/>
