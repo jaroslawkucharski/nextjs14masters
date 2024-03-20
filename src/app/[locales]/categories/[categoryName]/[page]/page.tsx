@@ -17,13 +17,13 @@ export type CategoryPageType = {
 export async function generateMetadata({
 	params,
 }: CategoryPageType): Promise<Metadata> {
-	const t = await getTranslations("Category");
+	const t = await getTranslations();
 
 	const { category } = await getProductsByCategory(params.categoryName);
 
 	return {
-		title: t(category.slug),
-		description: t(`${category?.slug}-description`),
+		title: t(`category-${category.slug}`),
+		description: t(`category-${category?.slug}-description`),
 	};
 }
 

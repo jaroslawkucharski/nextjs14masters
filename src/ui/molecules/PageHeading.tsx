@@ -15,7 +15,7 @@ export const PageHeading = async ({
 	children,
 	sort,
 }: PageHeadingProps) => {
-	const t = await getTranslations("Sort");
+	const t = await getTranslations();
 
 	return (
 		<div className="w-full px-12 py-6 text-center sm:text-left">
@@ -25,13 +25,13 @@ export const PageHeading = async ({
 				{sort && (
 					<Sort
 						i18n={{
-							sortBy: t("sortby"),
-							nameAsc: t("name-asc"),
-							nameDesc: t("name-desc"),
-							priceAsc: t("price-asc"),
-							priceDesc: t("price-desc"),
-							ratingAsc: t("rating-asc"),
-							ratingDesc: t("rating-desc"),
+							sortBy: t("word-sortby"),
+							nameAsc: t("word-name-asc"),
+							nameDesc: t("word-name-desc"),
+							priceAsc: t("word-price-asc"),
+							priceDesc: t("word-price-desc"),
+							ratingAsc: t("word-rating-asc"),
+							ratingDesc: t("word-rating-desc"),
 						}}
 					/>
 				)}

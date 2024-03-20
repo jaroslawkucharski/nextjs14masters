@@ -20,11 +20,11 @@ const lato = Lato({
 });
 
 export const metadata = async (): Promise<Metadata> => {
-	const t = await getTranslations("Home");
+	const t = await getTranslations();
 
 	return {
-		title: t("title"),
-		description: t("description"),
+		title: t("home-title"),
+		description: t("home-description"),
 	};
 };
 

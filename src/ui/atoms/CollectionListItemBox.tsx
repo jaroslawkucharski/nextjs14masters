@@ -9,7 +9,7 @@ type CollectionListItemBoxProps = {
 export const CollectionListItemBox = async ({
 	collection: { slug },
 }: CollectionListItemBoxProps) => {
-	const t = await getTranslations("Collection");
+	const t = await getTranslations();
 
 	return (
 		<div className="p-4">
@@ -22,7 +22,7 @@ export const CollectionListItemBox = async ({
 			/>
 
 			<h3 className="mt-4 truncate text-sm font-semibold text-gray-950">
-				{t(slug).toLocaleUpperCase()}
+				{t(`collection-${slug}`).toLocaleUpperCase()}
 			</h3>
 		</div>
 	);

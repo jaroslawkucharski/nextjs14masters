@@ -12,11 +12,11 @@ import { checkoutRedirect } from "@/utils/checkoutRedirect";
 import { CHECKOUT_STEPS, PATHS } from "@/constants";
 
 export const metadata = async (): Promise<Metadata> => {
-	const t = await getTranslations("Checkout");
+	const t = await getTranslations();
 
 	return {
-		title: t("title"),
-		description: t("description"),
+		title: t("checkout-title"),
+		description: t("checkout-description"),
 	};
 };
 
@@ -27,7 +27,7 @@ export type CartPageType = {
 };
 
 export default async function CartPage({ searchParams }: CartPageType) {
-	const t = await getTranslations("Cart");
+	const t = await getTranslations();
 	const lang = await getLocale();
 	const user = await currentUser();
 
@@ -48,7 +48,7 @@ export default async function CartPage({ searchParams }: CartPageType) {
 
 	return (
 		<>
-			<PageHeading title="Your cart" />
+			<PageHeading title={t("checkout-title")} />
 
 			<Suspense>
 				<CheckoutTimeline steps={steps} />
@@ -59,12 +59,12 @@ export default async function CartPage({ searchParams }: CartPageType) {
 				total={total}
 				lang={lang}
 				i18n={{
-					payNow: t("pay-now"),
-					productPrice: t("product-price"),
-					delivery: t("delivery"),
-					total: t("total"),
-					freeReturns: t("free-returns"),
-					freeReturns30Days: t("free-returns-30-days"),
+					payNow: t("checkout-pay-now"),
+					productPrice: t("cart-product-price"),
+					delivery: t("cart-delivery"),
+					total: t("cart-total"),
+					freeReturns: t("cart-free-returns"),
+					freeReturns30Days: t("cart-free-returns-30-days"),
 				}}
 			/>
 		</>
