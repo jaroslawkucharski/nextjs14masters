@@ -6,6 +6,8 @@ import {
 	useElements,
 } from "@stripe/react-stripe-js";
 import { useState, useEffect, type FormEvent } from "react";
+import { type StripeAddressElementChangeEvent } from "@stripe/stripe-js";
+import { cartCompleteAction } from "../actions/cartCompleteAction";
 import { Button } from "@/ui/atoms/Button";
 import { PATHS } from "@/constants";
 
@@ -13,14 +15,23 @@ type CheckoutFormProps = {
 	i18n: {
 		payNow: string;
 	};
+	shipping: StripeAddressElementChangeEvent["value"];
 };
 
-export const CheckoutForm = ({ i18n }: CheckoutFormProps) => {
+export const CheckoutForm = ({ i18n, shipping }: CheckoutFormProps) => {
 	const stripe = useStripe();
 	const elements = useElements();
 
 	const [message, setMessage] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
+
+	const requiredShippingFields =
+		shipping?.name &&
+		shipping?.address.line1 &&
+		shipping?.address.city &&
+		shipping?.address.state &&
+		shipping?.address.postal_code &&
+		shipping?.address.country;
 
 	useEffect(() => {
 		if (!stripe) {
@@ -60,25 +71,28 @@ export const CheckoutForm = ({ i18n }: CheckoutFormProps) => {
 		e.preventDefault();
 
 		if (!stripe || !elements) {
-			return;
+			return console.log("Stripe or elements not found");
 		}
 
 		setIsLoading(true);
+
+		const orderId = await cartCompleteAction();
 
 		const { error } = await stripe.confirmPayment({
 			elements,
 			confirmParams: {
 				shipping: {
+					name: shipping?.name,
 					address: {
-						city: "",
-						line1: "",
-						line2: "",
-						postal_code: "",
-						state: "",
+						line1: shipping?.address.line1,
+						line2: shipping?.address.line2 as string | undefined,
+						city: shipping?.address.city,
+						state: shipping?.address.state,
+						postal_code: shipping?.address.postal_code,
+						country: shipping?.address.country,
 					},
-					name: "",
 				},
-				return_url: `${location.protocol}//${location.host}${PATHS.CART}?intent=success`,
+				return_url: `${process.env.NEXT_PUBLIC_URL}${PATHS.CART}?intent=success&orderId=${orderId?.id}`,
 			},
 		});
 
@@ -91,20 +105,18 @@ export const CheckoutForm = ({ i18n }: CheckoutFormProps) => {
 		setIsLoading(false);
 	};
 
-	const paymentElementOptions = {
-		layout: "tabs",
-	} as const;
-
 	return (
 		<form onSubmit={handleSubmit}>
 			<PaymentElement
 				className="mb-6"
 				id="payment-element"
-				options={paymentElementOptions}
+				options={{
+					layout: "tabs",
+				}}
 			/>
 
 			<Button
-				disabled={isLoading || !stripe || !elements}
+				disabled={isLoading || !stripe || !elements || !requiredShippingFields}
 				id="submit"
 				isLoading={isLoading}
 			>
