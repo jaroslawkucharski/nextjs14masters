@@ -14,6 +14,8 @@ export const PATHS = {
 	SIGN_UP: "/sign-up",
 	PRIVACY_POLICY: "/privacy-policy",
 	CONTACT: "/contact",
+	ORDERS: "/orders",
+	ORDER: "/order",
 	EN: "/en",
 	PL: "/pl",
 } as const;
@@ -26,7 +28,8 @@ export const CHECKOUT_STATUSES = {
 
 export const CHECKOUT_STEPS = {
 	CART: "cart",
-	CHECKOUT: "checkout",
+	PAYMENT: "payment",
+	SUMMARY: "summary",
 } as const;
 
 export type CheckoutStatusesType =
