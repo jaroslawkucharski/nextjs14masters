@@ -45,77 +45,67 @@
 	"word-orders": "Zamówienia",
 	"word-settings": "Ustawienia",
 	"word-log-out": "Wyloguj",
-	"Home": {
-		"title": "Strona główna",
-		"description": "Witaj w sklepie internetowym NextShop."
-	},
-	"Products": {
-		"title": "Wszyskie produkty",
-		"description": "Zobacz wszystkie nasze produkty."
-	},
-	"Collection": {
-		"summer-vibes": "Letnie klimaty",
-		"summer-vibes-description": "Najnowsze produkty dostępne w planie nextjsmasters!",
-		"new-arrivals": "Nowości",
-		"new-arrivals-description": "Zbiór klasycznych gadżetów.",
-		"elegant-extras": "Eleganckie dodatki",
-		"elegant-extras-description": "Eleganckie i niezbędne dodatki z naszego sklepu."
-	},
-	"Category": {
-		"t-shirts": "Koszulki",
-		"t-shirts-description": "Tutaj znajdziesz świetne koszulki!",
-		"hoodies": "Bluzy",
-		"hoodies-description": "Modne bluzy na każdą okazję!",
-		"accessories": "Akcesoria",
-		"accessories-description": "Najlepsze akcesoria do każdej stylizacji."
-	},
-	"Sort": {
-		"sortby": "sortuj według",
-		"name-asc": "Nazwa A-Z",
-		"name-desc": "Nazwa Z-A",
-		"price-asc": "Cena: od najniższej do najwyższej",
-		"price-desc": "Cena: od najwyższej do najniższej",
-		"rating-asc": "Ocena: od najniższej do najwyższej",
-		"rating-desc": "Ocena: od najwyższej do najniższej"
-	},
-	"NotFound": {
-		"title": "Strona, której szukasz nie istnieje.",
-		"back": "Wróć na stronę główną"
-	},
-	"EmptyCart": {
-		"title": "Twój koszyk jest pusty.",
-		"back": "Kontynuuj zakupy"
-	},
-	"SuccessCart": {
-		"title": "Dziękujemy za zakupy w naszym sklepie. Twoje zamówienie zostało opłacone i jest w trakcie przygotowania do wysyłki.",
-		"order": "Numer Twojego zamówienia:",
-		"back": "Zobacz swoje zamówienia"
-	},
-	"Cart": {
-		"title": "Twój koszyk",
-		"description": "Sprawdź, co masz w swoim koszyku.",
-		"product-price": "Cena produktów:",
-		"delivery": "Dostawa:",
-		"total": "Razem:",
-		"checkout": "Zamów",
-		"free-returns": "Darmowy zwrot",
-		"free-returns-30-days": "Darmowy zwrot w ciągu 30 dni",
-		"pay-now": "Zapłać teraz"
-	},
-	"Checkout": {
-		"title": "Zamówienie",
-		"description": "Opłać swoje zamówienie."
-	},
-	"Orders": {
-		"title": "Twoje zamówienia",
-		"description": "Sprawdź status swoich zamówień."
-	},
-	"Search": {
-		"title": "Wyniki wyszukiwania",
-		"description": "Wyniki wyszukiwania.",
-		"results": "Wyniki wyszukiwania dla: ' {query} '",
-		"found-results": "Znaleziono {results} produktów",
-		"no-results": "Nie znaleźliśmy tego, czego szukałeś",
-		"back": "Wróć do zakupów"
-	}
+	"empty-card-title": "Twój koszyk jest pusty.",
+	"empty-card-link": "Kontynuuj zakupy",
+	"checkout-success-title": "Dziękujemy za zakupy w naszym sklepie. Twoje zamówienie zostało opłacone i jest w trakcie przygotowania do wysyłki.",
+	"checkout-success-order": "Numer Twojego zamówienia:",
+	"checkout-success-link": "Zobacz swoje zamówienie",
+	"cart-title": "Twój koszyk",
+	"cart-description": "Sprawdź, co masz w swoim koszyku.",
+	"cart-product-price": "Cena produktów:",
+	"cart-delivery": "Dostawa:",
+	"cart-total": "Razem:",
+	"cart-checkout": "Zamów",
+	"cart-free-returns": "Darmowy zwrot",
+	"cart-summary": "Podsumowanie",
+	"cart-free-returns-30-days": "Darmowy zwrot w ciągu 30 dni",
+	"checkout-pay-now": "Zapłać teraz",
+	"checkout-title": "Płatność i wysyłka",
+	"checkout-description": "Opłać swoje zamówienie.",
+	"home-title": "Strona główna",
+	"homedescription": "Witaj w sklepie internetowym NextShop.",
+	"products-title": "Wszyskie produkty",
+	"products-description": "Zobacz wszystkie nasze produkty.",
+	"collection-summer-vibes": "Letnie klimaty",
+	"collection-summer-vibes-description": "Najnowsze produkty dostępne w planie nextjsmasters!",
+	"collection-new-arrivals": "Nowości",
+	"collection-new-arrivals-description": "Zbiór klasycznych gadżetów.",
+	"collection-elegant-extras": "Eleganckie dodatki",
+	"collection-elegant-extras-description": "Eleganckie i niezbędne dodatki z naszego sklepu.",
+	"category-t-shirts": "Koszulki",
+	"category-t-shirts-description": "Tutaj znajdziesz świetne koszulki!",
+	"category-hoodies": "Bluzy",
+	"category-hoodies-description": "Modne bluzy na każdą okazję!",
+	"category-accessories": "Akcesoria",
+	"category-accessories-description": "Najlepsze akcesoria do każdej stylizacji.",
+	"word-sortby": "sortuj według",
+	"word-name-asc": "Nazwa A-Z",
+	"word-name-desc": "Nazwa Z-A",
+	"word-price-asc": "Cena: od najniższej do najwyższej",
+	"word-price-desc": "Cena: od najwyższej do najniższej",
+	"word-rating-asc": "Ocena: od najniższej do najwyższej",
+	"word-rating-desc": "Ocena: od najwyższej do najniższej",
+	"not-found-title": "Strona, której szukasz nie istnieje.",
+	"not-found-link": "Wróć na stronę główną",
+	"orders-title": "Twoje zamówienia",
+	"orders-description": "Sprawdź status swoich zamówień.",
+	"order-title": "Twoje zamówienie",
+	"order-date": "Data zamówienia:",
+	"order-lines": "Zamówione przedmioty:",
+	"order-articles": "Artykuły:",
+	"order-number": "Numer zamówienia:",
+	"order-payment": "Wysyłka i płatność:",
+	"order-address": "Adres dostawy:",
+	"order-payment-method": "Metoda płatności:",
+	"order-payment-type": "Karta",
+	"order-description": "Szczegóły Twojego zamówienia.",
+	"search-title": "Wyniki wyszukiwania",
+	"search-description": "Wyniki wyszukiwania.",
+	"search-results": "Wyniki wyszukiwania dla: ' {query} '",
+	"search-found-results": "Znaleziono {results} produktów",
+	"search-no-results": "Nie znaleźliśmy tego, czego szukałeś",
+	"search-link": "Wróć do zakupów",
+	"orders-empty-title": "Nie masz jeszcze żadnych zamówień",
+	"orders-empty-link": "Zobacz nasze produkty",
+	"order-check": "Sprawdź zamówienie"
 }
