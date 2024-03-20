@@ -1,6 +1,8 @@
 import { type Metadata } from "next";
 import { getLocale, getTranslations } from "next-intl/server";
 import { CornerDownLeft, Store } from "lucide-react";
+import { redirect } from "next/navigation";
+import { Suspense } from "react";
 import { EmptyView } from "./EmptyView";
 import { SuccessView } from "./SuccessView";
 import { paymentAction } from "./actions/paymentAction";
@@ -10,6 +12,9 @@ import { PageHeading } from "@/ui/molecules/PageHeading";
 import { CartList } from "@/ui/organisms/CartList";
 import { type CartItem } from "@/gql/graphql";
 import { StatusButton } from "@/ui/molecules/StatusButton";
+import { CheckoutTimeline } from "@/ui/atoms/CheckoutTimeline";
+import { checkoutSteps } from "@/utils/checkoutSteps";
+import { CHECKOUT_STEPS, PATHS } from "@/constants";
 
 export const metadata = async (): Promise<Metadata> => {
 	const t = await getTranslations("Cart");
@@ -23,7 +28,8 @@ export const metadata = async (): Promise<Metadata> => {
 type CartPageType = {
 	searchParams: {
 		intent: string;
-		payment_intent: string;
+		orderId: string;
+		searchParams: string;
 	};
 };
 
@@ -34,7 +40,7 @@ export default async function CartPage({ searchParams }: CartPageType) {
 	const cart = await getCartById();
 
 	if (searchParams.intent === "success") {
-		return <SuccessView intent={searchParams.payment_intent} />;
+		return <SuccessView orderId={searchParams.orderId} />;
 	}
 
 	if (!cart) {
@@ -46,9 +52,27 @@ export default async function CartPage({ searchParams }: CartPageType) {
 		0,
 	);
 
+	const handleCheckout = async () => {
+		"use server";
+
+		await paymentAction();
+
+		redirect(PATHS.CHECKOUT);
+	};
+
+	const steps = await checkoutSteps(
+		searchParams.intent === "success"
+			? CHECKOUT_STEPS.SUMMARY
+			: CHECKOUT_STEPS.CART,
+	);
+
 	return (
 		<>
 			<PageHeading title={t("title")} />
+
+			<Suspense>
+				<CheckoutTimeline steps={steps} />
+			</Suspense>
 
 			<section className="mx-auto flex max-w-md flex-col gap-4 overflow-x-auto p-4 sm:max-w-2xl sm:p-12 sm:py-8 md:max-w-4xl lg:max-w-7xl lg:flex-row">
 				{cart?.items && (
@@ -76,7 +100,7 @@ export default async function CartPage({ searchParams }: CartPageType) {
 						</p>
 					</div>
 
-					<form action={paymentAction}>
+					<form action={handleCheckout}>
 						<StatusButton>{t("checkout")}</StatusButton>
 					</form>
 
