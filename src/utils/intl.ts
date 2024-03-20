@@ -16,6 +16,6 @@ export const formatDate = ({
 	time?: boolean;
 }) =>
 	new Intl.DateTimeFormat(lang, {
-		...(!time && { dateStyle: style || "long" }),
+		dateStyle: style || "long",
 		...(time && { timeStyle: "short" }),
 	}).format(new Date(date));
