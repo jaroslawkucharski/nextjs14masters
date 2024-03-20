@@ -29,7 +29,9 @@ export const FooterNavigation = ({ navigation }: NavigationProps) => (
 								href={href as Route}
 								exact={exact}
 							>
-								{img && <Image src={img} alt={label} width={20} height={20} />}
+								{img && (
+									<Image src={img} alt={label} width={20} height={12.5} />
+								)}
 
 								{label}
 							</ActiveLink>
