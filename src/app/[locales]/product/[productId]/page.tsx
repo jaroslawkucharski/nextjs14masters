@@ -158,23 +158,7 @@ export default async function ProductPage({ params }: ProductPageType) {
 
 					<div className="mx-auto flex max-w-md flex-col gap-12 overflow-x-auto p-4 sm:max-w-2xl sm:p-12 sm:py-8 md:max-w-4xl lg:max-w-7xl xl:flex-row">
 						<Suspense>
-							<ReviewForm
-								productId={productId}
-								i18n={{
-									name: t("word-name"),
-									namePlaceholder: t("word-name-placeholder"),
-									email: t("word-email"),
-									emailPlaceholder: t("word-email-placeholder"),
-									headline: t("word-headline"),
-									headlinePlaceholder: t("word-headline-placeholder"),
-									content: t("word-content"),
-									contentPlaceholder: t("word-content-placeholder"),
-									rating: t("word-rating"),
-									button: t("word-button"),
-								}}
-								email={email}
-								name={name}
-							/>
+							<ReviewForm productId={productId} email={email} name={name} />
 						</Suspense>
 
 						<ReviewList

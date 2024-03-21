@@ -5,6 +5,7 @@ import { type ReactNode } from "react";
 import { ClerkProvider } from "@clerk/nextjs";
 import { getTranslations } from "next-intl/server";
 import { plPL, enUS } from "@clerk/localizations";
+import { NextIntlClientProvider, useMessages } from "next-intl";
 import { Header } from "@/ui/organisms/Header";
 import { Footer } from "@/ui/organisms/Footer";
 
@@ -33,21 +34,25 @@ export default function RootLayout({
 	modal,
 	params,
 }: Readonly<RootLayoutType>) {
+	const messages = useMessages();
+
 	return (
-		<ClerkProvider localization={params.locales === "pl" ? plPL : enUS}>
-			<html lang={params.locales}>
-				<body className={lato.className}>
-					<Header />
+		<NextIntlClientProvider locale={params.locales} messages={messages}>
+			<ClerkProvider localization={params.locales === "pl" ? plPL : enUS}>
+				<html lang={params.locales}>
+					<body className={lato.className}>
+						<Header />
 
-					<main className="mx-auto min-h-[calc(100vh_-_278px)] lg:max-w-7xl lg:pt-[88px]">
-						{children}
-					</main>
+						<main className="mx-auto min-h-[calc(100vh_-_278px)] lg:max-w-7xl lg:pt-[88px]">
+							{children}
+						</main>
 
-					{modal}
+						{modal}
 
-					<Footer />
-				</body>
-			</html>
-		</ClerkProvider>
+						<Footer />
+					</body>
+				</html>
+			</ClerkProvider>
+		</NextIntlClientProvider>
 	);
 }

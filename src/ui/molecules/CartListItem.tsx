@@ -70,9 +70,6 @@ export const CartListItem = async ({
 						cartId={cartId}
 						productId={item.product.id}
 						itemsLength={itemsLength}
-						i18n={{
-							remove: t("word-remove"),
-						}}
 					/>
 				)}
 
