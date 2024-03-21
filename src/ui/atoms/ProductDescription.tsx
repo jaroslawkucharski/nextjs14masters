@@ -16,6 +16,7 @@ export const ProductDescription = async ({
 	return (
 		<div className="flex flex-col p-4">
 			<h1 className="text-2xl font-medium text-gray-950 lg:text-4xl">{name}</h1>
+
 			<p className="my-2 pt-1 text-2xl font-semibold text-gray-900 lg:my-4 lg:text-4xl">
 				<span className="sr-only">{t("word-price")}:</span>
 
@@ -29,6 +30,7 @@ export const ProductDescription = async ({
 
 				{description}
 			</p>
+
 			<p className="text-lg text-gray-500">
 				<span className="sr-only">{t("word-category")}:</span>
 

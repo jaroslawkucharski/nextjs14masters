@@ -15,7 +15,7 @@ export async function generateMetadata({
 	const t = await getTranslations();
 
 	return {
-		title: t(`collection-${params.collectionName}`.toLocaleUpperCase()),
+		title: t(`collection-${params.collectionName}`).toLocaleUpperCase(),
 		description: t(`collection-${params.collectionName}-description`),
 	};
 }
