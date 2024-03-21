@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { ImageResponse } from "next/og";
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { getProductById } from "@/api/products/getProductById";
 import { formatMoney } from "@/utils/intl";
 import { Rating } from "@/ui/atoms/Rating";
@@ -21,6 +21,7 @@ type OgTypes = {
 };
 
 export default async function og({ params }: OgTypes) {
+	const t = await getTranslations();
 	const lang = await getLocale();
 
 	const { id, name, price, images, categories, rating } = await getProductById(
