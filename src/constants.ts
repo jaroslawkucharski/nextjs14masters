@@ -16,8 +16,11 @@ export const PATHS = {
 	CONTACT: "/contact",
 	ORDERS: "/orders",
 	ORDER: "/order",
-	EN: "/en",
-	PL: "/pl",
+} as const;
+
+export const LANGUAGES = {
+	EN: "en",
+	PL: "pl",
 } as const;
 
 export const CHECKOUT_STATUSES = {
@@ -31,6 +34,8 @@ export const CHECKOUT_STEPS = {
 	PAYMENT: "payment",
 	SUMMARY: "summary",
 } as const;
+
+export type LanguagesType = (typeof LANGUAGES)[keyof typeof LANGUAGES];
 
 export type CheckoutStatusesType =
 	(typeof CHECKOUT_STATUSES)[keyof typeof CHECKOUT_STATUSES];
