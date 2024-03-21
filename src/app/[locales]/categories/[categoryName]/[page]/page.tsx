@@ -19,11 +19,9 @@ export async function generateMetadata({
 }: CategoryPageType): Promise<Metadata> {
 	const t = await getTranslations();
 
-	const { category } = await getProductsByCategory(params.categoryName);
-
 	return {
-		title: t(`category-${category.slug}`),
-		description: t(`category-${category?.slug}-description`),
+		title: t(`category-${params.categoryName}`),
+		description: t(`category-${params.categoryName}-description`),
 	};
 }
 
