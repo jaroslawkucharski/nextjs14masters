@@ -21,6 +21,10 @@ export default authMiddleware({
 		"/collections/(.*)",
 		"/product/(.*)",
 		"/products/(.*)",
+		"/sign-in",
+		"/sign-up",
+		"/sign-in/(.*)",
+		"/sign-up/(.*)",
 
 		"/:locale",
 		"/:locale/search",
@@ -29,11 +33,6 @@ export default authMiddleware({
 		"/:locale/collections/(.*)",
 		"/:locale/product/(.*)",
 		"/:locale/products/(.*)",
-
-		"/sign-in",
-		"/sign-up",
-		"/sign-in/(.*)",
-		"/sign-up/(.*)",
 		"/:locale/sign-in",
 		"/:locale/sign-up",
 		"/:locale/sign-in/(.*)",
