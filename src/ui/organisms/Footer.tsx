@@ -52,21 +52,6 @@ export const Footer = async () => {
 				},
 			],
 		},
-		{
-			label: t("word-language"),
-			items: [
-				{
-					label: t("word-english"),
-					href: PATHS.EN,
-					img: "/images/en.png",
-				},
-				{
-					label: t("word-polish"),
-					href: PATHS.PL,
-					img: "/images/pl.png",
-				},
-			],
-		},
 	];
 
 	return (

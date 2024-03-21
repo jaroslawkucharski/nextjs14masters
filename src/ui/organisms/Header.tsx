@@ -65,7 +65,7 @@ export const Header = async () => {
 					</SignedIn>
 
 					<SignedOut>
-						<SignInButton />
+						<SignInButton>{t("word-sign-in")}</SignInButton>
 					</SignedOut>
 
 					<Suspense>
