@@ -14,11 +14,9 @@ export async function generateMetadata({
 }: CollectionPageType): Promise<Metadata> {
 	const t = await getTranslations();
 
-	const { collection } = await getProductsByCollection(params.collectionName);
-
 	return {
-		title: t(`collection-${collection.slug}`).toLocaleUpperCase(),
-		description: t(`collection-${collection?.slug}-description`),
+		title: t(`collection-${params.collectionName}`).toLocaleUpperCase(),
+		description: t(`collection-${params.collectionName}-description`),
 	};
 }
 

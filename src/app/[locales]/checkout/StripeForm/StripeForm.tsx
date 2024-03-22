@@ -7,6 +7,7 @@ import {
 } from "@stripe/stripe-js";
 import { CornerDownLeft, Store } from "lucide-react";
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { CheckoutForm } from "../CheckoutForm";
 import { formatMoney } from "@/utils/intl";
 
@@ -19,25 +20,14 @@ const stripePromise = loadStripe(
 );
 
 type StripeFormProps = {
-	i18n: {
-		payNow: string;
-		productPrice: string;
-		delivery: string;
-		total: string;
-		freeReturns: string;
-		freeReturns30Days: string;
-	};
 	total?: number;
 	lang: string;
 	clientSecret: string;
 };
 
-export const StripeForm = ({
-	i18n,
-	total,
-	lang,
-	clientSecret,
-}: StripeFormProps) => {
+export const StripeForm = ({ total, lang, clientSecret }: StripeFormProps) => {
+	const t = useTranslations();
+
 	const [totalAmount] = useState(total);
 
 	const [shipping, setShipping] = useState<
@@ -73,37 +63,37 @@ export const StripeForm = ({
 				<div className="min-w-full p-4 sm:min-w-[450px] sm:p-10">
 					<div className="mb-6">
 						<p className="flex w-full justify-between py-2 text-lg text-gray-500">
-							<span>{i18n.productPrice}</span>
+							<span>{t("cart-product-price")}</span>
 
 							<span>{formatMoney(Number(totalAmount), lang)}</span>
 						</p>
 
 						<p className="flex w-full justify-between py-2 text-lg text-gray-500">
-							<span>{i18n.delivery}</span>
+							<span>{t("cart-delivery")}</span>
 
 							<span>{formatMoney(Number(0), lang)}</span>
 						</p>
 
 						<p className="mt-4 flex w-full justify-between border-t py-2 text-lg">
-							<span>{i18n.total}</span>
+							<span>{t("cart-total")}</span>
 
 							<span>{formatMoney(Number(totalAmount), lang)}</span>
 						</p>
 					</div>
 
-					<CheckoutForm i18n={i18n} shipping={shipping} />
+					<CheckoutForm shipping={shipping} />
 
 					<div className="mt-8 flex flex-col gap-2">
 						<p className="flex items-center gap-2 text-sm text-slate-500">
 							<Store className="h-4 w-4" />
 
-							<span>{i18n.freeReturns}</span>
+							<span>{t("cart-free-returns")}</span>
 						</p>
 
 						<p className="flex items-center gap-2 text-sm text-slate-500">
 							<CornerDownLeft className="h-4 w-4" />
 
-							<span>{i18n.freeReturns30Days}</span>
+							<span>{t("cart-free-returns-30-days")}</span>
 						</p>
 					</div>
 				</div>

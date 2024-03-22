@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, Suspense } from "react";
 import { Star } from "lucide-react";
 import clsx from "clsx";
+import { useTranslations } from "next-intl";
 import { formAction } from "../actions/reviewActions";
 import { formSchema } from "./formSchema";
 import { useTypeSafeFormState } from "@/utils/typeSafeForm";
@@ -13,29 +14,15 @@ import { FormTextArea } from "@/ui/atoms/FormTextArea";
 
 type AddReviewFormProps = {
 	productId: string;
-	i18n: {
-		name: string;
-		namePlaceholder: string;
-		email: string;
-		emailPlaceholder: string;
-		headline: string;
-		headlinePlaceholder: string;
-		content: string;
-		contentPlaceholder: string;
-		rating: string;
-		button: string;
-	};
 	email?: string;
 	name?: string;
 };
 
-export const ReviewForm = ({
-	productId,
-	i18n,
-	email,
-	name,
-}: AddReviewFormProps) => {
+export const ReviewForm = ({ productId, email, name }: AddReviewFormProps) => {
+	const t = useTranslations();
+
 	const formRef = useRef<HTMLFormElement | null>(null);
+
 	const [isClient, setIsClient] = useState(false);
 
 	useEffect(() => {
@@ -66,24 +53,26 @@ export const ReviewForm = ({
 				<input type="hidden" name="productId" value={productId} readOnly />
 
 				<FormInput
-					label={i18n.headline}
+					label={t("word-headline")}
 					error={state?.errors.headline}
-					placeholder={i18n.headlinePlaceholder}
+					placeholder={t("word-headline-placeholder")}
 					type="text"
 					name="headline"
 					required
 				/>
 
 				<FormTextArea
-					label={i18n.content}
+					label={t("word-content")}
 					error={state?.errors.content}
-					placeholder={i18n.contentPlaceholder}
+					placeholder={t("word-content-placeholder")}
 					name="content"
 					required
 				/>
 
 				<div className="mb-4 flex items-center justify-between">
-					<span className="text-sm font-bold text-gray-900">{i18n.rating}</span>
+					<span className="text-sm font-bold text-gray-900">
+						{t("word-rating")}
+					</span>
 
 					<div className="flex items-center">
 						<span
@@ -115,9 +104,9 @@ export const ReviewForm = ({
 				</div>
 
 				<FormInput
-					label={i18n.name}
+					label={t("word-name")}
 					error={state?.errors.name}
-					placeholder={i18n.namePlaceholder}
+					placeholder={t("word-name-placeholder")}
 					name="name"
 					type="text"
 					defaultValue={name}
@@ -125,16 +114,16 @@ export const ReviewForm = ({
 				/>
 
 				<FormInput
-					label={i18n.email}
+					label={t("word-email")}
 					error={state?.errors.email}
-					placeholder={i18n.emailPlaceholder}
+					placeholder={t("word-email-placeholder")}
 					name="email"
 					type="email"
 					defaultValue={email}
 					required
 				/>
 
-				<StatusButton>{i18n.button}</StatusButton>
+				<StatusButton>{t("word-button")}</StatusButton>
 			</form>
 		</Suspense>
 	) : (

@@ -7,18 +7,17 @@ import {
 } from "@stripe/react-stripe-js";
 import { useState, useEffect, type FormEvent } from "react";
 import { type StripeAddressElementChangeEvent } from "@stripe/stripe-js";
+import { useTranslations } from "next-intl";
 import { cartCompleteAction } from "../actions/cartCompleteAction";
 import { Button } from "@/ui/atoms/Button";
 import { PATHS } from "@/constants";
 
 type CheckoutFormProps = {
-	i18n: {
-		payNow: string;
-	};
 	shipping: StripeAddressElementChangeEvent["value"];
 };
 
-export const CheckoutForm = ({ i18n, shipping }: CheckoutFormProps) => {
+export const CheckoutForm = ({ shipping }: CheckoutFormProps) => {
+	const t = useTranslations();
 	const stripe = useStripe();
 	const elements = useElements();
 
@@ -120,7 +119,7 @@ export const CheckoutForm = ({ i18n, shipping }: CheckoutFormProps) => {
 				id="submit"
 				isLoading={isLoading}
 			>
-				{i18n.payNow}
+				{t("checkout-pay-now")}
 			</Button>
 
 			{message && <div id="payment-message">{message}</div>}

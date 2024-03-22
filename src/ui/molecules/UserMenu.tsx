@@ -7,17 +7,11 @@ import Image from "next/image";
 import { useClerk, useUser } from "@clerk/nextjs";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { PATHS } from "@/constants";
 
-type UserMenuType = {
-	i18n: {
-		orders: string;
-		settings: string;
-		logOut: string;
-	};
-};
-
-export const UserMenu = ({ i18n }: UserMenuType) => {
+export const UserMenu = () => {
+	const t = useTranslations();
 	const { user } = useUser();
 	const { signOut } = useClerk();
 	const router = useRouter();
@@ -79,7 +73,7 @@ export const UserMenu = ({ i18n }: UserMenuType) => {
 							>
 								<Package className="h-4 w-4 text-gray-600" />
 
-								{i18n.orders}
+								{t("word-orders")}
 							</Link>
 						</Menu.Item>
 
@@ -90,7 +84,7 @@ export const UserMenu = ({ i18n }: UserMenuType) => {
 							>
 								<Settings className="h-4 w-4 text-gray-600" />
 
-								{i18n.settings}
+								{t("word-settings")}
 							</Link>
 						</Menu.Item>
 					</div>
@@ -103,7 +97,7 @@ export const UserMenu = ({ i18n }: UserMenuType) => {
 							>
 								<LogOut className="h-4 w-4 text-gray-600" />
 
-								{i18n.logOut}
+								{t("word-log-out")}
 							</button>
 						</Menu.Item>
 					</div>

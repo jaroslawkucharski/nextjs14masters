@@ -1,22 +1,12 @@
 "use client";
 
 import { ChevronDown } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { type FormEvent } from "react";
 
-type SortProps = {
-	i18n: {
-		sortBy: string;
-		nameAsc: string;
-		nameDesc: string;
-		priceAsc: string;
-		priceDesc: string;
-		ratingAsc: string;
-		ratingDesc: string;
-	};
-};
-
-export const Sort = ({ i18n }: SortProps) => {
+export const Sort = () => {
+	const t = useTranslations();
 	const searchParams = useSearchParams();
 	const router = useRouter();
 
@@ -37,26 +27,26 @@ export const Sort = ({ i18n }: SortProps) => {
 				onChange={handleSort}
 				value={`${searchParams.get("order")}-${searchParams.get("dir")}`.toLocaleLowerCase()}
 			>
-				<option>-- {i18n.sortBy} --</option>
+				<option>-- {t("word-sortby")} --</option>
 
-				<option value="name-asc">{i18n.nameAsc}</option>
+				<option value="name-asc">{t("word-name-asc")}</option>
 
-				<option value="name-desc">{i18n.nameDesc}</option>
+				<option value="name-desc">{t("word-name-desc")}</option>
 
 				<option value="price-asc" data-testid="sort-by-price">
-					{i18n.priceAsc}
+					{t("word-price-asc")}
 				</option>
 
 				<option value="price-desc" data-testid="sort-by-price">
-					{i18n.priceDesc}
+					{t("word-price-desc")}
 				</option>
 
 				<option value="rating-asc" data-testid="sort-by-rating">
-					{i18n.ratingAsc}
+					{t("word-rating-asc")}
 				</option>
 
 				<option value="rating-desc" data-testid="sort-by-rating">
-					{i18n.ratingDesc}
+					{t("word-rating-desc")}
 				</option>
 			</select>
 

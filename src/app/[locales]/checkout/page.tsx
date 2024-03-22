@@ -58,14 +58,6 @@ export default async function CartPage({ searchParams }: CartPageType) {
 				clientSecret={searchParams.intent}
 				total={total}
 				lang={lang}
-				i18n={{
-					payNow: t("checkout-pay-now"),
-					productPrice: t("cart-product-price"),
-					delivery: t("cart-delivery"),
-					total: t("cart-total"),
-					freeReturns: t("cart-free-returns"),
-					freeReturns30Days: t("cart-free-returns-30-days"),
-				}}
 			/>
 		</>
 	);

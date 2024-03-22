@@ -3,6 +3,7 @@
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/ui/atoms/Button";
 import { removeProductFromCard } from "@/api/cart/removeProductFromCard";
 import { removeCookie } from "@/utils/cookies";
@@ -11,16 +12,13 @@ type RemoveProductFromCartProps = {
 	cartId: string;
 	productId: string;
 	itemsLength: number;
-	i18n: {
-		remove: string;
-	};
 };
 
 export const RemoveProductFromCart = ({
 	productId,
 	itemsLength,
-	i18n,
 }: RemoveProductFromCartProps) => {
+	const t = useTranslations();
 	const router = useRouter();
 	const [isPending, startTransition] = useTransition();
 
@@ -42,7 +40,7 @@ export const RemoveProductFromCart = ({
 			onClick={handleremoveProductFromCard}
 			disabled={isPending}
 		>
-			<Trash2 className="h-3 w-3" /> {i18n.remove}
+			<Trash2 className="h-3 w-3" /> {t("word-remove")}
 		</Button>
 	);
 };

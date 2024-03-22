@@ -1,5 +1,4 @@
 import { type ReactNode } from "react";
-import { getTranslations } from "next-intl/server";
 import { Sort } from "@/ui/molecules/Sort";
 
 type PageHeadingProps = {
@@ -15,26 +14,12 @@ export const PageHeading = async ({
 	children,
 	sort,
 }: PageHeadingProps) => {
-	const t = await getTranslations();
-
 	return (
 		<div className="w-full px-12 py-6 text-center sm:text-left">
 			<div className="mx-auto flex w-full flex-col items-center justify-center gap-12 sm:flex-row sm:justify-between lg:max-w-7xl">
 				{title && <h2 className="text-md">{title}</h2>}
 
-				{sort && (
-					<Sort
-						i18n={{
-							sortBy: t("word-sortby"),
-							nameAsc: t("word-name-asc"),
-							nameDesc: t("word-name-desc"),
-							priceAsc: t("word-price-asc"),
-							priceDesc: t("word-price-desc"),
-							ratingAsc: t("word-rating-asc"),
-							ratingDesc: t("word-rating-desc"),
-						}}
-					/>
-				)}
+				{sort && <Sort />}
 			</div>
 
 			<div className="mx-auto flex w-full flex-col items-center justify-center gap-12 sm:flex-row sm:justify-between lg:max-w-7xl">

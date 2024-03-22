@@ -38,7 +38,7 @@ export const Header = async () => {
 
 	const renderSearcher = () => (
 		<Suspense>
-			<Searcher i18n={{ placecholder: t("word-search") }} />
+			<Searcher />
 		</Suspense>
 	);
 
@@ -61,17 +61,11 @@ export const Header = async () => {
 					<Cart />
 
 					<SignedIn>
-						<UserMenu
-							i18n={{
-								orders: t("word-orders"),
-								settings: t("word-settings"),
-								logOut: t("word-log-out"),
-							}}
-						/>
+						<UserMenu />
 					</SignedIn>
 
 					<SignedOut>
-						<SignInButton />
+						<SignInButton>{t("word-sign-in")}</SignInButton>
 					</SignedOut>
 
 					<Suspense>

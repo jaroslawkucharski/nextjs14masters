@@ -14,8 +14,10 @@ export default async function StaticPage({ params }: StaticPageType) {
 	);
 
 	return (
-		<article className="prose">
-			<Content />
-		</article>
+		<section className="mx-auto max-w-md gap-4 overflow-x-auto p-4 sm:max-w-2xl sm:p-12 sm:py-8 md:max-w-4xl lg:max-w-7xl lg:flex-row">
+			<article className="prose">
+				<Content />
+			</article>
+		</section>
 	);
 }
