@@ -8,7 +8,6 @@ import { Rating } from "@/ui/atoms/Rating";
 export const runtime = "edge";
 
 export const alt = "NextShop";
-
 export const size = {
 	width: 1200,
 	height: 630,
@@ -16,11 +15,11 @@ export const size = {
 
 export const contentType = "image/png";
 
-type OgTypes = {
+type OpengraphImageTypes = {
 	params: { productId: string };
 };
 
-export default async function og({ params }: OgTypes) {
+export default async function OpengraphImage({ params }: OpengraphImageTypes) {
 	const t = await getTranslations();
 	const lang = await getLocale();
 
@@ -50,5 +49,6 @@ export default async function og({ params }: OgTypes) {
 				</div>
 			</div>
 		),
+		{ ...size },
 	);
 }
