@@ -2,7 +2,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="public/logodark.png">
-  <img src="public/logolight.png" alt="NextShop" width="200px" />
+  <img src="public/logolight.png" alt="NextShop" width="400px" />
 </picture>
 
 #
